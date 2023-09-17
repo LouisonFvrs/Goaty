@@ -20,6 +20,7 @@
         <ul class="space-x-4 flex">
             <li><a href="/catalogue/all" class="text-gray-600 hover:text-gray-800">Parcourir les ressources</a></li>
             <li><a href="/horaires" class="text-gray-600 hover:text-gray-800">Horaires</a></li>
+            <li><a href="/about" class="text-gray-600 hover:text-gray-800">À propos</a></li>
             <li>
                 <?php if (\utils\SessionHelpers::isLogin()) { ?>
                     <a href="/me" class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-3 px-6 rounded-full">
