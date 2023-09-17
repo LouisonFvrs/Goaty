@@ -150,6 +150,9 @@ class UserController extends WebController
 
         if ($result) {
             $this->redirect("/me");
+
+            // Envoi de l'email confirmation d'emprunt
+            mail("ceracif253@viicard.com", "Emprunt", "Vous venez d'emprunter la ressource suivante : " + $idRessource->titre);
         } else {
             // Gestion d'erreur à améliorer
             die("Erreur lors de l'emprunt");
