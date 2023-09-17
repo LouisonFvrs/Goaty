@@ -80,8 +80,8 @@ class UserController extends WebController
 
 
         // Gestion de l'inscription
-        if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["nom"]) && isset($_POST["prenom"])) {
-            $result = $this->emprunteur->creerEmprenteur($_POST["email"], $_POST["password"], $_POST["nom"], $_POST["prenom"]);
+        if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["phoneNumber"])) {
+            $result = $this->emprunteur->creerEmprenteur($_POST["email"], $_POST["password"], $_POST["nom"], $_POST["prenom"], $_POST["phoneNumber"]);
 
             // Si l'inscription est réussie, on affiche un message de succès
             if ($result) {
