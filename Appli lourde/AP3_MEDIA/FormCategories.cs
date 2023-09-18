@@ -18,6 +18,7 @@ namespace AP3_MEDIA
         public FormCategories()
         {
             InitializeComponent();
+
         }
 
         public void remplirListeCategories()
@@ -31,6 +32,9 @@ namespace AP3_MEDIA
         private void FormCategories_Load(object sender, EventArgs e)
         {
             remplirListeCategories();
+
+            btnModifier.Hide();
+            btnSupprimer.Hide();
 
         }
 
@@ -66,6 +70,9 @@ namespace AP3_MEDIA
         {
             if (lbCategories.SelectedIndex != -1)
             {
+                btnModifier.Show();
+                btnSupprimer.Show();
+
                 // récupération de la catégorie sélectionnée
                 C = (Categorie)bsCategories.Current;
 
@@ -77,6 +84,7 @@ namespace AP3_MEDIA
         private void btnModifier_Click(object sender, EventArgs e)
         {
             string libelle = tbLibelle.Text;
+  
             if (libelle != "")
             {
                 if (Modele.ModifierCategorie(C.Idcategorie, libelle))
