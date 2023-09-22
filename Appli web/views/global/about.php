@@ -22,7 +22,7 @@
 
             <!-- Membre de l'équipe 1 -->
             <div class="flex items-center mb-6">
-                <img src="margaux.jpg" alt="Margaux Gaboriaux" class="w-16 h-16 rounded-full mr-4">
+                <img src="/public/images/grosseTete2Margaux.jpg" alt="Margaux Gaboriaux" class="w-16 h-16 rounded-full mr-4">
                 <div>
                     <h3 class="text-lg font-semibold">Margaux Gaboriaux</h3>
                     <p class="text-gray-600">Développeur Web</p>
@@ -32,7 +32,7 @@
 
             <!-- Membre de l'équipe 2 -->
             <div class="flex items-center mb-6">
-                <img src="louison.jpg" alt="Louison Feuvrais" class="w-16 h-16 rounded-full mr-4">
+                <img src="/public/images/louison.jpg" alt="Louison Feuvrais" class="w-16 h-16 rounded-full mr-4">
                 <div>
                     <h3 class="text-lg font-semibold">Louison Feuvrais</h3>
                     <p class="text-gray-600 text-justify">Développeur Web</p>
