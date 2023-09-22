@@ -95,16 +95,25 @@
             // On déclare une variable ressources qui sera utilisée dans le template.
             // C'est une variable réactive, c'est-à-dire que si on la modifie, le template sera mis à jour.
             const ressources = ref([]);
+            let lastIndexDisplayed = 0;
 
             // Fonction qui permet de récupérer les ressources.
             // La fonction fera un appel Ajax à l'API pour récupérer les ressources.
             // Une fois les ressources récupérées, on met à jour la variable ressources.
             function getRessources() {
-                fetch('/api/catalogue/random/6') // Appel Ajax à l'API en utilisant la fonction fetch.
+                fetch('/api/catalogue/') // Appel Ajax à l'API en utilisant la fonction fetch.
                     .then(res => res.json()) // Conversion la réponse en JSON (objet JavaScript).
                     .then(data => { const ressourcesTriees = data.sort((a, b) => b.anneesortie - a.anneesortie);
+
+                        const sixNextRessources = ressourcesTriees.slice(lastIndexDisplayed, lastIndexDisplayed + 6);
+                        lastIndexDisplayed += 6;
+
+                        if(lastIndexDisplayed >= ressourcesTriees.length) {
+                            lastIndexDisplayed = 0;
+                        }
+
                         // Mise à jour de la variable ressources (variable réactive) avec les ressources triées.
-                        ressources.value = ressourcesTriees;
+                        ressources.value = sixNextRessources;
                     });
             }
 

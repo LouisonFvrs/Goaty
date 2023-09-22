@@ -16,7 +16,7 @@
                     </p>
                     <p class="text-gray-600 mb-2"><span
                                 class="font-semibold">Prénom:</span> <?= $user->prenomemprunteur ?></p>
-                    <p class="text-gray-600 mb-2"><span class="font-semibold">Téléphone:</span> <?= $user->telportable ?>
+                    <p class="text-gray-600 mb-2"><span class="font-semibold">Téléphone:</span> <span class="flou" id="tel" onclick="changeClass()"> <?= $user->telportable ?></span>
                     </p>
                 </div>
 
@@ -62,3 +62,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    function changeClass() {
+        if(document.getElementById('tel').className == "noFlou") {
+            document.getElementById('tel').className = "flou";
+
+        } else {
+            document.getElementById('tel').className = "noFlou";
+        }
+    }
+</script>
