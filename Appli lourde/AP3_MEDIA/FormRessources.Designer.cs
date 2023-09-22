@@ -32,6 +32,7 @@
             dgvRessources = new DataGridView();
             contextMenuStrip1 = new ContextMenuStrip(components);
             voirLesExemplaireToolStripMenuItem = new ToolStripMenuItem();
+            supprimerToolStripMenuItem = new ToolStripMenuItem();
             label1 = new Label();
             btnFermer = new Button();
             bsRessources = new BindingSource(components);
@@ -65,9 +66,9 @@
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { voirLesExemplaireToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { voirLesExemplaireToolStripMenuItem, supprimerToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(181, 48);
+            contextMenuStrip1.Size = new Size(181, 70);
             // 
             // voirLesExemplaireToolStripMenuItem
             // 
@@ -75,6 +76,13 @@
             voirLesExemplaireToolStripMenuItem.Size = new Size(180, 22);
             voirLesExemplaireToolStripMenuItem.Text = "voir les exemplaires";
             voirLesExemplaireToolStripMenuItem.Click += voirLesExemplaireToolStripMenuItem_Click;
+            // 
+            // supprimerToolStripMenuItem
+            // 
+            supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
+            supprimerToolStripMenuItem.Size = new Size(180, 22);
+            supprimerToolStripMenuItem.Text = "supprimer";
+            supprimerToolStripMenuItem.Click += deleteToolStripMenuItem;
             // 
             // label1
             // 
@@ -109,7 +117,6 @@
             label2.Size = new Size(438, 20);
             label2.TabIndex = 4;
             label2.Text = "click droit sur la ressource sélectionnée pour voir ses exemplaires";
-            label2.Click += label2_Click;
             // 
             // dgvExemplaires
             // 
@@ -159,5 +166,6 @@
         private Label label2;
         private BindingSource bsExemplaires;
         private DataGridView dgvExemplaires;
+        private ToolStripMenuItem supprimerToolStripMenuItem;
     }
 }

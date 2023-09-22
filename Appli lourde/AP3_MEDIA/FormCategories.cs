@@ -28,6 +28,7 @@ namespace AP3_MEDIA
             lbCategories.DisplayMember = "libellecategorie";
             bsCategories.DataSource = Modele.getListCategories();
             lbCategories.DataSource = bsCategories;
+            lbCategories.SelectedIndex = -1;
         }
         private void FormCategories_Load(object sender, EventArgs e)
         {
@@ -35,7 +36,6 @@ namespace AP3_MEDIA
 
             btnModifier.Hide();
             btnSupprimer.Hide();
-
         }
 
         private void btnFermer_Click(object sender, EventArgs e)
@@ -70,21 +70,22 @@ namespace AP3_MEDIA
         {
             if (lbCategories.SelectedIndex != -1)
             {
-                btnModifier.Show();
-                btnSupprimer.Show();
-
                 // récupération de la catégorie sélectionnée
                 C = (Categorie)bsCategories.Current;
 
                 // mise à jour du libellé pour modifier ou supprimer
                 tbLibelle.Text = C.Libellecategorie;
+
+                btnValider.Hide();
+                btnModifier.Show();
+                btnSupprimer.Show();
             }
         }
 
         private void btnModifier_Click(object sender, EventArgs e)
         {
             string libelle = tbLibelle.Text;
-  
+
             if (libelle != "")
             {
                 if (Modele.ModifierCategorie(C.Idcategorie, libelle))
@@ -122,6 +123,15 @@ namespace AP3_MEDIA
             {
                 MessageBox.Show("ERREUR : Sélectionner la catégorie à supprimer", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnDeselectionner_Click(object sender, EventArgs e)
+        {
+            lbCategories.SelectedIndex = -1;
+            tbLibelle.Clear();
+            btnValider.Show();
+            btnModifier.Hide();
+            btnSupprimer.Hide();
         }
     }
 }

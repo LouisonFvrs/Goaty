@@ -13,6 +13,8 @@ public partial class Exemplaire
 
     public DateOnly? Dateentree { get; set; }
 
+    public bool? ArchiverExem { get; set; }
+
     public virtual ICollection<Emprunter> Emprunters { get; set; } = new List<Emprunter>();
 
     public virtual Etat IdetatNavigation { get; set; } = null!;

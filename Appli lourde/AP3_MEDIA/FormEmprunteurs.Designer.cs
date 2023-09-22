@@ -28,7 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label1 = new Label();
+            dgvEmprunteurs = new DataGridView();
+            bsEmprunteurs = new BindingSource(components);
+            btnFermer = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvEmprunteurs).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsEmprunteurs).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -41,16 +47,44 @@
             label1.TabIndex = 4;
             label1.Text = "Liste des emprunteurs";
             // 
+            // dgvEmprunteurs
+            // 
+            dgvEmprunteurs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvEmprunteurs.Location = new Point(153, 57);
+            dgvEmprunteurs.Name = "dgvEmprunteurs";
+            dgvEmprunteurs.RowTemplate.Height = 25;
+            dgvEmprunteurs.Size = new Size(479, 185);
+            dgvEmprunteurs.TabIndex = 5;
+            // 
+            // btnFermer
+            // 
+            btnFermer.BackColor = Color.Black;
+            btnFermer.FlatStyle = FlatStyle.Popup;
+            btnFermer.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnFermer.ForeColor = Color.White;
+            btnFermer.Location = new Point(653, 231);
+            btnFermer.Name = "btnFermer";
+            btnFermer.Size = new Size(105, 55);
+            btnFermer.TabIndex = 10;
+            btnFermer.Text = "FERMER";
+            btnFermer.UseVisualStyleBackColor = false;
+            btnFermer.Click += btnFermer_Click;
+            // 
             // FormEmprunteurs
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
             ClientSize = new Size(784, 298);
+            Controls.Add(btnFermer);
+            Controls.Add(dgvEmprunteurs);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormEmprunteurs";
             Text = "FormEmprunteurs";
+            Load += FormEmprunteurs_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvEmprunteurs).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsEmprunteurs).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -58,5 +92,8 @@
         #endregion
 
         private Label label1;
+        private DataGridView dgvEmprunteurs;
+        private BindingSource bsEmprunteurs;
+        private Button btnFermer;
     }
 }

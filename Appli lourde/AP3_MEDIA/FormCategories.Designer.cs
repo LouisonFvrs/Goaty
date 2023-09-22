@@ -41,6 +41,7 @@
             btnModifier = new Button();
             btnValider = new Button();
             label4 = new Label();
+            btnDeselectionner = new Button();
             ((System.ComponentModel.ISupportInitialize)bsCategories).BeginInit();
             gbCategorie.SuspendLayout();
             SuspendLayout();
@@ -164,12 +165,27 @@
             label4.TabIndex = 12;
             label4.Text = "sélectionner une catégorie pour la modifier ou la supprimer";
             // 
+            // btnDeselectionner
+            // 
+            btnDeselectionner.BackColor = Color.Black;
+            btnDeselectionner.FlatStyle = FlatStyle.Popup;
+            btnDeselectionner.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDeselectionner.ForeColor = Color.White;
+            btnDeselectionner.Location = new Point(548, 46);
+            btnDeselectionner.Name = "btnDeselectionner";
+            btnDeselectionner.Size = new Size(106, 42);
+            btnDeselectionner.TabIndex = 13;
+            btnDeselectionner.Text = "Désélectionner";
+            btnDeselectionner.UseVisualStyleBackColor = false;
+            btnDeselectionner.Click += btnDeselectionner_Click;
+            // 
             // FormCategories
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
             ClientSize = new Size(800, 337);
+            Controls.Add(btnDeselectionner);
             Controls.Add(label4);
             Controls.Add(gbCategorie);
             Controls.Add(btnFermer);
@@ -201,5 +217,6 @@
         private Button btnValider;
         private Button btnSupprimer;
         private Button btnModifier;
+        private Button btnDeselectionner;
     }
 }

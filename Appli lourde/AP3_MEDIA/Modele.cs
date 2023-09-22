@@ -58,6 +58,11 @@ namespace AP3_MEDIA
             return lesEx;
         }
 
+        public static List<Emprunteur> getListEmprunteurs()
+        {
+            return monModele.Emprunteurs.ToList();
+        }
+
         /// <summary>
         /// Fonction qui retourne vrai si l'ajout d'une ressource peut s'effectuer
         /// </summary>
@@ -235,7 +240,9 @@ namespace AP3_MEDIA
             {
                 // récupération de la categorie à supprimer
                 uneCategorie = RecupererCategorie(idC);
+                uneCategorie.ArchiverCat = false ;
                 monModele.Categories.Remove(uneCategorie);
+
                 monModele.SaveChanges();
 
             }

@@ -9,5 +9,7 @@ public partial class Categorie
 
     public string? Libellecategorie { get; set; }
 
+    public bool? ArchiverCat { get; set; }
+
     public virtual ICollection<Ressource> Ressources { get; set; } = new List<Ressource>();
 }

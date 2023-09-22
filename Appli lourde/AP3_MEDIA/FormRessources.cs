@@ -30,19 +30,13 @@ namespace AP3_MEDIA
                 x.Idressource,
                 x.Titre,
                 x.Description,
-                x.Isbn,
-                x.Idcategorie,
+                x.Langue,
+                x.Anneesortie,
                 x.IdcategorieNavigation.Libellecategorie
-            }).OrderBy(x => x.Idressource).ToList();
-
+            }).OrderBy(x => x.Titre).ToList();
 
             dgvRessources.DataSource = bsRessources;
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
+            dgvRessources.Columns[0].Visible = false;
         }
 
         private void voirLesExemplaireToolStripMenuItem_Click(object sender, EventArgs e)
@@ -82,6 +76,11 @@ namespace AP3_MEDIA
         private void dgvRessources_Click(object sender, EventArgs e)
         {
             dgvExemplaires.Visible = false;
+        }
+
+        private void deleteToolStripMenuItem(object sender, EventArgs e)
+        {
+
         }
     }
 }

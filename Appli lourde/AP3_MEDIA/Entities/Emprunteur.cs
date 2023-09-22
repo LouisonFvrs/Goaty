@@ -21,5 +21,7 @@ public partial class Emprunteur
 
     public int? Validationcompte { get; set; }
 
+    public bool? ArchiverEmprunteur { get; set; }
+
     public virtual ICollection<Emprunter> Emprunters { get; set; } = new List<Emprunter>();
 }
