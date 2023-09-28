@@ -128,4 +128,5 @@ class EmprunteurModel extends SQL
 
         return false;
     }
+
 }

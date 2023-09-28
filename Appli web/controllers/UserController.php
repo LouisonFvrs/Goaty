@@ -163,4 +163,36 @@ class UserController extends WebController
         }
     }
 
+    // Télécharger les données au format jsonS
+    function download() {
+
+        $header = "\n=================================== Information compte ===================================\n\n";
+        $headerEmprunt = "\n\n\n=================================== Information emprunt ===================================\n\n";
+
+        // Récupération de l'utilisateur connecté en SESSION.
+        $user = SessionHelpers::getConnected();
+
+        // Données de l'utilisateur
+        $userData = "Nom : " . $user->nomemprunteur . "\nPrénom : " . $user->prenomemprunteur . "\nDate de naissance : " . $user->datenaissance . "\nEmail : " . $user->emailemprunteur . "\nTéléphone : " . $user->telportable;
+
+        // récupération des emprunts d'un utilisateur
+        $emprunts = $this->emprunter->getEmprunts($user->idemprunteur);
+
+        $empruntData = "";
+
+
+        foreach ($emprunts as $e) {
+            $empruntData .= "Titre : ". $e->titre . "\nDate d'emprunt : " . $e->datedebutemprunt . "\nDurée emprunt : " . $e->dureeemprunt . "\nDate de retour : " . $e->dateretour . "\nDescription : " . $e->description . "\nAnnée de sortie : " . $e->anneesortie . "\nLangue : " . $e->langue . "\nType de la ressource : " . $e->libellecategorie . "\n\n\n";
+        }
+
+        $fileName = "information.json";
+
+        header('Content-Type: application/json');
+        header('Content-Disposition: attachment; filename="' . $fileName . '"');
+
+        file_put_contents($fileName, $header . $userData . $headerEmprunt . $empruntData);
+
+        $this->redirect("/me");
+    }
+
 }

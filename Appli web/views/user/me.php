@@ -21,10 +21,14 @@
                 </div>
 
                 <div class="p-5 text-center">
-                    <a class="bg-red-600 text-white hover:bg-red-900 font-bold py-3 px-6 rounded-full" href="/logout">
-                        Déconnexion
+                    <a href="/logout" class="btn btn-custom">
+                        <button class="btn bg-red-600 text-white hover:bg-red-900 py-1 px-3 m-2"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</button>
+                    </a>
+                    <a href="/download" class="btn btn-custom">
+                        <button class="btn bg-blue-600 text-white hover:bg-blue-900 py-1 px-3 m-2"><i class="fa fa-download"></i> Télécharger</button>
                     </a>
                 </div>
+
             </div>
         </div>
 

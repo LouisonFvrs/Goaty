@@ -45,6 +45,9 @@ class Web
             // Page de profil utilisateur.
             Route::Add('/me', [$user, 'me']);
 
+            // Télécharger ses données
+            Route::Add('/download', [$user, 'download']);
+
             // Action de déconnexion.
             Route::Add('/logout', [$user, 'logout']);
 
