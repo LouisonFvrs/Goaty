@@ -46,6 +46,18 @@ class EmprunterModel extends SQL
         }
     }
 
+    public function getRessource($idRessource)
+    {
+        try {
+            $sql = 'SELECT * FROM ressource WHERE idressource = ?';
+            $stmt = parent::getPdo()->prepare($sql);
+            $stmt->execute([$idRessource]);
+            return $stmt->fetch(\PDO::FETCH_OBJ);
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
     /**
      * Retourne les 5 ressources les plus empruntées.
      * @return array|false
