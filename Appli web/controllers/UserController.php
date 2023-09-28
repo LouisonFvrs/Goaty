@@ -52,11 +52,11 @@ class UserController extends WebController
             $result = $this->emprunteur->connexion($_POST["email"], $_POST["password"]);
 
             // Si la connexion est réussie, on redirige l'utilisateur vers sa page de profil
-            if ($result) {
+            if ($result == "true") {
                 $this->redirect("/me");
             } else {
                 // Sinon, on affiche un message d'erreur
-                $data["error"] = "Email ou mot de passe incorrect";
+                $data["error"] = $result;
             }
         }
 

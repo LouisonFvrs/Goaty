@@ -35,15 +35,21 @@ class EmprunteurModel extends SQL
         $user = $stmt->fetch(\PDO::FETCH_OBJ);
 
         if ($user == null) {
-            return false;
+            return "Compte Inexistant";
         }
 
         if (password_verify($password, $user->motpasseemprunteur)) {
-            SessionHelpers::login($user);
-            return true;
+            if ($user->validationcompte == 0) {
+                return "Veuillez valider votre compte via le lien distribué par mail";
+            } else if ($user->validationcompte == 3 || $user->validationcompte == 4) {
+                return "Ce compte n'est malheureusement plus accessible";
+            }
+            if ($user->validationcompte == 1 || $user->validationcompte == 2) {
+                SessionHelpers::login($user);
+                return "true";
+            }
         }
-
-        return false;
+        return "Ce compte nous est inconnu";
     }
 
     public function creerEmprenteur(mixed $email, mixed $password, mixed $nom, mixed $prenom, mixed $phoneNumber): bool
@@ -106,28 +112,20 @@ class EmprunteurModel extends SQL
         }, $all);
     }
 
+    // Gestion de la validation par mail du compte
     public function validateAccount($uuid)
     {
-        /*
-         * Méthode à implémenter
-         *
-         * Il faut :
-         * - Vérifier que l'UUID est valide (vérifier que l'utilisateur existe), colonne validationtoken
-         * - Mettre à jour la colonne validationcompte à 1
-         * - Supprimer l'UUID de la colonne validationtoken
-         */
+        $stmt = $this->getPdo()->prepare("SELECT * FROM emprunteur WHERE validationtoken = ?;");
+        $stmt->execute([$uuid]);
+        $result = $stmt->fetch(\PDO::FETCH_OBJ);
 
-        /**
-         * Rappel
-         *
-         * La validation du compte est un int qui prend plusieurs valeurs :
-         * 0 : Compte non validé
-         * 1 : email validé
-         * 2 : Compte validé par un admin
-         * 3 : Compte banni
-         * 4 : Compte supprimé
-         */
+        if ($result->validationtoken == $uuid) {
+            $stmt = $this->getPdo()->prepare("UPDATE emprunteur SET validationcompte = 1, validationtoken = uuid() WHERE idemprunteur = ?;");
+            $stmt->execute([$result->idemprunteur]);
 
-        return true;
+            return true;
+        }
+
+        return false;
     }
 }
