@@ -195,4 +195,19 @@ class UserController extends WebController
         $this->redirect("/me");
     }
 
+    // Édition du profil
+    function edit () {
+
+        // Récupération de l'id utilisateur
+        $user = SessionHelpers::getConnected();
+
+        var_dump($_POST["nom"]);
+        die();
+        // Récupération des données
+
+        // Ajout des données de l'utilsateur
+
+        $this->redirect("/me");
+    }
+
 }

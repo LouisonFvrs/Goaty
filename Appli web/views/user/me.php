@@ -21,11 +21,21 @@
                 </div>
 
                 <div class="p-5 text-center">
-                    <a href="/logout" class="btn btn-custom">
-                        <button class="btn bg-red-600 text-white hover:bg-red-900 py-1 px-3 m-2"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</button>
+                    <a href="/edit" class="btn btn-custom">
                     </a>
+
+                    <!-- Bouton pour emprunter un exemplaire -->
+                    <form id="modify" method="post" class="text-center pt-5 pb-3">
+                        <?php if (\utils\SessionHelpers::isLogin()) { ?>
+                            <button type="submit" class="btn bg-green-600 text-white hover:bg-green-900 py-1 px-3 m-2"><i class="bi bi-pen"></i>Édition</button>
+                        <?php } ?>
+                    </form>
+
                     <a href="/download" class="btn btn-custom">
                         <button class="btn bg-blue-600 text-white hover:bg-blue-900 py-1 px-3 m-2"><i class="fa fa-download"></i> Télécharger</button>
+                    </a>
+                    <a href="/logout" class="btn btn-custom">
+                        <button class="btn bg-red-600 text-white hover:bg-red-900 py-1 px-3 m-2"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</button>
                     </a>
                 </div>
 
@@ -64,6 +74,7 @@
                 </div>
             <?php } ?>
         </div>
+
     </div>
 </div>
 
@@ -76,4 +87,50 @@
             document.getElementById('tel').className = "noFlou";
         }
     }
+
+    document.querySelector("#modify").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Création d'un formulaire à l'intérieur du dialogue de confirmation
+        const { value: formValues } = await Swal.fire({
+            title: 'Édition de votre compte',
+            html:
+                '<form id="loginForm" action="/edit" method="post">' +
+                '<input type="text" id="nom" class="swal2-input" placeholder="Nom" value="<?php echo $user->nomemprunteur;  ?>"" required>' +
+                '<input type="text" id="prenom" class="swal2-input" placeholder="Prénom" value="<?php echo $user->prenomemprunteur; ?>" required>' +
+                '<input type="email" id="email" class="swal2-input" placeholder="Adresse e-mail" value="<?php echo $user->emailemprunteur; ?>" required>' +
+                '<input type="date" id="dateNaissance" class="swal2-input" placeholder="Date de naissance" value="<?php echo $user->datenaissance; ?>" required>' +
+                '<input type="text" id="telephone" class="swal2-input" placeholder="Téléphone" value="<?php echo $user->telportable; ?>" required>' +
+                '<input type="password" id="password" class="swal2-input" placeholder="Mot de passe" value="" required>' +
+                '<input type="password" id="confirmPassword" class="swal2-input" placeholder="Mot de passe" value="" required>' +
+                '</form>',
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonText: 'Éditer',
+            preConfirm: () => {
+                return {
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('password').value,
+                    nom : document.getElementById('nom').value,
+                    prenom : document.getElementById('prenom').value,
+                    dateNaissance : document.getElementById('dateNaissance').value,
+                    telephone : document.getElementById('telephone').value,
+                    password : document.getElementById('password').value,
+                    confirmPassword : document.getElementById('confirmPassword').value
+                };
+            }
+        });
+
+        if (formValues) {
+            const nom = formValues.nom;
+            const prenom = formValues.prenom;
+            const email = formValues.email;
+            const telephone = formValues.telephone;
+            const password = formValues.password;
+            const confirmPassword = formValues.confirmPassword;
+            const dateNaissance = formValues.dateNaissance;
+            e.target.submit();
+        }
+    });
+
 </script>

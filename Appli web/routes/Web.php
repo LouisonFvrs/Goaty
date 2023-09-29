@@ -53,6 +53,9 @@ class Web
 
             // Action d'emprunt d'une ressource.
             Route::Add('/catalogue/emprunter', [$user, 'emprunter']);
+
+            // Action de modification des données du compte utilisateur
+            Route::Add('/edit', [$user, 'edit']);
         }
 
         // Route permettant l'accès au catalogue.

@@ -19,7 +19,7 @@
                         <?= $ressource->description ?>
                 </p>
 
-                <!-- Bouton pour emprunter un exemplaire -->
+                <!-- Bouton pour modifier un exemplaire -->
                 <?php if ($exemplaire) { ?>
 
                     <form id="exemplaire" method="post" class="text-center pt-5 pb-3" action="/catalogue/emprunter">
