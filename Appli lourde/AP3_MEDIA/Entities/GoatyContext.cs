@@ -47,7 +47,7 @@ public partial class GoatyContext : DbContext
                 .HasColumnType("int(11)")
                 .HasColumnName("idcategorie");
             entity.Property(e => e.ArchiverCat)
-                .HasDefaultValueSql("'1'")
+                .HasDefaultValueSql("'0'")
                 .HasColumnName("archiverCat");
             entity.Property(e => e.Libellecategorie)
                 .HasMaxLength(128)
@@ -78,10 +78,7 @@ public partial class GoatyContext : DbContext
             entity.Property(e => e.Datedebutemprunt)
                 .HasColumnType("datetime")
                 .HasColumnName("datedebutemprunt");
-            entity.Property(e => e.ArchiverEmprunter)
-                .IsRequired()
-                .HasDefaultValueSql("'1'")
-                .HasColumnName("archiverEmprunter");
+            entity.Property(e => e.ArchiverEmprunter).HasColumnName("archiverEmprunter");
             entity.Property(e => e.Dateretour)
                 .HasColumnType("datetime")
                 .HasColumnName("dateretour");
@@ -111,10 +108,7 @@ public partial class GoatyContext : DbContext
             entity.Property(e => e.Idemprunteur)
                 .HasColumnType("int(11)")
                 .HasColumnName("idemprunteur");
-            entity.Property(e => e.ArchiverEmprunteur)
-                .IsRequired()
-                .HasDefaultValueSql("'1'")
-                .HasColumnName("archiverEmprunteur");
+            entity.Property(e => e.ArchiverEmprunteur).HasColumnName("archiverEmprunteur");
             entity.Property(e => e.Datenaissance).HasColumnName("datenaissance");
             entity.Property(e => e.Emailemprunteur).HasColumnName("emailemprunteur");
             entity.Property(e => e.Motpasseemprunteur)
@@ -166,10 +160,7 @@ public partial class GoatyContext : DbContext
             entity.Property(e => e.Idexemplaire)
                 .HasColumnType("int(11)")
                 .HasColumnName("idexemplaire");
-            entity.Property(e => e.ArchiverExem)
-                .IsRequired()
-                .HasDefaultValueSql("'1'")
-                .HasColumnName("archiverExem");
+            entity.Property(e => e.ArchiverExem).HasColumnName("archiverExem");
             entity.Property(e => e.Dateentree).HasColumnName("dateentree");
             entity.Property(e => e.Idetat)
                 .HasColumnType("int(11)")
@@ -200,10 +191,7 @@ public partial class GoatyContext : DbContext
             entity.Property(e => e.Anneesortie)
                 .HasColumnType("int(11)")
                 .HasColumnName("anneesortie");
-            entity.Property(e => e.ArchiverRess)
-                .IsRequired()
-                .HasDefaultValueSql("'1'")
-                .HasColumnName("archiverRess");
+            entity.Property(e => e.ArchiverRess).HasColumnName("archiverRess");
             entity.Property(e => e.Description)
                 .HasMaxLength(255)
                 .HasColumnName("description");

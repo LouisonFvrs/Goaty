@@ -78,9 +78,60 @@ namespace AP3_MEDIA
             dgvExemplaires.Visible = false;
         }
 
-        private void deleteToolStripMenuItem(object sender, EventArgs e)
+        private void btnListeArchive_Click(object sender, EventArgs e)
         {
+            List<Ressource> lesRessources = Modele.getListRessourcesArchivees();
+            if (lesRessources.Count != 0)
+            {
+                bsRessourcesArchivees.DataSource = (lesRessources).Select(x => new
+                {
+                    x.Idressource,
+                    x.Titre,
+                    x.Description,
+                    x.Langue,
+                    x.Anneesortie,
+                    x.IdcategorieNavigation.Libellecategorie
+                }).OrderBy(x => x.Titre).ToList();
 
+                dgvRessources.DataSource = bsRessourcesArchivees;
+                dgvRessources.Columns[0].Visible = false;
+            }
+            else
+            {
+                dgvRessources.Visible = false;
+                MessageBox.Show("Pas de ressource archivée");
+            }
+        }
+
+        private void btnRessources_Click(object sender, EventArgs e)
+        {
+            dgvRessources.Visible = true;
+            bsRessources.DataSource = Modele.getListRessources().Select(x => new
+            {
+                x.Idressource,
+                x.Titre,
+                x.Description,
+                x.Langue,
+                x.Anneesortie,
+                x.IdcategorieNavigation.Libellecategorie
+            }).OrderBy(x => x.Titre).ToList();
+
+            dgvRessources.DataSource = bsRessources;
+            dgvRessources.Columns[0].Visible = false;
+        }
+
+        private void archiveToolStripMenuItem(object sender, EventArgs e)
+        {
+            System.Type type = bsRessources.Current.GetType();
+            int idR = (int)type.GetProperty("Idressource").GetValue(bsRessources.Current, null);
+            Modele.ArchiverRessource(idR);
+        }
+
+        private void supprimerToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            System.Type type = bsRessources.Current.GetType();
+            int idR = (int)type.GetProperty("Idressource").GetValue(bsRessources.Current, null);
+            Modele.SupprimerRessource(idR);
         }
     }
 }

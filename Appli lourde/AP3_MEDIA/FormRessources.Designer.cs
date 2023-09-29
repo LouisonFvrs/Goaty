@@ -33,17 +33,22 @@
             contextMenuStrip1 = new ContextMenuStrip(components);
             voirLesExemplaireToolStripMenuItem = new ToolStripMenuItem();
             supprimerToolStripMenuItem = new ToolStripMenuItem();
+            supprimerToolStripMenuItem1 = new ToolStripMenuItem();
             label1 = new Label();
             btnFermer = new Button();
             bsRessources = new BindingSource(components);
             label2 = new Label();
             bsExemplaires = new BindingSource(components);
             dgvExemplaires = new DataGridView();
+            btnListeArchive = new Button();
+            bsRessourcesArchivees = new BindingSource(components);
+            btnRessources = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvRessources).BeginInit();
             contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bsRessources).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsExemplaires).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvExemplaires).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsRessourcesArchivees).BeginInit();
             SuspendLayout();
             // 
             // dgvRessources
@@ -68,21 +73,29 @@
             // 
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { voirLesExemplaireToolStripMenuItem, supprimerToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(181, 70);
+            contextMenuStrip1.Size = new Size(178, 48);
             // 
             // voirLesExemplaireToolStripMenuItem
             // 
             voirLesExemplaireToolStripMenuItem.Name = "voirLesExemplaireToolStripMenuItem";
-            voirLesExemplaireToolStripMenuItem.Size = new Size(180, 22);
+            voirLesExemplaireToolStripMenuItem.Size = new Size(177, 22);
             voirLesExemplaireToolStripMenuItem.Text = "voir les exemplaires";
             voirLesExemplaireToolStripMenuItem.Click += voirLesExemplaireToolStripMenuItem_Click;
             // 
             // supprimerToolStripMenuItem
             // 
+            supprimerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { supprimerToolStripMenuItem1 });
             supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
-            supprimerToolStripMenuItem.Size = new Size(180, 22);
-            supprimerToolStripMenuItem.Text = "supprimer";
-            supprimerToolStripMenuItem.Click += deleteToolStripMenuItem;
+            supprimerToolStripMenuItem.Size = new Size(177, 22);
+            supprimerToolStripMenuItem.Text = "archiver";
+            supprimerToolStripMenuItem.Click += archiveToolStripMenuItem;
+            // 
+            // supprimerToolStripMenuItem1
+            // 
+            supprimerToolStripMenuItem1.Name = "supprimerToolStripMenuItem1";
+            supprimerToolStripMenuItem1.Size = new Size(180, 22);
+            supprimerToolStripMenuItem1.Text = "supprimer";
+            supprimerToolStripMenuItem1.Click += supprimerToolStripMenuItem1_Click;
             // 
             // label1
             // 
@@ -131,12 +144,34 @@
             dgvExemplaires.TabIndex = 5;
             dgvExemplaires.Visible = false;
             // 
+            // btnListeArchive
+            // 
+            btnListeArchive.Location = new Point(58, 302);
+            btnListeArchive.Name = "btnListeArchive";
+            btnListeArchive.Size = new Size(134, 23);
+            btnListeArchive.TabIndex = 6;
+            btnListeArchive.Text = "Ressources archivées";
+            btnListeArchive.UseVisualStyleBackColor = true;
+            btnListeArchive.Click += btnListeArchive_Click;
+            // 
+            // btnRessources
+            // 
+            btnRessources.Location = new Point(207, 302);
+            btnRessources.Name = "btnRessources";
+            btnRessources.Size = new Size(134, 23);
+            btnRessources.TabIndex = 7;
+            btnRessources.Text = "Ressources";
+            btnRessources.UseVisualStyleBackColor = true;
+            btnRessources.Click += btnRessources_Click;
+            // 
             // FormRessources
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
             ClientSize = new Size(800, 337);
+            Controls.Add(btnRessources);
+            Controls.Add(btnListeArchive);
             Controls.Add(dgvExemplaires);
             Controls.Add(label2);
             Controls.Add(btnFermer);
@@ -151,6 +186,7 @@
             ((System.ComponentModel.ISupportInitialize)bsRessources).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsExemplaires).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvExemplaires).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsRessourcesArchivees).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -167,5 +203,9 @@
         private BindingSource bsExemplaires;
         private DataGridView dgvExemplaires;
         private ToolStripMenuItem supprimerToolStripMenuItem;
+        private Button btnListeArchive;
+        private BindingSource bsRessourcesArchivees;
+        private Button btnRessources;
+        private ToolStripMenuItem supprimerToolStripMenuItem1;
     }
 }

@@ -17,7 +17,7 @@ public partial class Emprunter
 
     public DateTime? Dateretour { get; set; }
 
-    public bool? ArchiverEmprunter { get; set; }
+    public bool ArchiverEmprunter { get; set; }
 
     public virtual Exemplaire Id { get; set; } = null!;
 

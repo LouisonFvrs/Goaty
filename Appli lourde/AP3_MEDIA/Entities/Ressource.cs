@@ -21,7 +21,7 @@ public partial class Ressource
 
     public string? Langue { get; set; }
 
-    public bool? ArchiverRess { get; set; }
+    public bool ArchiverRess { get; set; }
 
     public virtual ICollection<Exemplaire> Exemplaires { get; set; } = new List<Exemplaire>();
 
