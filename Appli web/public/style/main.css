@@ -25,3 +25,10 @@ html {
 .noFlou:hover {
     cursor: pointer;
 }
+
+.filtrage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50%;
+}

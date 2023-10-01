@@ -1,5 +1,17 @@
 <div class="container mx-auto py-8 min-h-[calc(100vh-136px)]">
     <h2 class="text-3xl font-bold text-gray-800 mb-4"><?= $titre ?></h2>
+
+    <form action="/catalogue/tri" method="get">
+        <div class="mb-10 mt-10 filtrage">
+            <select name="categories[]" id="categories[]" multiple ">
+                <?php foreach ($categories as $categorie) { ?>
+                    <option value="<?= $categorie->idcategorie ?>"><?= $categorie->libellecategorie ?></option>
+                <?php } ?>
+            </select>
+            <button type="submit" class="btn bg-green-600 text-white hover:bg-green-900 py-1 px-3 m-2">Filtrer</button>
+        </div>
+    </form>
+
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 container mx-auto">
         <?php foreach ($catalogue as $ressource) { ?>
 
@@ -20,3 +32,9 @@
         <?php } ?>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+
+<script>
+    new MultiSelectTag('categories[]')  // id
+</script>

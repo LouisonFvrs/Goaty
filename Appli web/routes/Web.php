@@ -24,8 +24,6 @@ class Web
         Route::Add('/exemple', [$main, 'exemple']);
         Route::Add('/exemple2/{parametre}', [$main, 'exemple']);
 
-
-
         // Appel la fonction inline dans le routeur.
         // Utile pour du code très simple, où un test, l'utilisation d'un contrôleur est préférable.
         // Si le code accède à la base de données, la création d'un contrôleur est requis.
@@ -60,7 +58,7 @@ class Web
 
         // Route permettant l'accès au catalogue.
         Route::Add('/catalogue/detail/{id}', [$catalogue, 'detail']);
-        Route::Add('/catalogue/{type}', [$catalogue, 'liste']);
+        Route::Add('/catalogue/{categorie}', [$catalogue, 'liste']);
 
         //Route permettant l'accès à la page à propos
         Route::Add('/about', fn() => Template::render('views/global/about.php'));

@@ -3,6 +3,7 @@
 namespace controllers;
 
 use controllers\base\WebController;
+use models\CategorieModel;
 use models\ExemplaireModel;
 use models\RessourceModel;
 use utils\Template;
@@ -11,12 +12,14 @@ class CatalogueController extends WebController
 {
 
     private RessourceModel $ressourceModel;
+    private CategorieModel $categorieModel;
     private ExemplaireModel $exemplaireModel;
 
     function __construct()
     {
         $this->ressourceModel = new RessourceModel();
         $this->exemplaireModel = new ExemplaireModel();
+        $this->categorieModel = new CategorieModel();
     }
 
     /**
@@ -24,15 +27,27 @@ class CatalogueController extends WebController
      * @param string $type
      * @return string
      */
-    function liste(string $type): string
+    function liste(string $categorie): string
     {
-        if ($type == "all") {
-            // Récupération de l'ensemble du catalogue
+        // Récupération de toutes les categories
+        $categories = $this->categorieModel->getAll();
+
+        // L'utilisateur souhaite visualiser toutes les ressources
+        if ($categorie == "all") {
+
             $catalogue = $this->ressourceModel->getAll();
 
-            // Affichage de la page à l'utilisateur
-            return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue));
-        } else {
+            return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories));
+        }
+        // L'utilisateur souhaite visualiser certaines type de ressource ex : BD, Livre
+        else if ($categorie == "tri")
+        {
+
+            $catalogue = $this->ressourceModel->getRessourceFilter($_GET['categories']);
+
+            return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories));
+
+
             // Les autres types de ressources ne sont pas encore implémentés.
             return $this->redirect("/");
         }

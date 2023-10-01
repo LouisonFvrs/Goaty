@@ -25,4 +25,21 @@ class RessourceModel extends SQL
         $stmt->execute([$limit]);
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
+
+    // Récupère les ressources selon les catégories spécifiés
+    public function getRessourceFilter($tabOfCategorie) {
+
+        $endOfSentence = "";
+
+        foreach ($tabOfCategorie as $categorie) {
+            $endOfSentence .= " categorie.idcategorie = " . $categorie . " OR";
+        }
+
+        $sql = 'SELECT * FROM ressource INNER JOIN categorie ON categorie.idcategorie = ressource.idcategorie WHERE '. $endOfSentence;
+        $sql = substr($sql, 0, strlen($sql)-2);
+
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
 }

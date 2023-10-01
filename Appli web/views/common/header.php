@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="/public/style/main.css">
     <script src="/public/js/sweetalert2.all.min.js"></script>
     <script src="/public/js/vue.global.prod.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+
     <link src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
