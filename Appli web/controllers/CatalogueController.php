@@ -40,11 +40,16 @@ class CatalogueController extends WebController
             return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories));
         }
         // L'utilisateur souhaite visualiser certaines type de ressource ex : BD, Livre
-        else if ($categorie == "tri")
+        else if ($categorie == "tri" && isset($_GET['categories']))
         {
 
             $catalogue = $this->ressourceModel->getRessourceFilter($_GET['categories']);
 
+            return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories));
+        }
+        else
+        {
+            $catalogue = $this->ressourceModel->getAll();
             return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories));
         }
     }
