@@ -46,10 +46,6 @@ class CatalogueController extends WebController
             $catalogue = $this->ressourceModel->getRessourceFilter($_GET['categories']);
 
             return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories));
-
-
-            // Les autres types de ressources ne sont pas encore implémentés.
-            return $this->redirect("/");
         }
     }
 
