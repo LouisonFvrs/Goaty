@@ -35,7 +35,7 @@ namespace AP3_MEDIA
         /// <returns>Liste</returns>
         public static List<Ressource> getListRessources()
         {
-            return monModele.Ressources.Include(a=> a.IdcategorieNavigation).ToList();
+            return monModele.Ressources.Where(p => p.ArchiverRess == false).Include(a=> a.IdcategorieNavigation).ToList();
         }
 
         /// <summary>
@@ -170,6 +170,62 @@ namespace AP3_MEDIA
                 MessageBox.Show(ex.Message.ToString());
             }
             return uneRessource;
+        }
+
+        public static bool ArchiverRessource(int idR)
+        {
+            Ressource uneRessource;
+            bool vretour = true;
+            try
+            {
+                if (listeExemplairesParRessource(idR).Count <= 0 )
+                {
+                    // récupération de la ressource à modifier
+                    uneRessource = RecupererRessource(idR);
+
+                    // mise à jour des champs
+                    uneRessource.ArchiverRess = true;
+                    monModele.SaveChanges();
+                } else
+                {
+                    MessageBox.Show("Impossible d'archiver la ressource, il existe un exemplaire.");
+                }
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+                MessageBox.Show(ex.Message.ToString());
+            }
+            return vretour;
+        }
+
+        public static bool SupprimerRessource(int idR)
+        {
+            Ressource uneRessource;
+            bool vretour = true;
+            try
+            {
+                if (listeExemplairesParRessource(idR).Count <= 0)
+                {
+                    // récupération de la ressource à supprimer
+                    uneRessource = RecupererRessource(idR);
+                    monModele.Ressources.Remove(uneRessource);
+                    monModele.SaveChanges();
+                } else {
+                    MessageBox.Show("Impossible de supprimer la ressource, il existe un exemplaire.");
+                }
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+                MessageBox.Show(ex.Message.ToString());
+            }
+            return vretour;
+        }
+
+        public static List<Ressource> getListRessourcesArchivees()
+        {
+            return monModele.Ressources.Where(p => p.ArchiverRess == true).Include(a => a.IdcategorieNavigation).ToList();
         }
 
         /// <summary>
