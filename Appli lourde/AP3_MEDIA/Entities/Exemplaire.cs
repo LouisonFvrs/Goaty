@@ -15,8 +15,6 @@ public partial class Exemplaire
 
     public bool ArchiverExem { get; set; }
 
-    public virtual ICollection<Emprunter> Emprunters { get; set; } = new List<Emprunter>();
-
     public virtual Etat IdetatNavigation { get; set; } = null!;
 
     public virtual Ressource IdressourceNavigation { get; set; } = null!;

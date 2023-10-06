@@ -26,7 +26,7 @@ namespace AP3_MEDIA
             // remplir la comboBox des catégories
             lbCategories.ValueMember = "idcategorie";    //permet de stocker l'identifiant
             lbCategories.DisplayMember = "libellecategorie";
-            bsCategories.DataSource = Modele.getListCategories();
+            bsCategories.DataSource = ModeleCategorie.getListCategories();
             lbCategories.DataSource = bsCategories;
             lbCategories.SelectedIndex = -1;
         }
@@ -48,7 +48,7 @@ namespace AP3_MEDIA
             string libelle = tbLibelle.Text;
             if (libelle != "")
             {
-                if (Modele.AjoutCategorie(libelle))
+                if (ModeleCategorie.AjoutCategorie(libelle))
                 {
                     MessageBox.Show("Catégorie ajoutée ");
                     tbLibelle.Clear();
@@ -88,7 +88,7 @@ namespace AP3_MEDIA
 
             if (libelle != "")
             {
-                if (Modele.ModifierCategorie(C.Idcategorie, libelle))
+                if (ModeleCategorie.ModifierCategorie(C.Idcategorie, libelle))
                 {
                     MessageBox.Show("Catégorie modifiée ");
                     remplirListeCategories();
@@ -111,7 +111,7 @@ namespace AP3_MEDIA
             string libelle = tbLibelle.Text;
             if (libelle != "")
             {
-                if (Modele.SupprimerCategorie(C.Idcategorie))
+                if (ModeleCategorie.SupprimerCategorie(C.Idcategorie))
                 {
                     MessageBox.Show("Catégorie supprimée ");
                     remplirListeCategories();

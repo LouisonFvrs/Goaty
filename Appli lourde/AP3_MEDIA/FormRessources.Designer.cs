@@ -43,6 +43,8 @@
             btnListeArchive = new Button();
             bsRessourcesArchivees = new BindingSource(components);
             btnRessources = new Button();
+            contextMenuStrip2 = new ContextMenuStrip(components);
+            btnAjoutExem = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvRessources).BeginInit();
             contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bsRessources).BeginInit();
@@ -93,7 +95,7 @@
             // supprimerToolStripMenuItem1
             // 
             supprimerToolStripMenuItem1.Name = "supprimerToolStripMenuItem1";
-            supprimerToolStripMenuItem1.Size = new Size(180, 22);
+            supprimerToolStripMenuItem1.Size = new Size(128, 22);
             supprimerToolStripMenuItem1.Text = "supprimer";
             supprimerToolStripMenuItem1.Click += supprimerToolStripMenuItem1_Click;
             // 
@@ -164,12 +166,28 @@
             btnRessources.UseVisualStyleBackColor = true;
             btnRessources.Click += btnRessources_Click;
             // 
+            // contextMenuStrip2
+            // 
+            contextMenuStrip2.Name = "contextMenuStrip2";
+            contextMenuStrip2.Size = new Size(61, 4);
+            // 
+            // btnAjoutExem
+            // 
+            btnAjoutExem.Location = new Point(362, 302);
+            btnAjoutExem.Name = "btnAjoutExem";
+            btnAjoutExem.Size = new Size(134, 23);
+            btnAjoutExem.TabIndex = 9;
+            btnAjoutExem.Text = "Ajouter un exemplaire";
+            btnAjoutExem.UseVisualStyleBackColor = true;
+            btnAjoutExem.Click += btnAjoutExem_Click;
+            // 
             // FormRessources
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
             ClientSize = new Size(800, 337);
+            Controls.Add(btnAjoutExem);
             Controls.Add(btnRessources);
             Controls.Add(btnListeArchive);
             Controls.Add(dgvExemplaires);
@@ -207,5 +225,7 @@
         private BindingSource bsRessourcesArchivees;
         private Button btnRessources;
         private ToolStripMenuItem supprimerToolStripMenuItem1;
+        private ContextMenuStrip contextMenuStrip2;
+        private Button btnAjoutExem;
     }
 }
