@@ -146,7 +146,8 @@ namespace AP3_MEDIA
         // bouton qui permet d'ajouter un exemplaire à la ressource sélectionnée 
         private void btnAjoutExem_Click(object sender, EventArgs e)
         {
-            f.openChildForm(new FormExemplaire());
+            FormExemplaire formExemplaire = new FormExemplaire();
+            formExemplaire.Show();
         }
     }
 }

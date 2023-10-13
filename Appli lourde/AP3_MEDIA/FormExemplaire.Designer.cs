@@ -30,94 +30,100 @@
         {
             components = new System.ComponentModel.Container();
             btnFermer = new Button();
-            labelRessource = new Label();
-            labelEtat = new Label();
-            labelDateEntree = new Label();
             btnValider = new Button();
-            bsExemplaire = new BindingSource(components);
-            cbEtat = new ComboBox();
-            cbRessource = new ComboBox();
-            dtpEntree = new DateTimePicker();
             bsRessource = new BindingSource(components);
             bsEtat = new BindingSource(components);
-            ((System.ComponentModel.ISupportInitialize)bsExemplaire).BeginInit();
+            bsExemplaire = new BindingSource(components);
+            cbRessource = new ComboBox();
+            cbEtat = new ComboBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            dtpEntree = new DateTimePicker();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)bsRessource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsEtat).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsExemplaire).BeginInit();
             SuspendLayout();
             // 
             // btnFermer
             // 
-            btnFermer.BackColor = Color.Black;
-            btnFermer.FlatStyle = FlatStyle.Popup;
-            btnFermer.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnFermer.ForeColor = Color.White;
-            btnFermer.Location = new Point(180, 262);
+            btnFermer.Location = new Point(177, 274);
             btnFermer.Name = "btnFermer";
-            btnFermer.Size = new Size(72, 39);
-            btnFermer.TabIndex = 3;
-            btnFermer.Text = "FERMER";
-            btnFermer.UseVisualStyleBackColor = false;
-            btnFermer.Click += btnFermer_Click;
-            // 
-            // labelRessource
-            // 
-            labelRessource.AutoSize = true;
-            labelRessource.Location = new Point(28, 28);
-            labelRessource.Name = "labelRessource";
-            labelRessource.Size = new Size(66, 15);
-            labelRessource.TabIndex = 4;
-            labelRessource.Text = "Ressource :";
-            // 
-            // labelEtat
-            // 
-            labelEtat.AutoSize = true;
-            labelEtat.Location = new Point(30, 90);
-            labelEtat.Name = "labelEtat";
-            labelEtat.Size = new Size(33, 15);
-            labelEtat.TabIndex = 5;
-            labelEtat.Text = "Etat :";
-            // 
-            // labelDateEntree
-            // 
-            labelDateEntree.AutoSize = true;
-            labelDateEntree.Location = new Point(28, 160);
-            labelDateEntree.Name = "labelDateEntree";
-            labelDateEntree.Size = new Size(73, 15);
-            labelDateEntree.TabIndex = 6;
-            labelDateEntree.Text = "Date Entrée :";
+            btnFermer.Size = new Size(75, 23);
+            btnFermer.TabIndex = 0;
+            btnFermer.Text = "Fermer";
+            btnFermer.UseVisualStyleBackColor = true;
+            btnFermer.Click += btnFermer_Click_1;
             // 
             // btnValider
             // 
-            btnValider.Location = new Point(28, 262);
+            btnValider.Location = new Point(12, 274);
             btnValider.Name = "btnValider";
             btnValider.Size = new Size(75, 23);
-            btnValider.TabIndex = 9;
-            btnValider.Text = "Ajouter";
+            btnValider.TabIndex = 1;
+            btnValider.Text = "Valider";
             btnValider.UseVisualStyleBackColor = true;
-            btnValider.Click += btnValider_Click;
-            // 
-            // cbEtat
-            // 
-            cbEtat.FormattingEnabled = true;
-            cbEtat.Location = new Point(28, 108);
-            cbEtat.Name = "cbEtat";
-            cbEtat.Size = new Size(121, 23);
-            cbEtat.TabIndex = 10;
+            btnValider.Click += btnValider_Click_1;
             // 
             // cbRessource
             // 
             cbRessource.FormattingEnabled = true;
-            cbRessource.Location = new Point(28, 46);
+            cbRessource.Location = new Point(12, 82);
             cbRessource.Name = "cbRessource";
-            cbRessource.Size = new Size(121, 23);
-            cbRessource.TabIndex = 11;
+            cbRessource.Size = new Size(164, 23);
+            cbRessource.TabIndex = 2;
+            // 
+            // cbEtat
+            // 
+            cbEtat.FormattingEnabled = true;
+            cbEtat.Location = new Point(12, 143);
+            cbEtat.Name = "cbEtat";
+            cbEtat.Size = new Size(121, 23);
+            cbEtat.TabIndex = 3;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 64);
+            label1.Name = "label1";
+            label1.Size = new Size(60, 15);
+            label1.TabIndex = 4;
+            label1.Text = "Ressource";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 125);
+            label2.Name = "label2";
+            label2.Size = new Size(27, 15);
+            label2.TabIndex = 5;
+            label2.Text = "Etat";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(64, 27);
+            label3.Name = "label3";
+            label3.Size = new Size(124, 15);
+            label3.TabIndex = 6;
+            label3.Text = "Ajouter un exemplaire";
             // 
             // dtpEntree
             // 
-            dtpEntree.Location = new Point(28, 178);
+            dtpEntree.Location = new Point(12, 218);
             dtpEntree.Name = "dtpEntree";
             dtpEntree.Size = new Size(200, 23);
-            dtpEntree.TabIndex = 12;
+            dtpEntree.TabIndex = 7;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(12, 200);
+            label4.Name = "label4";
+            label4.Size = new Size(70, 15);
+            label4.TabIndex = 8;
+            label4.Text = "Date entrée ";
             // 
             // FormExemplaire
             // 
@@ -125,20 +131,22 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
             ClientSize = new Size(264, 309);
+            Controls.Add(label4);
             Controls.Add(dtpEntree);
-            Controls.Add(cbRessource);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(cbEtat);
+            Controls.Add(cbRessource);
             Controls.Add(btnValider);
-            Controls.Add(labelDateEntree);
-            Controls.Add(labelEtat);
-            Controls.Add(labelRessource);
             Controls.Add(btnFermer);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "FormExemplaire";
             Text = "FormExemplaire";
-            ((System.ComponentModel.ISupportInitialize)bsExemplaire).EndInit();
+            Load += FormExemplaire_Load;
             ((System.ComponentModel.ISupportInitialize)bsRessource).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsEtat).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsExemplaire).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -146,15 +154,16 @@
         #endregion
 
         private Button btnFermer;
-        private Label labelRessource;
-        private Label labelEtat;
-        private Label labelDateEntree;
         private Button btnValider;
-        private BindingSource bsExemplaire;
-        private ComboBox cbEtat;
-        private ComboBox cbRessource;
-        private DateTimePicker dtpEntree;
         private BindingSource bsRessource;
         private BindingSource bsEtat;
+        private BindingSource bsExemplaire;
+        private ComboBox cbRessource;
+        private ComboBox cbEtat;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private DateTimePicker dtpEntree;
+        private Label label4;
     }
 }

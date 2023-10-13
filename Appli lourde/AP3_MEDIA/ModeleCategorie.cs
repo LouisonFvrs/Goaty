@@ -11,16 +11,7 @@ namespace AP3_MEDIA
 {
     internal class ModeleCategorie
     {
-
-        private static MediatoutContext monModele;
-
-        /// <summary>
-        /// Initialisation du modèle
-        /// </summary>
-        public static void init()
-        {
-            monModele = new MediatoutContext();
-        }
+     
 
         /// <summary>
         /// Fonction qui retourne la liste de toutes les catégories
@@ -28,7 +19,7 @@ namespace AP3_MEDIA
         /// <returns>Liste</returns>
         public static List<Categorie> getListCategories()
         {
-            return monModele.Categories.ToList();
+            return Modele.MonModele.Categories.ToList();
         }
 
   
@@ -49,8 +40,8 @@ namespace AP3_MEDIA
                 uneCategorie = new Categorie();
                 uneCategorie.Libellecategorie = libelle;
 
-                monModele.Categories.Add(uneCategorie);
-                monModele.SaveChanges();
+                Modele.MonModele.Categories.Add(uneCategorie);
+                Modele.MonModele.SaveChanges();
 
             }
             catch (Exception ex)
@@ -77,7 +68,7 @@ namespace AP3_MEDIA
                 uneCategorie = RecupererCategorie(idC);
                 uneCategorie.Libellecategorie = libelle;
 
-                monModele.SaveChanges();
+                Modele.MonModele.SaveChanges();
 
             }
             catch (Exception ex)
@@ -102,9 +93,9 @@ namespace AP3_MEDIA
                 // récupération de la categorie à supprimer
                 uneCategorie = RecupererCategorie(idC);
                 uneCategorie.ArchiverCat = false;
-                monModele.Categories.Remove(uneCategorie);
+                Modele.MonModele.Categories.Remove(uneCategorie);
 
-                monModele.SaveChanges();
+                Modele.MonModele.SaveChanges();
 
             }
             catch (Exception ex)
@@ -125,7 +116,7 @@ namespace AP3_MEDIA
             Categorie uneCategorie = new Categorie();
             try
             {
-                uneCategorie = monModele.Categories.First(x => x.Idcategorie == idC);
+                uneCategorie = Modele.MonModele.Categories.First(x => x.Idcategorie == idC);
             }
             catch (Exception ex)
             {

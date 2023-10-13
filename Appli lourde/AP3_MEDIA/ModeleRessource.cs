@@ -12,11 +12,9 @@ namespace AP3_MEDIA
 {
     public static class ModeleRessource
     {
-       
-     
-       
-  
+    
 
+      
         /// <summary>
         /// Fonction qui retourne la liste des ressources
         /// </summary>
@@ -54,8 +52,8 @@ namespace AP3_MEDIA
                 uneRessource.Isbn = isbn;
                 uneRessource.Idcategorie = idCategorie;
 
-                monModele.Ressources.Add(uneRessource);
-                monModele.SaveChanges();
+                Modele.MonModele.Ressources.Add(uneRessource);
+                Modele.MonModele.SaveChanges();
 
             }
             catch (Exception ex)
@@ -72,7 +70,7 @@ namespace AP3_MEDIA
         /// <returns>entier</returns>
         public static int RetourneDerniereRessourceSaisie()
         {
-            return monModele.Ressources.Max(x => x.Idressource);
+            return Modele.MonModele.Ressources.Max(x => x.Idressource);
         }
 
         /// <summary>
@@ -106,7 +104,7 @@ namespace AP3_MEDIA
                 uneRessource.Isbn = isbn;
                 uneRessource.Idcategorie = idCategorie;
 
-                monModele.SaveChanges();
+                Modele.MonModele.SaveChanges();
 
             }
             catch (Exception ex)
@@ -127,7 +125,7 @@ namespace AP3_MEDIA
             Ressource uneRessource = new Ressource();
             try
             {
-                uneRessource = monModele.Ressources.First(x => x.Idressource == idR);
+                uneRessource = Modele.MonModele.Ressources.First(x => x.Idressource == idR);
             }
             catch (Exception ex)
             {
@@ -150,7 +148,7 @@ namespace AP3_MEDIA
 
                     // mise à jour des champs
                     uneRessource.ArchiverRess = true;
-                    monModele.SaveChanges();
+                    Modele.MonModele.SaveChanges();
                 }
                 else
                 {
@@ -172,12 +170,12 @@ namespace AP3_MEDIA
             bool vretour = true;
             try
             {
-                if (m.listeExemplairesParRessource(idR).Count <= 0)
+                if (ModeleExemplaire.listeExemplairesParRessource(idR).Count <= 0)
                 {
                     // récupération de la ressource à supprimer
                     uneRessource = RecupererRessource(idR);
-                    monModele.Ressources.Remove(uneRessource);
-                    monModele.SaveChanges();
+                    Modele.MonModele.Ressources.Remove(uneRessource);
+                    Modele.MonModele.SaveChanges();
                 }
                 else
                 {
@@ -195,7 +193,7 @@ namespace AP3_MEDIA
         // retourne la liste des ressources archivées 
         public static List<Ressource> getListRessourcesArchivees()
         {
-            return monModele.Ressources.Where(p => p.ArchiverRess == true).Include(a => a.IdcategorieNavigation).ToList();
+            return Modele.MonModele.Ressources.Where(p => p.ArchiverRess == true).Include(a => a.IdcategorieNavigation).ToList();
         }
     }
 }

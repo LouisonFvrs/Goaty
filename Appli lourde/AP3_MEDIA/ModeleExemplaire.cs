@@ -12,7 +12,7 @@ namespace AP3_MEDIA
 {
     public static class ModeleExemplaire
     {
-        
+    
 
         /// <summary>
         /// Fonction qui retourne la liste des Exemplaires
@@ -26,7 +26,7 @@ namespace AP3_MEDIA
         // retourne la liste des exemplaires selon la ressource sélectionnée 
         public static List<Exemplaire> listeExemplairesParRessource(int idR)
         {
-            List<Exemplaire> lesEx = monModele.Exemplaires.Where(p => p.Idressource == idR).Include(p => p.IdetatNavigation).ToList();
+            List<Exemplaire> lesEx = Modele.MonModele.Exemplaires.Where(p => p.Idressource == idR).Include(p => p.IdetatNavigation).ToList();
             return lesEx;
         }
 
@@ -45,8 +45,8 @@ namespace AP3_MEDIA
                 unExemplaire.Dateentree = dateEntree;
                 unExemplaire.ArchiverExem = true ;
 
-                monModele.Exemplaires.Add(unExemplaire);
-                monModele.SaveChanges();
+                Modele.MonModele.Exemplaires.Add(unExemplaire);
+                Modele.MonModele.SaveChanges();
 
             }
             catch (Exception ex)
@@ -59,7 +59,7 @@ namespace AP3_MEDIA
 
         public static List<Etat> getListEtats()
         {
-            return monModele.Etat.ToList();
+            return Modele.MonModele.Etats.ToList();
         }
     }
 }

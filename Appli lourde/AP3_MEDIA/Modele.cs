@@ -11,19 +11,19 @@ namespace AP3_MEDIA
 {
     internal static class Modele
     {
-        private static MediatoutContext monModele;
+        private static GoatyContext monModele;
        
-
-        public static MediatoutContext MonModele { get => monModele; set => monModele = value; }
-    
-
         /// <summary>
         /// Initialisation du modèle
         /// </summary>
         public static void init()
         {
-            monModele = new MediatoutContext();
+            monModele = new GoatyContext();
         }
+
+        public static GoatyContext MonModele { get => monModele; set => monModele = value; }
+
+
         /// <summary>
         /// Fonction qui retourne la liste de toutes les catégories
         /// </summary>
