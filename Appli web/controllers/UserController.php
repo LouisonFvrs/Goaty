@@ -150,7 +150,6 @@ class UserController extends WebController
         // On déclare l'emprunt, et on redirige l'utilisateur vers sa page de profil
         $result = $this->emprunter->declarerEmprunt($idRessource, $idExemplaire, $user->idemprunteur);
 
-
         if ($result) {
             // Envoi de l'email confirmation d'emprunt
             EmailUtils::sendEmail($user->emailemprunteur, "Emprunt", "emprunt", array("name" => $user->nomemprunteur, "title" => $ressource->titre));

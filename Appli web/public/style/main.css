@@ -32,3 +32,13 @@ html {
     align-items: center;
     margin-right: 50%;
 }
+
+.profil {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.italy {
+    font-style: italic;
+}

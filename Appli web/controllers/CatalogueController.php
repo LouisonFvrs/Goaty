@@ -4,8 +4,10 @@ namespace controllers;
 
 use controllers\base\WebController;
 use models\CategorieModel;
+use models\CommentaireModel;
 use models\ExemplaireModel;
 use models\RessourceModel;
+use utils\SessionHelpers;
 use utils\Template;
 
 class CatalogueController extends WebController
@@ -14,12 +16,15 @@ class CatalogueController extends WebController
     private RessourceModel $ressourceModel;
     private CategorieModel $categorieModel;
     private ExemplaireModel $exemplaireModel;
+    private CommentaireModel $commentaireModel;
 
     function __construct()
     {
         $this->ressourceModel = new RessourceModel();
         $this->exemplaireModel = new ExemplaireModel();
         $this->categorieModel = new CategorieModel();
+        $this->commentaireModel = new CommentaireModel();
+
     }
 
     /**
@@ -63,9 +68,18 @@ class CatalogueController extends WebController
     {
         // Récupération de la ressource
         $ressource = $this->ressourceModel->getOne($id);
+        $user = SessionHelpers::getConnected();
+
 
         if ($ressource == null) {
             $this->redirect("/");
+        }
+
+
+        // /! vérifier que l'on est connecté
+        // création d'un commentaire
+        if (isset($_POST['com']) && isset($_POST['note'])) {
+            $this->commentaireModel->createCommentaire(htmlspecialchars($_POST['com']), htmlspecialchars($_POST['note']), $user->idemprunteur, $ressource->idressource);
         }
 
         // Récupération des exemplaires de la ressource
@@ -78,7 +92,10 @@ class CatalogueController extends WebController
             $exemplaire = $exemplaires[0];
         }
 
+        // Récupération des commentaires de la ressources
+        $commentaires = $this->commentaireModel->getComByRessources($id);
 
-        return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire));
+
+        return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire, "commentaires" => $commentaires));
     }
 }

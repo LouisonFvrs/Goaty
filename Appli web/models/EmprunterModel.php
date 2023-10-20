@@ -23,6 +23,7 @@ class EmprunterModel extends SQL
         try {
             $sql = 'INSERT INTO emprunter (idressource, idexemplaire, idemprunteur, datedebutemprunt, dureeemprunt, dateretour) VALUES (?, ?, ?, NOW(), 30, DATE_ADD(NOW(), INTERVAL 1 MONTH))';
             $stmt = parent::getPdo()->prepare($sql);
+
             return $stmt->execute([$idRessource, $idExemplaire, $idemprunteur]);
         } catch (\PDOException $e) {
             return false;

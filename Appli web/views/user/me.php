@@ -21,14 +21,9 @@
                 </div>
 
                 <div class="p-5 text-center">
-                    <a href="/edit" class="btn btn-custom">
-                    </a>
-
-                    <form id="modify" method="post" class="text-center pt-5 pb-3">
                         <?php if (\utils\SessionHelpers::isLogin()) { ?>
-                            <button type="submit" class="btn bg-green-600 text-white hover:bg-green-900 py-1 px-3 m-2"><i class="bi bi-pen"></i>Édition</button>
+                            <button type="button" id="modify" class="btn bg-green-600 text-white hover:bg-green-900 py-1 px-3 m-2"><i class='fas fa-user-alt mr-1'></i>Édition</button>
                         <?php } ?>
-                    </form>
 
                     <a href="/download" class="btn btn-custom">
                         <button class="btn bg-blue-600 text-white hover:bg-blue-900 py-1 px-3 m-2"><i class="fa fa-download"></i> Télécharger</button>
@@ -87,41 +82,26 @@
         }
     }
 
-    document.querySelector("#modify").addEventListener("submit", async (e) => {
+    document.querySelector("#modify").addEventListener("click", async (e) => {
         e.preventDefault();
 
         // Création d'un formulaire à l'intérieur du dialogue de confirmation
         const { value: formValues } = await Swal.fire({
             title: 'Édition de votre compte',
             html:
+                '<form action="edit" method="post">' +
                 '<input type="text" id="swal-nom" class="swal2-input" placeholder="Nom" value="<?php echo $user->nomemprunteur;  ?>"" required>' +
                 '<input type="text" id="swal-prenom" class="swal2-input" placeholder="Prénom" value="<?php echo $user->prenomemprunteur; ?>" required>' +
                 '<input type="email" id="swal-email" class="swal2-input" placeholder="Adresse e-mail" value="<?php echo $user->emailemprunteur; ?>" required>' +
                 '<input type="date" id="swal-dateNaissance" class="swal2-input" placeholder="Date de naissance" value="<?php echo $user->datenaissance; ?>" required>' +
                 '<input type="text" id="swal-telephone" class="swal2-input" placeholder="Téléphone" value="<?php echo $user->telportable; ?>" required>' +
                 '<input type="password" id="swal-password" class="swal2-input" placeholder="Mot de passe" value="" required>' +
-                '<input type="password" id="swal-confirmPassword" class="swal2-input" placeholder="Confirmation mot de passe" value="" required>',
+                '<input type="password" id="swal-confirmPassword" class="swal2-input" placeholder="Confirmation mot de passe" value="" required>' +
+                '<button type = "submit">bouton </button>' +
+                '</form>',
             focusConfirm: false,
-            showCancelButton: true,
-            confirmButtonText: 'Éditer',
-            preConfirm: () => {
-                return [
-                    document.getElementById('swal-email').value,
-                    document.getElementById('swal-password').value,
-                    document.getElementById('swal-nom').value,
-                    document.getElementById('swal-prenom').value,
-                    document.getElementById('swal-dateNaissance').value,
-                    document.getElementById('swal-telephone').value,
-                    document.getElementById('swal-password').value,
-                    document.getElementById('swal-confirmPassword').value
-            ];
-            }
+            showCancelButton: false,
         });
-
-        if (formValues) {
-            Swal.fire(JSON.stringify(formValues));
-            e.target.submit();
-        }
     });
 
 </script>
