@@ -53,7 +53,7 @@ class Web
             Route::Add('/catalogue/emprunter', [$user, 'emprunter']);
 
             // Action de modification des données du compte utilisateur
-            Route::Add('/edit', [$user, 'edit']);
+            Route::Add('/edit/{id}', [$user, 'edit']);
         }
 
         // Route permettant l'accès au catalogue.

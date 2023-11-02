@@ -122,7 +122,6 @@ class UserController extends WebController
 
         // Récupération des emprunts de l'utilisateur
         $emprunts = $this->emprunter->getEmprunts($user->idemprunteur);
-
         return Template::render("views/user/me.php", array("user" => $user, "emprunts" => $emprunts));
     }
 
@@ -168,36 +167,32 @@ class UserController extends WebController
         // Récupération de l'utilisateur connecté en SESSION.
         $user = SessionHelpers::getConnected();
 
+        header('Content-Disposition: attachment; filename=user.json');
+        header('Content-Type: application/json; charset=utf-8');
+
         // Données de l'utilisateur
-        $data = ['nom' => $user->nomemprunteur, 'prenom' => $user->prenomemprunteur, 'date2naissance' => $user->datenaissance, 'email' => $user->emailemprunteur, 'telephone' => $user->telportable];
+        $data = array('nom' => $user->nomemprunteur, 'prenom' => $user->prenomemprunteur, 'date2naissance' => $user->datenaissance, 'email' => $user->emailemprunteur, 'telephone' => $user->telportable);
+        echo json_encode($data, JSON_PRETTY_PRINT);
 
         // récupération des emprunts d'un utilisateur
         $emprunts = $this->emprunter->getEmprunts($user->idemprunteur);
 
         foreach ($emprunts as $e) {
-            $empruntData .= "Titre : ". $e->titre . "\nDate d'emprunt : " . $e->datedebutemprunt . "\nDurée emprunt : " . $e->dureeemprunt . "\nDate de retour : " . $e->dateretour . "\nDescription : " . $e->description . "\nAnnée de sortie : " . $e->anneesortie . "\nLangue : " . $e->langue . "\nType de la ressource : " . $e->libellecategorie . "\n\n\n";
+             $data = array('titre' => $e->titre, 'date emprunt' => $e->datedebutemprunt, 'Durée emprunt' => $e->dureeemprunt, 'Date de retour' => $e->dateretour, 'description' => $e->description, 'année de sortie' => $e->anneesortie, 'langue' => $e->langue, 'type de la ressource' => $e->libellecategorie);
+            echo json_encode($data, JSON_PRETTY_PRINT);
         }
 
-        header('Content-disposition: attachment; filename=user.json');
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($data);
-
-        $this->redirect("/me");
     }
 
     // Édition du profil
-    function edit() {
-
-        // Récupération de l'id utilisateur
-        $user = SessionHelpers::getConnected();
-
-        var_dump($_POST["nom"]);
-        die();
-        // Récupération des données
+    function edit($id, $nom, $email, $prenom, $dateNaissance, $telephone, $password) {
 
         // Ajout des données de l'utilsateur
+        $this->emprunteur->editEmpruteur($id, $nom, $email, $prenom, $dateNaissance, $telephone, $password);
 
-        $this->redirect("/");
+        $user = $this->emprunteur->getOne($id);
+        SessionHelpers::login($user);
+
+        $this->redirect("/me");
     }
-
 }

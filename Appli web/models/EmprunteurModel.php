@@ -129,4 +129,12 @@ class EmprunteurModel extends SQL
         return false;
     }
 
+    // edition d'un emprunteur
+    public function editEmpruteur($id, $nom, $email, $prenom, $dateNaissance, $telephone, $password) {
+
+        $newPassword = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $this->getPdo()->prepare("UPDATE emprunteur SET nomemprunteur = ?, prenomemprunteur = ?, emailemprunteur = ?, datenaissance = ?, telportable = ?, motpasseemprunteur = ? WHERE idemprunteur = ?");
+        $stmt->execute([$nom, $prenom, $email, $dateNaissance, $telephone, $newPassword, $id]);
+    }
+
 }
