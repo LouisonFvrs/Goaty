@@ -5,6 +5,7 @@ namespace controllers;
 use controllers\base\WebController;
 use models\EmprunterModel;
 use models\EmprunteurModel;
+use models\LocalisationModel;
 use utils\EmailUtils;
 use utils\SessionHelpers;
 use utils\Template;
@@ -14,11 +15,13 @@ class UserController extends WebController
     // On déclare les modèles utilisés par le contrôleur.
     private EmprunteurModel $emprunteur; // Modèle permettant d'interagir avec la table emprunteur
     private EmprunterModel $emprunter; // Modèle permettant l'emprunt
+    private LocalisationModel $localisation;
 
     function __construct()
     {
         $this->emprunteur = new EmprunteurModel();
         $this->emprunter = new EmprunterModel();
+        $this->localisation = new LocalisationModel();
     }
 
     /**
@@ -37,7 +40,7 @@ class UserController extends WebController
      * Si la connexion échoue, un message d'erreur est affiché.
      * @return string
      */
-    function login(): string
+    function  login(): string
     {
         $data = array();
 
@@ -79,10 +82,11 @@ class UserController extends WebController
             return $this->redirect("/me");
         }
 
+        $localisation = $this->localisation->getAll();
 
         // Gestion de l'inscription
-        if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["phoneNumber"])) {
-            $result = $this->emprunteur->creerEmprenteur($_POST["email"], $_POST["password"], $_POST["nom"], $_POST["prenom"], $_POST["phoneNumber"]);
+        if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["phoneNumber"]) && $_POST["ville"] != "") {
+            $result = $this->emprunteur->creerEmprenteur($_POST["email"], $_POST["password"], $_POST["nom"], $_POST["prenom"], $_POST["phoneNumber"], $_POST["ville"]);
 
             // Si l'inscription est réussie, on affiche un message de succès
             if ($result) {
@@ -94,7 +98,7 @@ class UserController extends WebController
         }
 
         // Affichage de la page d'inscription
-        return Template::render("views/user/signup.php", $data);
+        return Template::render("views/user/signup.php", ["data" => $data, "localisation" => $localisation]);
     }
 
     function signupValidate($uuid){
@@ -122,7 +126,10 @@ class UserController extends WebController
 
         // Récupération des emprunts de l'utilisateur
         $emprunts = $this->emprunter->getEmprunts($user->idemprunteur);
-        return Template::render("views/user/me.php", array("user" => $user, "emprunts" => $emprunts));
+        $empruntsDelay = $this->emprunter->getEmpruntsDelay($user->idemprunteur);
+        $ville = $this->localisation->getVilleOfuser($user->idLocalisation);
+        $localisation = $this->localisation->getAll();
+        return Template::render("views/user/me.php", array("user" => $user, "emprunts" => $emprunts, "empruntsDelay" => $empruntsDelay, "ville" => $ville, "localisation" => $localisation));
     }
 
     /**
@@ -185,10 +192,10 @@ class UserController extends WebController
     }
 
     // Édition du profil
-    function edit($id, $nom, $email, $prenom, $dateNaissance, $telephone, $password) {
+    function edit($id, $nom, $email, $prenom, $dateNaissance, $telephone, $password, $ville) {
 
         // Ajout des données de l'utilsateur
-        $this->emprunteur->editEmpruteur($id, $nom, $email, $prenom, $dateNaissance, $telephone, $password);
+        $this->emprunteur->editEmpruteur($id, $nom, $email, $prenom, $ville, $dateNaissance, $telephone, $password);
 
         $user = $this->emprunteur->getOne($id);
         SessionHelpers::login($user);

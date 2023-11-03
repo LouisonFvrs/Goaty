@@ -52,7 +52,7 @@ class EmprunteurModel extends SQL
         return "Ce compte nous est inconnu";
     }
 
-    public function creerEmprenteur(mixed $email, mixed $password, mixed $nom, mixed $prenom, mixed $phoneNumber): bool
+    public function creerEmprenteur(mixed $email, mixed $password, mixed $nom, mixed $prenom, mixed $phoneNumber, mixed $localisation): bool
     {
         // Création du hash du mot de passe (pour le stockage en base de données)
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -69,9 +69,9 @@ class EmprunteurModel extends SQL
             // 4 : Compte supprimé
 
             $UUID = TokenHelpers::guidv4(); // Génération d'un UUID v4, qui sera utilisé pour la validation du compte
-            $sql = 'INSERT INTO emprunteur (emailemprunteur, motpasseemprunteur, nomemprunteur, prenomemprunteur, datenaissance, telportable, validationcompte, validationtoken) VALUES (?, ?, ?, ?, NOW(), ?, 0, ?)';
+            $sql = 'INSERT INTO emprunteur (emailemprunteur, motpasseemprunteur, nomemprunteur, prenomemprunteur, idLocalisation, datenaissance, telportable, validationcompte, validationtoken) VALUES (?, ?, ?, ?, ?, NOW(), ?, 0, ?)';
             $stmt = parent::getPdo()->prepare($sql);
-            $result = $stmt->execute([$email, $password_hash, $nom, $prenom , $phoneNumber, $UUID]);
+            $result = $stmt->execute([$email, $password_hash, $nom, $prenom, $localisation, $phoneNumber, $UUID]);
 
             if ($result) {
                 // Envoi d'un email de validation du compte
@@ -130,11 +130,11 @@ class EmprunteurModel extends SQL
     }
 
     // edition d'un emprunteur
-    public function editEmpruteur($id, $nom, $email, $prenom, $dateNaissance, $telephone, $password) {
+    public function editEmpruteur($id, $nom, $email, $prenom, $ville, $dateNaissance, $telephone, $password) {
 
         $newPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $this->getPdo()->prepare("UPDATE emprunteur SET nomemprunteur = ?, prenomemprunteur = ?, emailemprunteur = ?, datenaissance = ?, telportable = ?, motpasseemprunteur = ? WHERE idemprunteur = ?");
-        $stmt->execute([$nom, $prenom, $email, $dateNaissance, $telephone, $newPassword, $id]);
+        $stmt = $this->getPdo()->prepare("UPDATE emprunteur SET nomemprunteur = ?, prenomemprunteur = ?, idLocalisation = ?, emailemprunteur = ?, datenaissance = ?, telportable = ?, motpasseemprunteur = ? WHERE idemprunteur = ?");
+        $stmt->execute([$nom, $prenom, $ville, $email, $dateNaissance, $telephone, $newPassword, $id]);
     }
 
 }

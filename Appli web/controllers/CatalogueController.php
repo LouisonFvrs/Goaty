@@ -6,6 +6,7 @@ use controllers\base\WebController;
 use models\CategorieModel;
 use models\CommentaireModel;
 use models\ExemplaireModel;
+use models\LocalisationModel;
 use models\RessourceModel;
 use utils\SessionHelpers;
 use utils\Template;
@@ -17,6 +18,7 @@ class CatalogueController extends WebController
     private CategorieModel $categorieModel;
     private ExemplaireModel $exemplaireModel;
     private CommentaireModel $commentaireModel;
+    private LocalisationModel $localisationModel;
 
     function __construct()
     {
@@ -24,6 +26,7 @@ class CatalogueController extends WebController
         $this->exemplaireModel = new ExemplaireModel();
         $this->categorieModel = new CategorieModel();
         $this->commentaireModel = new CommentaireModel();
+        $this->localisationModel = new LocalisationModel();
 
     }
 
@@ -37,25 +40,53 @@ class CatalogueController extends WebController
         // Récupération de toutes les categories
         $categories = $this->categorieModel->getAll();
 
-        // L'utilisateur souhaite visualiser toutes les ressources
-        if ($categorie == "all") {
+        // L'utilisateur n'est pas connecté on affiche les toutes les ressources
+        if (! SessionHelpers::isLogin()) {
+            // L'utilisateur souhaite visualiser toutes les ressources
+            if ($categorie == "all") {
 
-            $catalogue = $this->ressourceModel->getAll();
+                $catalogue = $this->ressourceModel->getAll();
 
-            return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories));
-        }
-        // L'utilisateur souhaite visualiser certaines type de ressource ex : BD, Livre
-        else if ($categorie == "tri" && isset($_GET['categories']))
-        {
+                return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories));
+            }
+            // L'utilisateur souhaite visualiser certaines type de ressource ex : BD, Livre
+            else if ($categorie == "tri" && isset($_GET['categories']))
+            {
 
-            $catalogue = $this->ressourceModel->getRessourceFilter($_GET['categories']);
+                $catalogue = $this->ressourceModel->getRessourceFilter($_GET['categories']);
 
-            return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories));
-        }
-        else
-        {
-            $catalogue = $this->ressourceModel->getAll();
-            return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories));
+                return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories));
+            }
+            else
+            {
+                $catalogue = $this->ressourceModel->getAll();
+                return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories));
+            }
+        } else {
+            // l'utilisateur est connecté
+
+            $user = SessionHelpers::getConnected();
+            $ville = $this->localisationModel->getVilleOfuser($user->idLocalisation);
+
+            if ($categorie == "all") {
+
+                $catalogue = $this->ressourceModel->getAllForLocation($user->idLocalisation);
+
+                return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories, "ville" => $ville));
+            }
+            // L'utilisateur souhaite visualiser certaines type de ressource ex : BD, Livre
+            else if ($categorie == "tri" && isset($_GET['categories']))
+            {
+
+                $catalogue = $this->ressourceModel->getRessourceFilterForLocation($_GET['categories'], $user->idLocalisation);
+
+                return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories, "ville" => $ville));
+            }
+            else
+            {
+                $catalogue = $this->ressourceModel->getAllForLocation($user->idLocation);
+                return Template::render("views/catalogue/liste.php", array("titre" => "Ensemble du catalogue", "catalogue" => $catalogue, "categories" => $categories, "ville" => $ville));
+            }
         }
     }
 

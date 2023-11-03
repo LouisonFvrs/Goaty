@@ -14,7 +14,7 @@ class CommentaireModel extends SQL
     {
         try {
 
-            $sql = 'SELECT * FROM commentaire INNER JOIN emprunter on emprunter.idCom = commentaire.idCom INNER JOIN emprunteur on emprunteur.idemprunteur = emprunter.idemprunteur WHERE emprunter.idRessource = ? ORDER BY commentaire.dateCom DESC';
+            $sql = 'SELECT DISTINCT commentaire.*, emprunteur.*  FROM commentaire INNER JOIN emprunter on emprunter.idCom = commentaire.idCom INNER JOIN emprunteur on emprunteur.idemprunteur = emprunter.idemprunteur WHERE emprunter.idRessource = ? ORDER BY commentaire.dateCom DESC';
             $stmt = parent::getPdo()->prepare($sql);
             $stmt->execute([$id]);
             return $stmt->fetchAll(\PDO::FETCH_OBJ);

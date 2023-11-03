@@ -1,5 +1,9 @@
 <div class="container mx-auto py-8 min-h-[calc(100vh-136px)]">
+    <?php if (!isset($ville)) { ?>
     <h2 class="text-3xl font-bold text-gray-800 mb-4"><?= $titre ?></h2>
+    <?php } else { ?>
+    <h2 class="text-3xl font-bold text-gray-800 mb-4"><?= $titre .' de '. $ville->villeLocalisation?></h2>
+    <?php } ?>
 
     <form action="/catalogue/tri" method="get">
         <div class="mb-10 mt-10 filtrage">

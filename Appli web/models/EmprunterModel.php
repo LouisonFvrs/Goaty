@@ -31,14 +31,14 @@ class EmprunterModel extends SQL
     }
 
     /**
-     * Récupère les emprunts d'un emprunteur en fonction de son id (idemprunteur)
+     * Récupère les emprunts en retard d'un emprunteur
      * @param $idemprunteur
      * @return bool
      */
-    public function getEmprunts($idemprunteur): bool|array
+    public function getEmpruntsDelay($idemprunteur): bool|array
     {
         try {
-            $sql = 'SELECT * FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie WHERE idemprunteur = ?';
+            $sql = 'SELECT * FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie WHERE idemprunteur = ? AND dateretour < CURDATE()';
             $stmt = parent::getPdo()->prepare($sql);
             $stmt->execute([$idemprunteur]);
             return $stmt->fetchAll(\PDO::FETCH_OBJ);
@@ -47,6 +47,18 @@ class EmprunterModel extends SQL
         }
     }
 
+    // Récupère les emprunts qui ne sont pas en retard
+    public function getEmprunts($idemprunteur): bool|array
+    {
+        try {
+            $sql = 'SELECT * FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie WHERE idemprunteur = ? AND dateretour >= CURDATE()';
+            $stmt = parent::getPdo()->prepare($sql);
+            $stmt->execute([$idemprunteur]);
+            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
     public function getRessource($idRessource)
     {
         try {

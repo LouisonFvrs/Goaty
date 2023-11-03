@@ -25,7 +25,7 @@
                     <form id="exemplaire" method="post" class="text-center pt-5 pb-3" action="/catalogue/emprunter">
                         <input type="hidden" name="idRessource" value="<?= $ressource->idressource ?>">
                         <input type="hidden" name="idExemplaire" value="<?= $exemplaire->idexemplaire ?>">
-                        <?php if (\utils\SessionHelpers::isLogin()) { ?>
+                        <?php if (\utils\SessionHelpers::isLogin() && $exemplaire->idLocalisation == \utils\SessionHelpers::getConnected()->idLocalisation) { ?>
                             <button type="submit"
                                     class="bg-indigo-600 text-white hover:bg-indigo-900 font-bold py-3 px-6 rounded-full">
                                 Emprunter
