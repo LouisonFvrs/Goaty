@@ -41,14 +41,18 @@
             label3 = new Label();
             dtpEntree = new DateTimePicker();
             label4 = new Label();
+            label5 = new Label();
+            cbLocalisation = new ComboBox();
+            bsLocalisation = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)bsRessource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsEtat).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsExemplaire).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsLocalisation).BeginInit();
             SuspendLayout();
             // 
             // btnFermer
             // 
-            btnFermer.Location = new Point(177, 274);
+            btnFermer.Location = new Point(177, 330);
             btnFermer.Name = "btnFermer";
             btnFermer.Size = new Size(75, 23);
             btnFermer.TabIndex = 0;
@@ -58,7 +62,7 @@
             // 
             // btnValider
             // 
-            btnValider.Location = new Point(12, 274);
+            btnValider.Location = new Point(12, 330);
             btnValider.Name = "btnValider";
             btnValider.Size = new Size(75, 23);
             btnValider.TabIndex = 1;
@@ -111,7 +115,7 @@
             // 
             // dtpEntree
             // 
-            dtpEntree.Location = new Point(12, 218);
+            dtpEntree.Location = new Point(12, 272);
             dtpEntree.Name = "dtpEntree";
             dtpEntree.Size = new Size(200, 23);
             dtpEntree.TabIndex = 7;
@@ -119,18 +123,37 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(12, 200);
+            label4.Location = new Point(12, 243);
             label4.Name = "label4";
             label4.Size = new Size(70, 15);
             label4.TabIndex = 8;
             label4.Text = "Date entrée ";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(12, 183);
+            label5.Name = "label5";
+            label5.Size = new Size(70, 15);
+            label5.TabIndex = 10;
+            label5.Text = "Localisation";
+            // 
+            // cbLocalisation
+            // 
+            cbLocalisation.FormattingEnabled = true;
+            cbLocalisation.Location = new Point(12, 201);
+            cbLocalisation.Name = "cbLocalisation";
+            cbLocalisation.Size = new Size(121, 23);
+            cbLocalisation.TabIndex = 9;
             // 
             // FormExemplaire
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
-            ClientSize = new Size(264, 309);
+            ClientSize = new Size(264, 365);
+            Controls.Add(label5);
+            Controls.Add(cbLocalisation);
             Controls.Add(label4);
             Controls.Add(dtpEntree);
             Controls.Add(label3);
@@ -147,6 +170,7 @@
             ((System.ComponentModel.ISupportInitialize)bsRessource).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsEtat).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsExemplaire).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsLocalisation).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -165,5 +189,8 @@
         private Label label3;
         private DateTimePicker dtpEntree;
         private Label label4;
+        private Label label5;
+        private ComboBox cbLocalisation;
+        private BindingSource bsLocalisation;
     }
 }

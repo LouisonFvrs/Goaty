@@ -30,23 +30,34 @@ namespace AP3_MEDIA
             return lesEx;
         }
 
+
+        public static int ObtenirDernierIdExemplaire()
+        {
+            int dernierIdExemplaire = Modele.MonModele.Exemplaires.Max(p => (int?)p.Idexemplaire) ?? 0;
+            return dernierIdExemplaire;
+        }
+
+
         // Renvoie vrai si l'exemplaire a été ajouté à la base de donnée 
-        public static bool AjouterExemplaire(int idR, int idEtat, DateOnly dateEntree)
+        public static bool AjouterExemplaire(int idR, int idL, int idEtat, DateOnly dateEntree)
         {
             Exemplaire unExemplaire;
             bool vretour = true;
             try
             {
                 // ajout dans la table Exemplaire
-
                 unExemplaire = new Exemplaire();
+
                 unExemplaire.Idressource = idR;
+                unExemplaire.Idexemplaire = ObtenirDernierIdExemplaire() + 1;
                 unExemplaire.Idetat = idEtat;
                 unExemplaire.Dateentree = dateEntree;
-                unExemplaire.ArchiverExem = true ;
+                unExemplaire.ArchiverExem = false;
+                unExemplaire.IdLocalisation = idL;
 
                 Modele.MonModele.Exemplaires.Add(unExemplaire);
                 Modele.MonModele.SaveChanges();
+                MessageBox.Show("L'exemplaire a été ajouté");
 
             }
             catch (Exception ex)
@@ -60,6 +71,11 @@ namespace AP3_MEDIA
         public static List<Etat> getListEtats()
         {
             return Modele.MonModele.Etats.ToList();
+        }
+
+        public static List<Localisation> getListLocalisation()
+        {
+            return Modele.MonModele.Localisations.ToList();
         }
     }
 }

@@ -15,6 +15,10 @@ public partial class Exemplaire
 
     public bool ArchiverExem { get; set; }
 
+    public int IdLocalisation { get; set; }
+
+    public virtual Localisation IdLocalisationNavigation { get; set; } = null!;
+
     public virtual Etat IdetatNavigation { get; set; } = null!;
 
     public virtual Ressource IdressourceNavigation { get; set; } = null!;

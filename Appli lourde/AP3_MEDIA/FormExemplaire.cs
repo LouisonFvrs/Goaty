@@ -39,6 +39,15 @@ namespace AP3_MEDIA
                 x.Libelleetat
             });
             cbEtat.DataSource = bsEtat;
+            // remplir la comboBox des états
+            cbLocalisation.ValueMember = "IdLocalisation";    //permet de stocker l'identifiant
+            cbLocalisation.DisplayMember = "villeLocalisation";
+            bsLocalisation.DataSource = ModeleExemplaire.getListLocalisation().Select(x => new
+            {
+                x.IdLocalisation,
+                x.VilleLocalisation
+            });
+            cbLocalisation.DataSource = bsLocalisation;
         }
 
         private void btnFermer_Click_1(object sender, EventArgs e)
@@ -48,7 +57,7 @@ namespace AP3_MEDIA
 
         private void btnValider_Click_1(object sender, EventArgs e)
         {
-            ModeleExemplaire.AjouterExemplaire(Convert.ToInt32(cbRessource.SelectedValue), Convert.ToInt32(cbEtat.SelectedValue), DateOnly.FromDateTime(dtpEntree.Value));
+            ModeleExemplaire.AjouterExemplaire(Convert.ToInt32(cbRessource.SelectedValue), Convert.ToInt32(cbLocalisation.SelectedValue), Convert.ToInt32(cbEtat.SelectedValue), DateOnly.FromDateTime(dtpEntree.Value));
         }
     }
 }
