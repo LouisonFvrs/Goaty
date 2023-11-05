@@ -54,6 +54,7 @@ class Web
 
             // Action de modification des données du compte utilisateur
             Route::Add('/edit/{id}', [$user, 'edit']);
+
         }
 
         // Route permettant l'accès au catalogue.

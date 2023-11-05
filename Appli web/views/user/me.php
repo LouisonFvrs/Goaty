@@ -27,15 +27,22 @@
                 </div>
 
                 <div class="p-5 text-center">
-                        <?php if (\utils\SessionHelpers::isLogin()) { ?>
-                            <button type="button" id="modify" class="btn bg-green-600 text-white hover:bg-green-900 py-1 px-3 m-2"><i class='fas fa-user-alt mr-1'></i>Édition</button>
-                        <?php } ?>
+                    <?php if (\utils\SessionHelpers::isLogin()) { ?>
+                        <button type="button" id="modify"
+                                class="btn bg-green-600 text-white hover:bg-green-900 py-1 px-3 m-2"><i
+                                    class='fas fa-user-alt mr-1'></i>Édition
+                        </button>
+                    <?php } ?>
 
                     <a href="/download" class="btn btn-custom">
-                        <button class="btn bg-blue-600 text-white hover:bg-blue-900 py-1 px-3 m-2"><i class="fa fa-download"></i> Télécharger</button>
+                        <button class="btn bg-blue-600 text-white hover:bg-blue-900 py-1 px-3 m-2"><i
+                                    class="fa fa-download"></i> Télécharger
+                        </button>
                     </a>
                     <a href="/logout" class="btn btn-custom">
-                        <button class="btn bg-red-600 text-white hover:bg-red-900 py-1 px-3 m-2"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</button>
+                        <button class="btn bg-red-600 text-white hover:bg-red-900 py-1 px-3 m-2"><i
+                                    class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion
+                        </button>
                     </a>
                 </div>
 
@@ -44,19 +51,30 @@
 
         <!-- Colonne de droite -->
         <div class="w-full md:w-2/3 px-4 mt-6 md:mt-0">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">🚨 Mes retards 🚨</h1>
-            <?php if (!$empruntsDelay) { ?>
+            <?php if(isset($error)) { ?>
+                <div class="alert alert-warning" role="alert">
+                    <?=$error?>
+                </div>
+            <?php } ?>
+            <?php if (!$empruntsDelay && !$emprunts) { ?>
                 <!-- Message si aucun emprunt -->
                 <div class="bg-white shadow-lg rounded-lg px-6 py-4 mt-5">
                     <p class="text-gray-600 mb-2">Vous n'avez aucun emprunt en cours.</p>
                 </div>
-            <?php } else { ?>
-            <!-- Tableau des emprunts -->
+            <?php } else {?>
+
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">🚨 Mes retards 🚨</h1>
+            <?php if ( !$empruntsDelay ) { ?>
+            <div class="bg-white shadow-lg rounded-lg px-6 py-4 mt-5">
+                <p class="text-gray-600 mb-2">Vous n'avez aucun emprunt en retard.</p>
+            </div>
+            <?php } ?>
+        <!-- Tableau des emprunts -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-5">
 
                 <!-- Liste des emprunts -->
                 <?php foreach ($empruntsDelay as $emprunt) { ?>
-                    <div class="bg-red shadow-lg rounded-lg px-6 py-4">
+                    <div class="bg-white shadow-lg rounded-lg px-6 py-4">
                         <h2 class="text-xl font-semibold text-gray-800 mb-2"><?= $emprunt->titre ?></h2>
                         <p class="text-gray-600 mb-2">Type: <span
                                     class="font-semibold"><?= $emprunt->libellecategorie ?></span></p>
@@ -72,18 +90,35 @@
                             ⚠️ Frais:
                             <span class="font-semibold"><?= date_diff(date_create($emprunt->dateretour), new DateTime())->days ?>€</span>
                         </p>
+                        <?php if ($emprunt->id == 1) { ?>
+                            <button class="rendre-ressource-button" data-emprunt='<?= json_encode($emprunt) ?>'>
+                                <div class="w-fit flex justify-center items-center font-medium py-1 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300 ">
+                                    <div class="text-xs font-normal leading-none max-w-full flex-initial">
+                                        <?= $emprunt->libEtat ?>
+                                    </div>
+                                </div>
+                            </button>
+                        <?php } else if ($emprunt->id == 2) { ?>
+                            <div class="w-fit flex justify-center items-center font-medium py-1 px-2 bg-white rounded-full text-green-700 bg-blue-100 border border-green-300 ">
+                                <div class="text-xs font-normal leading-none max-w-full flex-initial">
+                                    <?= $emprunt->libEtat ?>
+                                </div>
+                            </div>
+                        <?php } ?>
                     </div>
-                <?php }} ?>
+                <?php } ?>
             </div>
 
             <h1 class="text-3xl font-bold text-gray-900 mb-2 mt-4">Mes emprunts</h1>
-            <!-- liste emprunts -->
+
             <?php if (!$emprunts) { ?>
-                <!-- Message si aucun emprunt -->
                 <div class="bg-white shadow-lg rounded-lg px-6 py-4 mt-5">
-                    <p class="text-gray-600 mb-2">Vous n'avez aucun emprunt en cours.</p>
+                    <p class="text-gray-600 mb-2">Vous n'avez aucun emprunt en retard.</p>
                 </div>
-            <?php } else { ?>
+            <?php } ?>
+
+            <!-- liste emprunts -->
+            <?php if ($emprunts) { ?>
                 <!-- Tableau des emprunts -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-5">
 
@@ -101,10 +136,25 @@
                                 Date de retour prévue:
                                 <span class="font-semibold"><?= date_format(date_create($emprunt->dateretour), "d/m/Y") ?></span>
                             </p>
+                            <?php if ($emprunt->id == 1) { ?>
+                                <button class="rendre-ressource-button" data-emprunt='<?= json_encode($emprunt) ?>'>
+                                    <div class="w-fit flex justify-center items-center font-medium py-1 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300 ">
+                                        <div class="text-xs font-normal leading-none max-w-full flex-initial">
+                                            <?= $emprunt->libEtat ?>
+                                        </div>
+                                    </div>
+                                </button>
+                            <?php } else if ($emprunt->id == 2) { ?>
+                                <div class="w-fit flex justify-center items-center font-medium py-1 px-2 bg-white rounded-full text-green-700 bg-blue-100 border border-green-300 ">
+                                    <div class="text-xs font-normal leading-none max-w-full flex-initial">
+                                        <?= $emprunt->libEtat ?>
+                                    </div>
+                                </div>
+                            <?php } ?>
                         </div>
                     <?php } ?>
                 </div>
-            <?php } ?>
+            <?php } }?>
         </div>
 
     </div>
@@ -112,7 +162,7 @@
 
 <script>
     function changeClass() {
-        if(document.getElementById('tel').className == "noFlou") {
+        if (document.getElementById('tel').className == "noFlou") {
             document.getElementById('tel').className = "flou";
 
         } else {
@@ -120,11 +170,53 @@
         }
     }
 
+    function rendreRessource(emprunt) {
+        Swal.fire({
+            title: 'Restituer ' + emprunt.titre + ' ?',
+            html: '<img loading="lazy" src="/public/assets/' + emprunt.image + '" alt="' + emprunt.titre + '" class="swal2-image" style="max-width: 100%; max-height: 50vh;">',
+            showCancelButton: false,
+            confirmButtonText: 'Rendre',
+            preConfirm: () => {
+                const form = new FormData();
+                form.append('idEmprunteur', emprunt.idemprunteur);
+                form.append('idRessource', emprunt.idressource);
+                form.append('idExemplaire', emprunt.idexemplaire);
+                form.append('idDateDebutEmprunt', emprunt.datedebutemprunt);
+
+                return fetch('/api/rendre-ressource/' + emprunt.idemprunteur + '/' + emprunt.idressource + '/' + emprunt.idexemplaire + '/' + emprunt.datedebutemprunt, {
+                    method: 'POST',
+                    body: form
+                })
+                    .then(response => response.json())
+                    .then((result) => {
+                        if (result && result.isConfirmed) {
+                            Swal.fire(
+                                'Rendu!',
+                                emprunt.titre + ' est en attente de validation',
+                                'success'
+                            );
+                        }
+                    });
+            }
+        })
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const rendreRessourceButtons = document.querySelectorAll('.rendre-ressource-button');
+
+        rendreRessourceButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                const empruntData = JSON.parse(button.getAttribute('data-emprunt'));
+                rendreRessource(empruntData);
+            });
+        });
+    });
+
     document.querySelector("#modify").addEventListener("click", async (e) => {
         e.preventDefault();
 
         // Création d'un formulaire à l'intérieur du dialogue de confirmation
-        const { value: formValues } = await Swal.fire({
+        const {value: formValues} = await Swal.fire({
             title: 'Édition de votre compte',
             html:
                 '<form action="/edit/<?= $user->idemprunteur  ?>" method="post" class="w-full text-center">' +

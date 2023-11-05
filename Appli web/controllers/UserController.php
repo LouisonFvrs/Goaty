@@ -3,8 +3,10 @@
 namespace controllers;
 
 use controllers\base\WebController;
+use models\CommentaireModel;
 use models\EmprunterModel;
 use models\EmprunteurModel;
+use models\ExemplaireModel;
 use models\LocalisationModel;
 use utils\EmailUtils;
 use utils\SessionHelpers;
@@ -16,12 +18,17 @@ class UserController extends WebController
     private EmprunteurModel $emprunteur; // Modèle permettant d'interagir avec la table emprunteur
     private EmprunterModel $emprunter; // Modèle permettant l'emprunt
     private LocalisationModel $localisation;
+    private ExemplaireModel $exemplaireModel;
+
+    private CommentaireModel $commentaireModel;
 
     function __construct()
     {
         $this->emprunteur = new EmprunteurModel();
         $this->emprunter = new EmprunterModel();
         $this->localisation = new LocalisationModel();
+        $this->commentaireModel = new CommentaireModel();
+        $this->exemplaireModel = new ExemplaireModel();
     }
 
     /**
@@ -153,8 +160,24 @@ class UserController extends WebController
             die ("Erreur: utilisateur non connecté ou ids non renseignés");
         }
 
-        // On déclare l'emprunt, et on redirige l'utilisateur vers sa page de profil
-        $result = $this->emprunter->declarerEmprunt($idRessource, $idExemplaire, $user->idemprunteur);
+        $userEmprunt = $this->emprunter->getAllEmprunts($user->idemprunteur);
+
+        // Gestion du nombre d'emprunt
+        if(count($userEmprunt) >= 3) {
+
+            $exemplaires = $this->exemplaireModel->getByRessource($idRessource);
+            $exemplaire = null;
+
+            if ($exemplaires && sizeof($exemplaires) > 0) {
+                $exemplaire = $exemplaires[0];
+            }
+
+            $commentaires = $this->commentaireModel->getComByRessources($idRessource);
+
+            return Template::render('views/catalogue/detail.php', array("ressource" => $ressource, "exemplaire" => $exemplaire, "commentaires" => $commentaires, "error" => "Vous avez dépassé le nombre d'emprunt autorisé"));
+        } else {
+            $result = $this->emprunter->declarerEmprunt($idRessource, $idExemplaire, $user->idemprunteur);
+        }
 
         if ($result) {
             // Envoi de l'email confirmation d'emprunt
@@ -201,5 +224,11 @@ class UserController extends WebController
         SessionHelpers::login($user);
 
         $this->redirect("/me");
+    }
+
+    // Rendre une ressource
+    function rendre($idEmp, $idR, $idEx, $date) {
+        var_dump($idEmp, $idR, $idEx, $date);
+        die();
     }
 }

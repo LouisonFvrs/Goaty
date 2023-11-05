@@ -67,4 +67,18 @@ class RessourceModel extends SQL
         $stmt->execute([$idLocation]);
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
+
+    // Recherche d'une ressource par ville ou nom
+    public function recherche(string $ressource = "", string $city = ""): array
+    {
+        $query = "SELECT * FROM ressource INNER JOIN exemplaire ON exemplaire.idressource = ressource.idressource INNER JOIN localisation ON exemplaire.idLocalisation = localisation.idLocalisation WHERE UPPER(titre) LIKE UPPER(:ressource) AND UPPER(villeLocalisation) like UPPER(:city);";
+
+        $stmt = SQL::getPdo()->prepare($query);
+        $stmt->execute([
+            ":ressource" => "%$ressource%",
+            ":city" => "%$city%"
+        ]);
+
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
 }

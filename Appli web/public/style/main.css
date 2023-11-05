@@ -140,3 +140,7 @@ html {
         top: 5px
     }
 }
+
+.emprunt:hover {
+    cursor: pointer;
+}

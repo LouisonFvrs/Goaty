@@ -21,7 +21,7 @@ class EmprunterModel extends SQL
     public function declarerEmprunt($idRessource, $idExemplaire, $idemprunteur): bool
     {
         try {
-            $sql = 'INSERT INTO emprunter (idressource, idexemplaire, idemprunteur, datedebutemprunt, dureeemprunt, dateretour) VALUES (?, ?, ?, NOW(), 30, DATE_ADD(NOW(), INTERVAL 1 MONTH))';
+            $sql = 'INSERT INTO emprunter (idressource, idexemplaire, idemprunteur, datedebutemprunt, dureeemprunt, dateretour, idEtatEmprunt) VALUES (?, ?, ?, NOW(), 30, DATE_ADD(NOW(), INTERVAL 1 MONTH), 1)';
             $stmt = parent::getPdo()->prepare($sql);
 
             return $stmt->execute([$idRessource, $idExemplaire, $idemprunteur]);
@@ -38,7 +38,7 @@ class EmprunterModel extends SQL
     public function getEmpruntsDelay($idemprunteur): bool|array
     {
         try {
-            $sql = 'SELECT * FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie WHERE idemprunteur = ? AND dateretour < CURDATE()';
+            $sql = 'SELECT * FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie LEFT JOIN etatEmprunt on emprunter.idEtatEmprunt = etatEmprunt.id WHERE idemprunteur = ? AND dateretour < CURDATE() and emprunter.idEtatEmprunt != 3';
             $stmt = parent::getPdo()->prepare($sql);
             $stmt->execute([$idemprunteur]);
             return $stmt->fetchAll(\PDO::FETCH_OBJ);
@@ -51,7 +51,19 @@ class EmprunterModel extends SQL
     public function getEmprunts($idemprunteur): bool|array
     {
         try {
-            $sql = 'SELECT * FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie WHERE idemprunteur = ? AND dateretour >= CURDATE()';
+            $sql = 'SELECT * FROM emprunter LEFT JOIN ressource ON emprunter.idressource = ressource.idressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie LEFT JOIN etatEmprunt on emprunter.idEtatEmprunt = etatEmprunt.id WHERE idemprunteur = ? AND dateretour >= CURDATE() and emprunter.idEtatEmprunt != 3';
+            $stmt = parent::getPdo()->prepare($sql);
+            $stmt->execute([$idemprunteur]);
+            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
+    public function getAllEmprunts($idemprunteur): bool|array
+    {
+        try {
+            $sql = 'SELECT * FROM emprunter LEFT JOIN etatEmprunt on emprunter.idEtatEmprunt = etatEmprunt.id WHERE idemprunteur = ? and emprunter.idEtatEmprunt != 3';
             $stmt = parent::getPdo()->prepare($sql);
             $stmt->execute([$idemprunteur]);
             return $stmt->fetchAll(\PDO::FETCH_OBJ);
