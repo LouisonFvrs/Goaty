@@ -59,10 +59,13 @@ class UserController extends WebController
 
         // Gestion de la connexion
         if (isset($_POST["email"]) && isset($_POST["password"])) {
-            $result = $this->emprunteur->connexion($_POST["email"], $_POST["password"]);
+            $result = $this->emprunteur->connexion(htmlspecialchars($_POST["email"]), htmlspecialchars($_POST["password"]));
 
             // Si la connexion est réussie, on redirige l'utilisateur vers sa page de profil
             if ($result == "true") {
+                // Envoi email de connexion
+                $user = SessionHelpers::getConnected();
+                EmailUtils::sendEmail($user->emailemprunteur, "Connexion", "connexion", array("name" => $user->nomemprunteur, "prenom" => $user->prenomemprunteur, "title" => "Connexion à votre comptre"));
                 $this->redirect("/me");
             } else {
                 // Sinon, on affiche un message d'erreur
@@ -83,6 +86,7 @@ class UserController extends WebController
     function signup(): string
     {
         $data = array();
+        $error = "";
 
         // Si l'utilisateur est déjà connecté, on le redirige vers sa page de profil
         if (SessionHelpers::isConnected()) {
@@ -93,13 +97,30 @@ class UserController extends WebController
 
         // Gestion de l'inscription
         if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["phoneNumber"]) && $_POST["ville"] != "") {
-            $result = $this->emprunteur->creerEmprenteur($_POST["email"], $_POST["password"], $_POST["nom"], $_POST["prenom"], $_POST["phoneNumber"], $_POST["ville"]);
+            if (!$this->verifMotDePasse(htmlspecialchars($_POST["password"])))
+            {
+                $error .= "Mot de passe incorrect ! 8 caractères minimum, majuscule, chiffre, caractère spécial. ";
+            }
+            if (!$this->verifEmail(htmlspecialchars($_POST["email"])))
+            {
+                $error .= "Email incorrect. ";
+            }
+            if (!$this->verifNumeroTelephone(htmlspecialchars($_POST["phoneNumber"])))
+            {
+                $error .= "Numéro de téléphone incorrect. ";
+            }
+            if ($error == "")
+            {
+                $result = $this->emprunteur->creerEmprenteur(htmlspecialchars($_POST["email"]), htmlspecialchars($_POST["password"]), htmlspecialchars($_POST["nom"]), htmlspecialchars($_POST["prenom"]), htmlspecialchars($_POST["phoneNumber"]), htmlspecialchars($_POST["ville"]));
+            } else
+            {
+                return Template::render("views/user/signup.php", ["error" => $error, "localisation" => $localisation]);
+            }
 
             // Si l'inscription est réussie, on affiche un message de succès
             if ($result) {
                 return Template::render("views/user/signup-success.php");
             } else {
-                // Sinon, on affiche un message d'erreur
                 $data["error"] = "La création du compte a échoué";
             }
         }
@@ -218,7 +239,7 @@ class UserController extends WebController
     function edit($id, $nom, $email, $prenom, $dateNaissance, $telephone, $password, $ville) {
 
         // Ajout des données de l'utilsateur
-        $this->emprunteur->editEmpruteur($id, $nom, $email, $prenom, $ville, $dateNaissance, $telephone, $password);
+        $this->emprunteur->editEmpruteur(htmlspecialchars($id), htmlspecialchars($nom), htmlspecialchars($email), htmlspecialchars($prenom), htmlspecialchars($ville), htmlspecialchars($dateNaissance), htmlspecialchars($telephone), htmlspecialchars($password));
 
         $user = $this->emprunteur->getOne($id);
         SessionHelpers::login($user);
@@ -227,8 +248,42 @@ class UserController extends WebController
     }
 
     // Rendre une ressource
-    function rendre($idEmp, $idR, $idEx, $date) {
-        var_dump($idEmp, $idR, $idEx, $date);
-        die();
+    function rendre($idEmp, $idR, $idEx, $dateD) {
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Origin: *');
+
+
+        if ($this->emprunter->rendreEmprunt($idEmp, $idR, $idEx, $dateD)) {
+            return json_encode(array("isConfirmed" => true));
+        } else {
+            return json_encode(array("isConfirmed" => false));
+        }
     }
+
+    // Vérifier la validiter d'un mdp
+    function verifMotDePasse($motDePasse) {
+        if (strlen($motDePasse) < 8) {
+            return false;
+        }
+        if (!preg_match('/[A-Z]/', $motDePasse) || !preg_match('/[a-z]/', $motDePasse) || !preg_match('/[0-9]/', $motDePasse) || !preg_match('/[^A-Za-z0-9]/', $motDePasse)) {
+            return false;
+        }
+        return true;
+    }
+
+    function verifEmail($email) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
+        return true;
+    }
+
+    function verifNumeroTelephone($numero) {
+        // Supprimez tout sauf les chiffres
+        $numero = preg_replace("/[^0-9]/", "", $numero);
+
+        // Vérifiez si le numéro a une longueur valide
+        return (strlen($numero) === 10);
+    }
+
 }

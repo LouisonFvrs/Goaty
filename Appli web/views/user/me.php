@@ -170,6 +170,12 @@
         }
     }
 
+    function toTimestamp(strDate){
+        var datum = Date.parse(strDate);
+        console.log(datum);
+        return datum/1000;
+    }
+
     function rendreRessource(emprunt) {
         Swal.fire({
             title: 'Restituer ' + emprunt.titre + ' ?',
@@ -183,6 +189,8 @@
                 form.append('idExemplaire', emprunt.idexemplaire);
                 form.append('idDateDebutEmprunt', emprunt.datedebutemprunt);
 
+                const dateTimestamp = toTimestamp(emprunt.datedebutemprunt);
+
                 return fetch('/api/rendre-ressource/' + emprunt.idemprunteur + '/' + emprunt.idressource + '/' + emprunt.idexemplaire + '/' + emprunt.datedebutemprunt, {
                     method: 'POST',
                     body: form
@@ -194,6 +202,12 @@
                                 'Rendu!',
                                 emprunt.titre + ' est en attente de validation',
                                 'success'
+                            );
+                        } else {
+                            Swal.fire(
+                                'Erreur!',
+                                emprunt.titre + ' a pas été rendu',
+                                'error'
                             );
                         }
                     });
@@ -216,11 +230,11 @@
         e.preventDefault();
 
         // Création d'un formulaire à l'intérieur du dialogue de confirmation
-        const {value: formValues} = await Swal.fire({
+        const { value: formValues } = await Swal.fire({
             title: 'Édition de votre compte',
             html:
-                '<form action="/edit/<?= $user->idemprunteur  ?>" method="post" class="w-full text-center">' +
-                '<input type="text" name="nom" id="swal-nom" class="swal2-input" placeholder="Nom" value="<?php echo $user->nomemprunteur;  ?>"" required>' +
+                '<form action="/edit/<?= $user->idemprunteur  ?>" method="post" class="w-full text-center" id="editForm">' +
+                '<input type="text" name="nom" id="swal-nom" class="swal2-input" placeholder="Nom" value="<?php echo $user->nomemprunteur; ?>" required>' +
                 '<input type="text" name="prenom" id="swal-prenom" class="swal2-input" placeholder="Prénom" value="<?php echo $user->prenomemprunteur; ?>" required>' +
                 '<input type="email" name="email" id="swal-email" class="swal2-input" placeholder="Adresse e-mail" value="<?php echo $user->emailemprunteur; ?>" required>' +
                 '<select class="form-select w-64 mx-auto mt-3" name="ville" aria-label="ville"> <option value="<?= $ville->idLocalisation ?>"><?= $ville->villeLocalisation ?></option> <?php foreach ($localisation as $l) { if($l->idLocalisation != $ville->idLocalisation) { ?> <option value="<?= $l->idLocalisation?>"><?= $l->villeLocalisation?></option> <?php }} ?> </select>' +
@@ -228,12 +242,45 @@
                 '<input type="text" name="telephone" id="swal-telephone" class="swal2-input" placeholder="Téléphone" value="<?php echo $user->telportable; ?>" required>' +
                 '<input type="password" name="password" id="swal-password" class="swal2-input" placeholder="Mot de passe" value="" required>' +
                 '<input type="password" name="passwordCheck" id="swal-confirmPassword" class="swal2-input" placeholder="Confirmation mot de passe" value="" required>' +
-                '<button type = "submit" class="btn bg-blue-600 text-white hover:bg-blue-900 py-1 px-3 m-4">Modifier</button>' +
+                '<button type="button" class="btn bg-blue-600 text-white hover:bg-blue-900 py-1 px-3 m-4" onclick="validateForm()">Modifier</button>' +
                 '</form>',
             focusConfirm: false,
             showConfirmButton: false,
             showCancelButton: false,
         });
     });
+
+    function validateForm() {
+        const nom = document.getElementById('swal-nom').value;
+        const prenom = document.getElementById('swal-prenom').value;
+        const email = document.getElementById('swal-email').value;
+        const telephone = document.getElementById('swal-telephone').value;
+        const password = document.getElementById('swal-password').value;
+        const confirmPassword = document.getElementById('swal-confirmPassword').value;
+
+        // Validation simple (vous pouvez ajouter des validations plus complexes selon vos besoins)
+        if (!nom || !prenom || !email || !telephone || !password || !confirmPassword) {
+            Swal.fire('Erreur', 'Veuillez remplir tous les champs', 'error');
+        } else if (!isValidEmail(email)) {
+            Swal.fire('Erreur', 'Adresse e-mail invalide', 'error');
+        } else if (!isValidPhoneNumber(telephone)) {
+            Swal.fire('Erreur', 'Numéro de téléphone invalide', 'error');
+        } else if (password !== confirmPassword) {
+            Swal.fire('Erreur', 'Les mots de passe ne correspondent pas', 'error');
+        } else {
+            // Si la validation réussit, vous pouvez soumettre le formulaire
+            document.getElementById('editForm').submit();
+        }
+    }
+
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    function isValidPhoneNumber(phoneNumber) {
+        const phoneRegex = /^\d{10}$/;
+        return phoneRegex.test(phoneNumber);
+    }
 
 </script>

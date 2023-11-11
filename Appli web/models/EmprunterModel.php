@@ -30,6 +30,19 @@ class EmprunterModel extends SQL
         }
     }
 
+    public function rendreEmprunt($idRessource, $idExemplaire, $idEmprunteur, $date)
+    {
+
+        try {
+            $sql = 'UPDATE emprunter SET emprunter.idEtatEmprunt = 2 WHERE emprunter.idemprunteur = ? AND emprunter.idressource = ? AND emprunter.idexemplaire = ? AND emprunter.datedebutemprunt = "?";';
+            $stmt = parent::getPdo()->prepare($sql);
+
+            return $stmt->execute([$idEmprunteur, $idRessource, $idExemplaire, $date]);
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
     /**
      * Récupère les emprunts en retard d'un emprunteur
      * @param $idemprunteur

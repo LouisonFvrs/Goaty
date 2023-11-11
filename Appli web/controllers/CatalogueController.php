@@ -106,21 +106,25 @@ class CatalogueController extends WebController
             $this->redirect("/");
         }
 
-
-        // /! vérifier que l'on est connecté
-        // création d'un commentaire
-        if (isset($_POST['com']) && isset($_POST['note'])) {
-            $this->commentaireModel->createCommentaire(htmlspecialchars($_POST['com']), htmlspecialchars($_POST['note']), $user->idemprunteur, $ressource->idressource);
-        }
-
         // Récupération des exemplaires de la ressource
         $exemplaires = $this->exemplaireModel->getByRessource($id);
         $exemplaire = null;
 
-        // Pour l'instant, on ne gère qu'un exemplaire par ressource.
-        // Si on en trouve plusieurs, on prend le premier.
         if ($exemplaires && sizeof($exemplaires) > 0) {
             $exemplaire = $exemplaires[0];
+        }
+
+        $commentaires = $this->commentaireModel->getComByRessources($id);
+
+        // /! vérifier que l'on est connecté
+        // création d'un commentaire
+        if (isset($_POST['com']) && isset($_POST['note'])) {
+            if (!$this->estSurBlacklist(htmlspecialchars($_POST['com']))) {
+                $this->commentaireModel->createCommentaire(htmlspecialchars($_POST['com']), htmlspecialchars($_POST['note']), $user->idemprunteur, $ressource->idressource);
+            } else
+            {
+                return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire, "commentaires" => $commentaires, "errorCom" => "Votre commentaire est déplacé !"));
+            }
         }
 
         // Récupération des commentaires de la ressources
@@ -128,5 +132,19 @@ class CatalogueController extends WebController
 
 
         return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire, "commentaires" => $commentaires));
+    }
+
+    function estSurBlacklist($texte) {
+
+        $blacklist = array("salaud", "putain", "fuck");
+        $texteEnMinuscules = strtolower($texte);
+
+        foreach ($blacklist as $mot) {
+            $motEnMinuscules = strtolower($mot);
+            if (str_contains($texteEnMinuscules, $motEnMinuscules)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -30,7 +30,7 @@ class MainController extends WebController
         $catalogue = array();
 
         if ($ressource != "" || $city != "") {
-            $catalogue = $this->ressourceModel->recherche($ressource, $city);
+            $catalogue = $this->ressourceModel->recherche(htmlspecialchars($ressource), htmlspecialchars($city));
         }
 
         // Affichage de la page à l'utilisateur
