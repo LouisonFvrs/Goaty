@@ -50,10 +50,10 @@
             // dgvEmprunteurs
             // 
             dgvEmprunteurs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvEmprunteurs.Location = new Point(153, 57);
+            dgvEmprunteurs.Location = new Point(116, 56);
             dgvEmprunteurs.Name = "dgvEmprunteurs";
             dgvEmprunteurs.RowTemplate.Height = 25;
-            dgvEmprunteurs.Size = new Size(479, 185);
+            dgvEmprunteurs.Size = new Size(552, 187);
             dgvEmprunteurs.TabIndex = 5;
             // 
             // btnFermer
@@ -62,9 +62,9 @@
             btnFermer.FlatStyle = FlatStyle.Popup;
             btnFermer.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnFermer.ForeColor = Color.White;
-            btnFermer.Location = new Point(653, 231);
+            btnFermer.Location = new Point(685, 240);
             btnFermer.Name = "btnFermer";
-            btnFermer.Size = new Size(105, 55);
+            btnFermer.Size = new Size(87, 46);
             btnFermer.TabIndex = 10;
             btnFermer.Text = "FERMER";
             btnFermer.UseVisualStyleBackColor = false;

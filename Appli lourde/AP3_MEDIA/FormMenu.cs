@@ -18,8 +18,6 @@ namespace AP3_MEDIA
             Application.Exit();
         }
 
-
-
         public Form activeForm = null;
         public void openChildForm(Form formEnfant)
         {

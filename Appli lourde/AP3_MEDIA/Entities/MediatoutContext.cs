@@ -87,7 +87,7 @@ public partial class MediatoutContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_emprunter_emprunteur");
 
-            entity.HasOne(d => d.Id).WithMany(p => p.Emprunters)
+            entity.HasOne(d => d.IdemprunteurNavigation).WithMany(p => p.Emprunters)
                 .HasForeignKey(d => new { d.Idressource, d.Idexemplaire })
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_emprunter_exemplaire");

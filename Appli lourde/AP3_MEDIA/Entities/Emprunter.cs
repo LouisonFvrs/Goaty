@@ -19,7 +19,9 @@ public partial class Emprunter
 
     public bool ArchiverEmprunter { get; set; }
 
-    public virtual Exemplaire Id { get; set; } = null!;
+    public int? IdCom { get; set; }
+
+    public virtual Commentaire? IdComNavigation { get; set; }
 
     public virtual Emprunteur IdemprunteurNavigation { get; set; } = null!;
 }
