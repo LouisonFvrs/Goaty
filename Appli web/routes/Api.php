@@ -3,6 +3,7 @@
 namespace routes;
 
 use controllers\MainApiController;
+use controllers\UserController;
 use routes\base\Route;
 use utils\Template;
 
@@ -11,6 +12,7 @@ class Api
     function __construct()
     {
         $mainApiController = new MainApiController();
+        $userApi = new UserController();
 
         // Documentation SWAGGER de l'API
         Route::Add('/api/swagger', [$mainApiController, 'swaggerYaml']);
@@ -29,6 +31,9 @@ class Api
 
         // Retourne toutes les ressources
         Route::Add('/api/catalogue/{type}', [$mainApiController, 'getAllRessources']);
+
+        // Rendre une ressource
+        Route::Add('/api/rendre-ressource/{idEmp}/{idR}/{idEx}/{dateD}', [$userApi, 'rendre']);
     }
 }
 

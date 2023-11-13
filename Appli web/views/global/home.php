@@ -5,7 +5,37 @@
         <div class="container mx-auto px-4 py-16">
             <div class="max-w-xl mx-auto text-center">
                 <h1 class="text-5xl font-bold text-white mb-6">Bienvenue à la médiathèque</h1>
-                <p class="text-xl text-white">Découvrez notre vaste collection de livres, films et musique.</p>
+                <p class="text-xl text-white mb-6">Découvrez notre vaste collection de livres, films et musique.</p>
+
+                <div class="container">
+                    <form action="/" method="post">
+                        <div class="search">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="search-1">
+                                        <i></i>
+                                        <input type="text" name="ressource" placeholder="Livre, Film, Album...">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div>
+                                        <div class="search-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">
+                                                <style>svg {
+                                                        fill: #ff0000
+                                                    }</style>
+                                                <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
+                                            </svg>
+                                            <input type="text" name="city" placeholder="Ville">
+                                            <button>Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
                 <div class="mt-8">
                     <a href="/catalogue/all"
                        class="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-6 rounded-full">
@@ -41,7 +71,8 @@
                 <!-- via la syntaxe {{ … }} qui permet d'insérer le contenu d'une variable dans du HTML -->
                 <!-- C'est une possibilité offerte par VueJS -->
                 <div class="p-6">
-                    <h3 class="d-flex d-inline text-xl font-semibold text-gray-800 mb-2 truncate" :title="r.titre">{{ r.titre }}</h3>
+                    <h3 class="d-flex d-inline text-xl font-semibold text-gray-800 mb-2 truncate" :title="r.titre">{{
+                        r.titre }}</h3>
                     <div class="w-fit flex justify-center items-center font-medium py-1 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300 ">
                         <div class="text-xs font-normal leading-none max-w-full flex-initial">
                             {{ r.libellecategorie }}
@@ -63,8 +94,34 @@
                           d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/>
                 </svg>
             </div>
-
         </div>
+
+        <?php if (!empty($catalogue)) { ?>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4 mt-4">
+                Résultat de la recherche
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 container mx-auto mt-5">
+
+                <?php foreach ($catalogue as $ressource) { ?>
+
+                    <a href="/catalogue/detail/<?= $ressource->idressource ?>" class="bg-white rounded-lg shadow-lg">
+                        <img loading="lazy" src="/public/assets/<?= $ressource->image ?>"
+                             alt="<?= htmlspecialchars($ressource->titre) ?>"
+                             class="w-full h-64 object-cover object-center rounded-t-lg">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2 truncate"><?= $ressource->titre ?></h3>
+                            <div class="w-fit flex justify-center items-center font-medium py-1 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300 ">
+                                <div class="text-xs font-normal leading-none max-w-full flex-initial">
+                                    <?= $ressource->villeLocalisation ?>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                <?php } ?>
+            </div>
+        <?php } ?>
     </main>
 </section>
 
@@ -103,12 +160,13 @@
             function getRessources() {
                 fetch('/api/catalogue/') // Appel Ajax à l'API en utilisant la fonction fetch.
                     .then(res => res.json()) // Conversion la réponse en JSON (objet JavaScript).
-                    .then(data => { const ressourcesTriees = data.sort((a, b) => b.anneesortie - a.anneesortie);
+                    .then(data => {
+                        const ressourcesTriees = data.sort((a, b) => b.anneesortie - a.anneesortie);
 
                         const sixNextRessources = ressourcesTriees.slice(lastIndexDisplayed, lastIndexDisplayed + 6);
                         lastIndexDisplayed += 6;
 
-                        if(lastIndexDisplayed >= ressourcesTriees.length) {
+                        if (lastIndexDisplayed >= ressourcesTriees.length) {
                             lastIndexDisplayed = 0;
                         }
 

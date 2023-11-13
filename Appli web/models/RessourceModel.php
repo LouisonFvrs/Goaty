@@ -18,6 +18,14 @@ class RessourceModel extends SQL
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function getAllForLocation($idLocation): array
+    {
+        $sql = 'SELECT * FROM ressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie INNER JOIN exemplaire ON exemplaire.idressource = ressource.idressource WHERE idLocalisation = ?';
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute([$idLocation]);
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     public function getRandomRessource($limit = 3)
     {
         $sql = 'SELECT * FROM ressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie  ORDER BY RAND() LIMIT ?';
@@ -35,11 +43,42 @@ class RessourceModel extends SQL
             $endOfSentence .= " categorie.idcategorie = " . $categorie . " OR";
         }
 
-        $sql = 'SELECT * FROM ressource INNER JOIN categorie ON categorie.idcategorie = ressource.idcategorie WHERE '. $endOfSentence;
+        $sql = 'SELECT * FROM ressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie WHERE '. $endOfSentence;
         $sql = substr($sql, 0, strlen($sql)-2);
 
         $stmt = parent::getPdo()->prepare($sql);
         $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function getRessourceFilterForLocation($tabOfCategorie, $idLocation) {
+
+        $endOfSentence = "";
+
+        foreach ($tabOfCategorie as $categorie) {
+            $endOfSentence .= " categorie.idcategorie = " . $categorie . " OR";
+        }
+
+        $sql = 'SELECT * FROM ressource LEFT JOIN categorie ON categorie.idcategorie = ressource.idcategorie INNER JOIN exemplaire ON exemplaire.idressource = ressource.idressource WHERE '. $endOfSentence;
+        $sql = substr($sql, 0, strlen($sql)-2);
+        $sql = $sql . ' AND idLocalisation = ?';
+
+        $stmt = parent::getPdo()->prepare($sql);
+        $stmt->execute([$idLocation]);
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    // Recherche d'une ressource par ville ou nom
+    public function recherche(string $ressource = "", string $city = ""): array
+    {
+        $query = "SELECT * FROM ressource INNER JOIN exemplaire ON exemplaire.idressource = ressource.idressource INNER JOIN localisation ON exemplaire.idLocalisation = localisation.idLocalisation WHERE UPPER(titre) LIKE UPPER(:ressource) AND UPPER(villeLocalisation) like UPPER(:city);";
+
+        $stmt = SQL::getPdo()->prepare($query);
+        $stmt->execute([
+            ":ressource" => "%$ressource%",
+            ":city" => "%$city%"
+        ]);
+
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 }

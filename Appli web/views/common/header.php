@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="/public/style/main.css">
     <script src="/public/js/sweetalert2.all.min.js"></script>
     <script src="/public/js/vue.global.prod.js"></script>
+    <script src="https://kit.fontawesome.com/c080bb4bb6.js" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
-
-    <link src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>

@@ -24,9 +24,16 @@ class MainController extends WebController
      * Affiche la page d'accueil.
      * @return string
      */
-    function home(): string
+    function home($ressource = "", $city = ""): string
     {
+
+        $catalogue = array();
+
+        if ($ressource != "" || $city != "") {
+            $catalogue = $this->ressourceModel->recherche(htmlspecialchars($ressource), htmlspecialchars($city));
+        }
+
         // Affichage de la page à l'utilisateur
-        return Template::render("views/global/home.php");
+        return Template::render("views/global/home.php", ["catalogue" => $catalogue]);
     }
 }

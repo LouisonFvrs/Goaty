@@ -1,6 +1,6 @@
-<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-[calc(100vh-136px)] lg:py-0 container">
+<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 container">
 
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap mt-5 mb-5">
         <!-- Colonne de gauche -->
         <div class="w-full md:w-1/2 px-4">
             <h1 class="text-3xl font-bold text-gray-900 mb-4">Créer un compte</h1>
@@ -21,7 +21,7 @@
                 <!-- Message d'erreur -->
 
                 <?php if (isset($error)) { ?>
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 max-w-[400px]" role="alert">
                         <strong class="font-bold">Oups ! </strong>
                         <span class="block sm:inline"><?= $error ?></span>
                     </div>
@@ -41,6 +41,16 @@
                         <label for="prenom" class="block text-gray-800 font-semibold mb-2">Prénom</label>
                         <input type="text" id="prenom" name="prenom"
                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="ville" class="block text-gray-800 font-semibold mb-2">Ville</label>
+                        <select class="form-select" name="ville" aria-label="ville">
+                            <option value="" selected>Sélectionner une médiathèque</option>
+                            <?php foreach ($localisation as $l) { ?>
+                                <option value="<?= $l->idLocalisation?>"><?= $l->villeLocalisation ." ". $l->adresseLocalisation?></option>
+                            <?php } ?>
+                        </select>
                     </div>
 
                     <div class="mb-4">
