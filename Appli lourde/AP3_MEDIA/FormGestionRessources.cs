@@ -30,12 +30,6 @@ namespace AP3_MEDIA
             this.Close();
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
         private void tbAnnee_TextChanged(object sender, EventArgs e)
         {
 
