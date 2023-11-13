@@ -201,5 +201,10 @@ namespace AP3_MEDIA
         {
             bsRessources_CurrentChanged(sender, e);
         }
+
+        private void btnPlus_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

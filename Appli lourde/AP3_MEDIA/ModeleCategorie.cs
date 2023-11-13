@@ -22,7 +22,6 @@ namespace AP3_MEDIA
             return Modele.MonModele.Categories.ToList();
         }
 
-  
 
         /// <summary>
         /// Fonction qui retourne vrai si l'ajout d'une catégorie est possible

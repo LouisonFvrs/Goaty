@@ -21,7 +21,11 @@ public partial class Emprunter
 
     public int? IdCom { get; set; }
 
+    public int IdEtatEmprunt { get; set; }
+
     public virtual Commentaire? IdComNavigation { get; set; }
+
+    public virtual EtatEmprunt IdEtatEmpruntNavigation { get; set; } = null!;
 
     public virtual Emprunteur IdemprunteurNavigation { get; set; } = null!;
 }
