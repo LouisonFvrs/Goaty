@@ -69,7 +69,7 @@ class EmprunteurModel extends SQL
             // 4 : Compte supprimé
 
             $UUID = TokenHelpers::guidv4(); // Génération d'un UUID v4, qui sera utilisé pour la validation du compte
-            $sql = 'INSERT INTO emprunteur (emailemprunteur, motpasseemprunteur, nomemprunteur, prenomemprunteur, idLocalisation, datenaissance, telportable, validationcompte, validationtoken) VALUES (?, ?, ?, ?, ?, NOW(), ?, 0, ?)';
+            $sql = 'INSERT INTO emprunteur (emailemprunteur, motpasseemprunteur, nomemprunteur, prenomemprunteur, idLocalisation, datenaissance, telportable, validationcompte, validationtoken, idRole) VALUES (?, ?, ?, ?, ?, NOW(), ?, 0, ?, 1)';
             $stmt = parent::getPdo()->prepare($sql);
             $result = $stmt->execute([$email, $password_hash, $nom, $prenom, $localisation, $phoneNumber, $UUID]);
 

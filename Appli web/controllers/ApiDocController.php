@@ -11,6 +11,10 @@ class ApiDocController extends WebController
 {
     function liste(): string
     {
-        return Template::render("views/apidoc/liste.php", array());
+        if (\utils\SessionHelpers::getConnected()->idRole == 1) {
+            return Template::render("views/apidoc/liste.php", array());
+        } else {
+            $this->redirect('/');
+        }
     }
 }
