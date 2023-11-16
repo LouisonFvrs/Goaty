@@ -30,10 +30,6 @@ namespace AP3_MEDIA
             this.Close();
         }
 
-        private void tbAnnee_TextChanged(object sender, EventArgs e)
-        {
-
-        }
         private void remplirListeRessources()
         {
             // remplir la comboBox des ressources (si modification)

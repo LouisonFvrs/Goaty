@@ -31,7 +31,7 @@
             components = new System.ComponentModel.Container();
             label1 = new Label();
             gbInfo = new GroupBox();
-            btnPlus = new Button();
+            lbAuteurs = new ListBox();
             cbAuteur = new ComboBox();
             label9 = new Label();
             cbCategories = new ComboBox();
@@ -53,7 +53,8 @@
             bsCategories = new BindingSource(components);
             cbRessources = new ComboBox();
             bsRessources = new BindingSource(components);
-            lbAuteurs = new ListBox();
+            tbAuteur = new TextBox();
+            btnPlus = new Button();
             gbInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bsCategories).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsRessources).BeginInit();
@@ -71,6 +72,7 @@
             // 
             // gbInfo
             // 
+            gbInfo.Controls.Add(tbAuteur);
             gbInfo.Controls.Add(lbAuteurs);
             gbInfo.Controls.Add(btnPlus);
             gbInfo.Controls.Add(cbAuteur);
@@ -96,18 +98,14 @@
             gbInfo.TabIndex = 3;
             gbInfo.TabStop = false;
             // 
-            // btnPlus
+            // lbAuteurs
             // 
-            btnPlus.BackColor = Color.Transparent;
-            btnPlus.Location = new Point(393, 107);
-            btnPlus.Margin = new Padding(2, 2, 2, 2);
-            btnPlus.Name = "btnPlus";
-            btnPlus.Size = new Size(26, 22);
-            btnPlus.TabIndex = 14;
-            btnPlus.Text = "+";
-            btnPlus.TextAlign = ContentAlignment.TopRight;
-            btnPlus.UseVisualStyleBackColor = false;
-            btnPlus.Click += btnPlus_Click;
+            lbAuteurs.FormattingEnabled = true;
+            lbAuteurs.ItemHeight = 17;
+            lbAuteurs.Location = new Point(225, 166);
+            lbAuteurs.Name = "lbAuteurs";
+            lbAuteurs.Size = new Size(165, 55);
+            lbAuteurs.TabIndex = 15;
             // 
             // cbAuteur
             // 
@@ -197,7 +195,6 @@
             tbAnnee.Name = "tbAnnee";
             tbAnnee.Size = new Size(100, 25);
             tbAnnee.TabIndex = 3;
-            tbAnnee.TextChanged += tbAnnee_TextChanged;
             tbAnnee.KeyPress += tbAnnee_KeyPress;
             // 
             // tbImage
@@ -295,14 +292,26 @@
             // 
             bsRessources.CurrentChanged += bsRessources_CurrentChanged;
             // 
-            // lbAuteurs
+            // tbAuteur
             // 
-            lbAuteurs.FormattingEnabled = true;
-            lbAuteurs.ItemHeight = 17;
-            lbAuteurs.Location = new Point(225, 138);
-            lbAuteurs.Name = "lbAuteurs";
-            lbAuteurs.Size = new Size(165, 55);
-            lbAuteurs.TabIndex = 15;
+            tbAuteur.ForeColor = SystemColors.WindowText;
+            tbAuteur.Location = new Point(225, 138);
+            tbAuteur.Name = "tbAuteur";
+            tbAuteur.Size = new Size(165, 25);
+            tbAuteur.TabIndex = 16;
+            // 
+            // btnPlus
+            // 
+            btnPlus.BackColor = Color.Transparent;
+            btnPlus.Location = new Point(393, 107);
+            btnPlus.Margin = new Padding(2);
+            btnPlus.Name = "btnPlus";
+            btnPlus.Size = new Size(26, 22);
+            btnPlus.TabIndex = 14;
+            btnPlus.Text = "+";
+            btnPlus.TextAlign = ContentAlignment.TopRight;
+            btnPlus.UseVisualStyleBackColor = false;
+            btnPlus.Click += btnPlus_Click;
             // 
             // FormGestionRessources
             // 
@@ -349,9 +358,10 @@
         private Button btnAjouter;
         private ComboBox cbRessources;
         private BindingSource bsRessources;
-        private Button btnPlus;
         private ComboBox cbAuteur;
         private Label label9;
         private ListBox lbAuteurs;
+        private TextBox tbAuteur;
+        private Button btnPlus;
     }
 }

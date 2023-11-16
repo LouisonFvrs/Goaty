@@ -37,10 +37,9 @@
             btnFermer.FlatStyle = FlatStyle.Popup;
             btnFermer.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnFermer.ForeColor = Color.White;
-            btnFermer.Location = new Point(935, 335);
-            btnFermer.Margin = new Padding(4, 5, 4, 5);
+            btnFermer.Location = new Point(683, 270);
             btnFermer.Name = "btnFermer";
-            btnFermer.Size = new Size(150, 92);
+            btnFermer.Size = new Size(105, 55);
             btnFermer.TabIndex = 4;
             btnFermer.Text = "FERMER";
             btnFermer.UseVisualStyleBackColor = false;
@@ -48,12 +47,13 @@
             // 
             // FormEmprunts
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
-            ClientSize = new Size(1098, 441);
+            ClientSize = new Size(800, 337);
             Controls.Add(btnFermer);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2, 2, 2, 2);
             Name = "FormEmprunts";
             Text = "FormEmprunts";
             ResumeLayout(false);
