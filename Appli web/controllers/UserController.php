@@ -19,7 +19,6 @@ class UserController extends WebController
     private EmprunterModel $emprunter; // Modèle permettant l'emprunt
     private LocalisationModel $localisation;
     private ExemplaireModel $exemplaireModel;
-
     private CommentaireModel $commentaireModel;
 
     function __construct()
@@ -37,6 +36,8 @@ class UserController extends WebController
      */
     function logout(): string
     {
+        if (!SessionHelpers::isConnected()) $this->redirect('/');
+
         SessionHelpers::logout();
         return $this->redirect("/");
     }
@@ -148,11 +149,14 @@ class UserController extends WebController
      */
     function me(): string
     {
+
+        if (!SessionHelpers::isConnected()) $this->redirect('/');
+
         // Récupération de l'utilisateur connecté en SESSION.
         // La variable contient les informations de l'utilisateur présent en base de données.
         $user = SessionHelpers::getConnected();
 
-        // Récupération des emprunts de l'utilisateur
+        // Récupération des   unts de l'utilisateur
         $emprunts = $this->emprunter->getEmprunts($user->idemprunteur);
         $empruntsDelay = $this->emprunter->getEmpruntsDelay($user->idemprunteur);
         $ville = $this->localisation->getVilleOfuser($user->idLocalisation);
@@ -168,6 +172,9 @@ class UserController extends WebController
      */
     function emprunter(): string
     {
+
+        if (!SessionHelpers::isConnected()) $this->redirect('/');
+
         // Id à emprunter
         $idRessource = $_POST["idRessource"];
         $idExemplaire = $_POST["idExemplaire"];
@@ -215,6 +222,8 @@ class UserController extends WebController
     // Télécharger les données au format jsonS
     function download() {
 
+        if (!SessionHelpers::isConnected()) $this->redirect('/');
+
         // Récupération de l'utilisateur connecté en SESSION.
         $user = SessionHelpers::getConnected();
 
@@ -238,6 +247,8 @@ class UserController extends WebController
     // Édition du profil
     function edit($id, $nom, $email, $prenom, $dateNaissance, $telephone, $password, $ville) {
 
+        if (!SessionHelpers::isConnected()) $this->redirect('/');
+
         // Ajout des données de l'utilsateur
         $this->emprunteur->editEmpruteur(htmlspecialchars($id), htmlspecialchars($nom), htmlspecialchars($email), htmlspecialchars($prenom), htmlspecialchars($ville), htmlspecialchars($dateNaissance), htmlspecialchars($telephone), htmlspecialchars($password));
 
@@ -258,6 +269,51 @@ class UserController extends WebController
         } else {
             return json_encode(array("isConfirmed" => false));
         }
+    }
+
+    function forgetPassword() {
+        return Template::render("views/user/forgetPassword.php");
+    }
+
+    function sendMailForForgetPassword($email) {
+
+        $error = "";
+
+        if(!isset($email)) {
+            $error .= "Veuillez entrez un mot de passe ! ";
+        }
+
+        if (!$this->emprunteur->checkEmail(htmlspecialchars($email)))
+        {
+            $error .= "Email incorrect. ";
+            return Template::render("views/user/forgetPassword.php", ["error" => $error]);
+        } else {
+            return Template::render('views/user/succesForgetPassword.php');
+        }
+    }
+
+    function resetPassword($uuid) {
+        if (isset($_POST['password'])) {
+            if ($this->verifMotDePasse(htmlspecialchars($_POST["password"]))) {
+                $this->emprunteur->resetPassword(htmlspecialchars($_POST['password']) ,htmlspecialchars($uuid));
+                return Template::render('views/user/login.php');
+            } else {
+                $error = "Mot de passe incorrect";
+                return Template::render('views/user/resetPassword.php', ["uuid" => $uuid ,"error" => $error]);
+            }
+        }
+        return Template::render('views/user/resetPassword.php', ["uuid" => $uuid]);
+    }
+
+    function deleteAccount() {
+
+        if (!SessionHelpers::isConnected()) $this->redirect('/');
+
+        $user = SessionHelpers::getConnected();
+
+        $this->emprunteur->deleteAccount($user->idemprunteur);
+        SessionHelpers::logout();
+        $this->redirect('/');
     }
 
     // Vérifier la validiter d'un mdp

@@ -44,6 +44,11 @@
                                     class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion
                         </button>
                     </a>
+                    <a id="delete" class="btn btn-custom">
+                        <button class="btn bg-gray-600 text-white hover:bg-gray-900 py-1 px-3 m-2">
+                            <i class="fa-regular fa-trash-can" style="color: #ffffff;"></i> Supprimer
+                        </button>
+                    </a>
                 </div>
 
             </div>
@@ -247,6 +252,25 @@
             focusConfirm: false,
             showConfirmButton: false,
             showCancelButton: false,
+        });
+    });
+
+    document.getElementById('delete').addEventListener('click', function(e) {
+        e.preventDefault();
+
+        // Afficher la boîte de dialogue
+        Swal.fire({
+            title: 'Êtes-vous sûr de vouloir supprimer votre compte ?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui',
+            cancelButtonText: 'Non'
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = '/deleteAccount';
+            }
         });
     });
 

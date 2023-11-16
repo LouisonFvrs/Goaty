@@ -36,26 +36,33 @@ class Web
         Route::Add('/login', [$user, 'login']);
         Route::Add('/signup', [$user, 'signup']);
 
+        Route::Add('/forget-password', [$user, 'forgetPassword']);
+        Route::Add('/forget-password-send', [$user, 'sendMailForForgetPassword']);
+
         // Validation de l'inscription.
         Route::Add('/valider-compte/{uuid}', [$user, 'signupValidate']);
 
-        if (SessionHelpers::isLogin()) {
-            // Page de profil utilisateur.
-            Route::Add('/me', [$user, 'me']);
+        // Changer le mot de passe
+        Route::Add('/reset-password/{uuid}', [$user, 'resetPassword']);
 
-            // Télécharger ses données
-            Route::Add('/download', [$user, 'download']);
+        // Supprimer un compte
+        Route::Add('/deleteAccount', [$user, 'deleteAccount']);
 
-            // Action de déconnexion.
-            Route::Add('/logout', [$user, 'logout']);
+        // Page de profil utilisateur.
+        Route::Add('/me', [$user, 'me']);
 
-            // Action d'emprunt d'une ressource.
-            Route::Add('/catalogue/emprunter', [$user, 'emprunter']);
+        // Télécharger ses données
+        Route::Add('/download', [$user, 'download']);
 
-            // Action de modification des données du compte utilisateur
-            Route::Add('/edit/{id}', [$user, 'edit']);
+        // Action de déconnexion.
+        Route::Add('/logout', [$user, 'logout']);
 
-        }
+        // Action d'emprunt d'une ressource.
+        Route::Add('/catalogue/emprunter', [$user, 'emprunter']);
+
+        // Action de modification des données du compte utilisateur
+        Route::Add('/edit/{id}', [$user, 'edit']);
+
 
         // Route permettant l'accès au catalogue.
         Route::Add('/catalogue/detail/{id}', [$catalogue, 'detail']);
