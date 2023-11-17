@@ -19,6 +19,7 @@ namespace AP3_MEDIA
     public partial class FormGestionRessources : Form
     {
         private EtatGestion etat;
+        private List<Auteur> ListAuteurs = new List<Auteur>();
         public FormGestionRessources(EtatGestion etat)
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace AP3_MEDIA
             // remplir la comboBox des ressources (si modification)
             cbRessources.ValueMember = "idressource";    //permet de stocker l'identifiant
             cbRessources.DisplayMember = "titre";
-            bsRessources.DataSource = Modele.getListRessources();
+            bsRessources.DataSource = ModeleRessource.getListRessources();
             cbRessources.DataSource = bsRessources;
         }
         public void remplirListeCategories()
@@ -43,8 +44,17 @@ namespace AP3_MEDIA
             // remplir la comboBox des catégories
             cbCategories.ValueMember = "idcategorie";    //permet de stocker l'identifiant
             cbCategories.DisplayMember = "libellecategorie";
-            bsCategories.DataSource = Modele.getListCategories();
+            bsCategories.DataSource = ModeleCategorie.getListCategories();
             cbCategories.DataSource = bsCategories;
+        }
+
+        public void remplirListeAuteurs()
+        {
+            // remplir la comboBox des catégories
+            cbAuteurs.ValueMember = "IdAuteur";    //permet de stocker l'identifiant
+            cbAuteurs.DisplayMember = "NomAuteur";
+            bsAuteurs.DataSource = ModeleAuteur.getListAuteurs();
+            cbAuteurs.DataSource = bsAuteurs;
         }
         private void FormGestionRessources_Load(object sender, EventArgs e)
         {
@@ -56,7 +66,7 @@ namespace AP3_MEDIA
                 btnAjouter.Text = "AJOUTER";
                 gbInfo.Visible = true;
                 cbRessources.Visible = false;
-
+                remplirListeAuteurs();
             }
             else // cas etat update
             {
@@ -129,10 +139,9 @@ namespace AP3_MEDIA
                     annee = Convert.ToInt32(tbAnnee.Text);
                     idCat = Convert.ToInt32(cbCategories.SelectedValue.ToString());
 
-
                     if (etat == EtatGestion.Create) // cas de l'ajout
                     {
-                        if (Modele.AjoutRessource(titre, description, image, annee, langue, isbn, idCat))
+                        if (Modele.AjoutRessource(titre, description, image, annee, langue, isbn, idCat, ListAuteurs))
                         {
                             MessageBox.Show("Ressource ajoutée " + Modele.RetourneDerniereRessourceSaisie());
                             Annuler();
@@ -155,7 +164,6 @@ namespace AP3_MEDIA
                 {
                     MessageBox.Show("Ajout impossible : problème sur l'année", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
             else
             {
@@ -192,9 +200,22 @@ namespace AP3_MEDIA
             bsRessources_CurrentChanged(sender, e);
         }
 
-        private void btnPlus_Click(object sender, EventArgs e)
+        private void btnAuteurList_Click(object sender, EventArgs e)
         {
+            lbAuteurs.Items.Add(cbAuteurs.Text);
+            ListAuteurs.Add(ModeleAuteur.RecupererAuteur(Convert.ToInt32(cbAuteurs.SelectedValue.ToString())));
+        }
 
+        private void btnAuteurInsert_Click(object sender, EventArgs e)
+        {
+            lbAuteurs.Items.Add(tbAuteur.Text);
+            ModeleAuteur.AjoutAuteur(tbAuteur.Text);
+            ListAuteurs.Add(ModeleAuteur.RecupererDernierAuteur());
+        }
+
+        private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lbAuteurs.Items.Remove(lbAuteurs.SelectedItem);
         }
     }
 }

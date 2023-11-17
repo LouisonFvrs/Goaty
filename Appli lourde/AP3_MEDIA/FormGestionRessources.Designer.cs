@@ -31,8 +31,11 @@
             components = new System.ComponentModel.Container();
             label1 = new Label();
             gbInfo = new GroupBox();
+            btnAuteurInsert = new Button();
+            tbAuteur = new TextBox();
             lbAuteurs = new ListBox();
-            cbAuteur = new ComboBox();
+            btnAuteurList = new Button();
+            cbAuteurs = new ComboBox();
             label9 = new Label();
             cbCategories = new ComboBox();
             label8 = new Label();
@@ -53,11 +56,14 @@
             bsCategories = new BindingSource(components);
             cbRessources = new ComboBox();
             bsRessources = new BindingSource(components);
-            tbAuteur = new TextBox();
-            btnPlus = new Button();
+            bsAuteurs = new BindingSource(components);
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            supprimerToolStripMenuItem = new ToolStripMenuItem();
             gbInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bsCategories).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsRessources).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsAuteurs).BeginInit();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -72,10 +78,11 @@
             // 
             // gbInfo
             // 
+            gbInfo.Controls.Add(btnAuteurInsert);
             gbInfo.Controls.Add(tbAuteur);
             gbInfo.Controls.Add(lbAuteurs);
-            gbInfo.Controls.Add(btnPlus);
-            gbInfo.Controls.Add(cbAuteur);
+            gbInfo.Controls.Add(btnAuteurList);
+            gbInfo.Controls.Add(cbAuteurs);
             gbInfo.Controls.Add(label9);
             gbInfo.Controls.Add(cbCategories);
             gbInfo.Controls.Add(label8);
@@ -94,12 +101,35 @@
             gbInfo.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             gbInfo.Location = new Point(52, 49);
             gbInfo.Name = "gbInfo";
-            gbInfo.Size = new Size(683, 227);
+            gbInfo.Size = new Size(683, 235);
             gbInfo.TabIndex = 3;
             gbInfo.TabStop = false;
             // 
+            // btnAuteurInsert
+            // 
+            btnAuteurInsert.BackColor = Color.Transparent;
+            btnAuteurInsert.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAuteurInsert.Location = new Point(395, 140);
+            btnAuteurInsert.Margin = new Padding(2);
+            btnAuteurInsert.Name = "btnAuteurInsert";
+            btnAuteurInsert.Size = new Size(54, 22);
+            btnAuteurInsert.TabIndex = 17;
+            btnAuteurInsert.Text = "Ajouter";
+            btnAuteurInsert.TextAlign = ContentAlignment.TopRight;
+            btnAuteurInsert.UseVisualStyleBackColor = false;
+            btnAuteurInsert.Click += btnAuteurInsert_Click;
+            // 
+            // tbAuteur
+            // 
+            tbAuteur.ForeColor = SystemColors.WindowText;
+            tbAuteur.Location = new Point(225, 138);
+            tbAuteur.Name = "tbAuteur";
+            tbAuteur.Size = new Size(165, 25);
+            tbAuteur.TabIndex = 16;
+            // 
             // lbAuteurs
             // 
+            lbAuteurs.ContextMenuStrip = contextMenuStrip1;
             lbAuteurs.FormattingEnabled = true;
             lbAuteurs.ItemHeight = 17;
             lbAuteurs.Location = new Point(225, 166);
@@ -107,14 +137,28 @@
             lbAuteurs.Size = new Size(165, 55);
             lbAuteurs.TabIndex = 15;
             // 
-            // cbAuteur
+            // btnAuteurList
             // 
-            cbAuteur.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbAuteur.FormattingEnabled = true;
-            cbAuteur.Location = new Point(225, 107);
-            cbAuteur.Name = "cbAuteur";
-            cbAuteur.Size = new Size(165, 25);
-            cbAuteur.TabIndex = 13;
+            btnAuteurList.BackColor = Color.Transparent;
+            btnAuteurList.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAuteurList.Location = new Point(395, 107);
+            btnAuteurList.Margin = new Padding(2);
+            btnAuteurList.Name = "btnAuteurList";
+            btnAuteurList.Size = new Size(54, 22);
+            btnAuteurList.TabIndex = 14;
+            btnAuteurList.Text = "Ajouter";
+            btnAuteurList.TextAlign = ContentAlignment.TopRight;
+            btnAuteurList.UseVisualStyleBackColor = false;
+            btnAuteurList.Click += btnAuteurList_Click;
+            // 
+            // cbAuteurs
+            // 
+            cbAuteurs.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbAuteurs.FormattingEnabled = true;
+            cbAuteurs.Location = new Point(225, 107);
+            cbAuteurs.Name = "cbAuteurs";
+            cbAuteurs.Size = new Size(165, 25);
+            cbAuteurs.TabIndex = 13;
             // 
             // label9
             // 
@@ -129,7 +173,7 @@
             // 
             cbCategories.DropDownStyle = ComboBoxStyle.DropDownList;
             cbCategories.FormattingEnabled = true;
-            cbCategories.Location = new Point(433, 159);
+            cbCategories.Location = new Point(494, 166);
             cbCategories.Name = "cbCategories";
             cbCategories.Size = new Size(165, 25);
             cbCategories.TabIndex = 6;
@@ -137,7 +181,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(433, 136);
+            label8.Location = new Point(494, 146);
             label8.Name = "label8";
             label8.Size = new Size(74, 17);
             label8.TabIndex = 11;
@@ -145,7 +189,7 @@
             // 
             // tbLangue
             // 
-            tbLangue.Location = new Point(433, 98);
+            tbLangue.Location = new Point(494, 104);
             tbLangue.MaxLength = 2;
             tbLangue.Name = "tbLangue";
             tbLangue.Size = new Size(65, 25);
@@ -155,7 +199,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(433, 78);
+            label7.Location = new Point(494, 84);
             label7.Name = "label7";
             label7.Size = new Size(50, 17);
             label7.TabIndex = 9;
@@ -163,7 +207,7 @@
             // 
             // tbIsbn
             // 
-            tbIsbn.Location = new Point(433, 41);
+            tbIsbn.Location = new Point(494, 38);
             tbIsbn.MaxLength = 13;
             tbIsbn.Name = "tbIsbn";
             tbIsbn.Size = new Size(165, 25);
@@ -173,7 +217,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(433, 21);
+            label6.Location = new Point(494, 18);
             label6.Name = "label6";
             label6.Size = new Size(35, 17);
             label6.TabIndex = 8;
@@ -256,9 +300,9 @@
             btnAjouter.FlatStyle = FlatStyle.Popup;
             btnAjouter.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnAjouter.ForeColor = Color.White;
-            btnAjouter.Location = new Point(508, 282);
+            btnAjouter.Location = new Point(614, 290);
             btnAjouter.Name = "btnAjouter";
-            btnAjouter.Size = new Size(100, 43);
+            btnAjouter.Size = new Size(84, 35);
             btnAjouter.TabIndex = 12;
             btnAjouter.Text = "AJOUTER";
             btnAjouter.UseVisualStyleBackColor = false;
@@ -270,9 +314,9 @@
             btnFermer.FlatStyle = FlatStyle.Popup;
             btnFermer.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnFermer.ForeColor = Color.White;
-            btnFermer.Location = new Point(630, 282);
+            btnFermer.Location = new Point(704, 290);
             btnFermer.Name = "btnFermer";
-            btnFermer.Size = new Size(105, 43);
+            btnFermer.Size = new Size(84, 35);
             btnFermer.TabIndex = 4;
             btnFermer.Text = "FERMER";
             btnFermer.UseVisualStyleBackColor = false;
@@ -292,26 +336,18 @@
             // 
             bsRessources.CurrentChanged += bsRessources_CurrentChanged;
             // 
-            // tbAuteur
+            // contextMenuStrip1
             // 
-            tbAuteur.ForeColor = SystemColors.WindowText;
-            tbAuteur.Location = new Point(225, 138);
-            tbAuteur.Name = "tbAuteur";
-            tbAuteur.Size = new Size(165, 25);
-            tbAuteur.TabIndex = 16;
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { supprimerToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(129, 26);
             // 
-            // btnPlus
+            // supprimerToolStripMenuItem
             // 
-            btnPlus.BackColor = Color.Transparent;
-            btnPlus.Location = new Point(393, 107);
-            btnPlus.Margin = new Padding(2);
-            btnPlus.Name = "btnPlus";
-            btnPlus.Size = new Size(26, 22);
-            btnPlus.TabIndex = 14;
-            btnPlus.Text = "+";
-            btnPlus.TextAlign = ContentAlignment.TopRight;
-            btnPlus.UseVisualStyleBackColor = false;
-            btnPlus.Click += btnPlus_Click;
+            supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
+            supprimerToolStripMenuItem.Size = new Size(180, 22);
+            supprimerToolStripMenuItem.Text = "supprimer";
+            supprimerToolStripMenuItem.Click += supprimerToolStripMenuItem_Click;
             // 
             // FormGestionRessources
             // 
@@ -331,6 +367,8 @@
             gbInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)bsCategories).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsRessources).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsAuteurs).EndInit();
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -358,10 +396,14 @@
         private Button btnAjouter;
         private ComboBox cbRessources;
         private BindingSource bsRessources;
-        private ComboBox cbAuteur;
+        private ComboBox cbAuteurs;
         private Label label9;
         private ListBox lbAuteurs;
         private TextBox tbAuteur;
-        private Button btnPlus;
+        private Button btnAuteurList;
+        private BindingSource bsAuteurs;
+        private Button btnAuteurInsert;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem supprimerToolStripMenuItem;
     }
 }

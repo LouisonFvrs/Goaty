@@ -23,6 +23,8 @@ public partial class Emprunter
 
     public int IdEtatEmprunt { get; set; }
 
+    public virtual Exemplaire Id { get; set; } = null!;
+
     public virtual Commentaire? IdComNavigation { get; set; }
 
     public virtual EtatEmprunt IdEtatEmpruntNavigation { get; set; } = null!;

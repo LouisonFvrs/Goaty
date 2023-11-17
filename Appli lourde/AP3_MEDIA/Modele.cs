@@ -78,7 +78,7 @@ namespace AP3_MEDIA
         /// <param name="isbn"></param>
         /// <param name="idCategorie"></param>
         /// <returns>bool</returns>
-        public static bool AjoutRessource(string titre, string description, string image, int annee, string langue, string isbn, int idCategorie)
+        public static bool AjoutRessource(string titre, string description, string image, int annee, string langue, string isbn, int idCategorie, List<Auteur> ListAuteur)
         {
             Ressource uneRessource;
             bool vretour = true;
@@ -94,6 +94,7 @@ namespace AP3_MEDIA
                 uneRessource.Langue= langue;
                 uneRessource.Isbn = isbn;
                 uneRessource.Idcategorie= idCategorie;
+                uneRessource.IdAuteurs= ListAuteur;
 
                 monModele.Ressources.Add(uneRessource);
                 monModele.SaveChanges();

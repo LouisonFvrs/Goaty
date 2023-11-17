@@ -17,6 +17,8 @@ public partial class Exemplaire
 
     public int IdLocalisation { get; set; }
 
+    public virtual ICollection<Emprunter> Emprunters { get; set; } = new List<Emprunter>();
+
     public virtual Localisation IdLocalisationNavigation { get; set; } = null!;
 
     public virtual Etat IdetatNavigation { get; set; } = null!;

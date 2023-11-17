@@ -19,7 +19,22 @@ namespace AP3_MEDIA
 
         private void btnFermer_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
 
+        private void FormEmprunts_Load(object sender, EventArgs e)
+        {
+            bsEmprunts.DataSource = ModeleEmprunts.getListEmprunts().Select(x => new
+            {
+                x.IdemprunteurNavigation.Nomemprunteur,
+                x.Id.IdressourceNavigation.Titre,
+                x.Idexemplaire,
+                x.Datedebutemprunt,
+                x.Dureeemprunt,
+                x.Dateretour,
+            })
+            .OrderBy(x => x.IdemprunteurNavigation.Nomemprunteur);
+            dgvEmprunteurs.DataSource = bsEmprunts;
         }
     }
 }

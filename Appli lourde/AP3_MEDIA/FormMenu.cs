@@ -79,5 +79,12 @@ namespace AP3_MEDIA
         {
             openChildForm(new FormEmprunts());
         }
+
+        private void dECONNEXIONToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormConnexion formConnexion = new FormConnexion();
+            this.Hide();
+            formConnexion.Show();
+        }
     }
 }

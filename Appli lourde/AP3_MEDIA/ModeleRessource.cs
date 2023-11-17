@@ -21,7 +21,7 @@ namespace AP3_MEDIA
         /// <returns>Liste</returns>
         public static List<Ressource> getListRessources()
         {
-            return Modele.MonModele.Ressources.Where(p => p.ArchiverRess == false).Include(a => a.IdcategorieNavigation).ToList();
+            return Modele.MonModele.Ressources.Where(p => p.ArchiverRess == false).ToList();
         }
 
         /// <summary>

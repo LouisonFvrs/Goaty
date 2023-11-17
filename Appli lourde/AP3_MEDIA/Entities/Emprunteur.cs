@@ -25,7 +25,11 @@ public partial class Emprunteur
 
     public int? IdLocalisation { get; set; }
 
+    public int IdRole { get; set; }
+
     public virtual ICollection<Emprunter> Emprunters { get; set; } = new List<Emprunter>();
 
     public virtual Localisation? IdLocalisationNavigation { get; set; }
+
+    public virtual Role IdRoleNavigation { get; set; } = null!;
 }

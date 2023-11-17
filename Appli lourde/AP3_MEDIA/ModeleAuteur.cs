@@ -121,5 +121,11 @@ namespace AP3_MEDIA
             }
             return unAuteur;
         }
+
+        public static Auteur RecupererDernierAuteur()
+        {
+            int IdAuteur =  Modele.MonModele.Auteurs.Max(x => x.IdAuteur);
+            return RecupererAuteur(IdAuteur);
+        }
     }
 }

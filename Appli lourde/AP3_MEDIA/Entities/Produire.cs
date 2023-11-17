@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace AP3_MEDIA.Entities;
 
-public partial class Auteur
+public partial class Produire
 {
     public int IdAuteur { get; set; }
 
-    public string NomAuteur { get; set; } = null!;
+    public int IdRessource { get; set; }
 }

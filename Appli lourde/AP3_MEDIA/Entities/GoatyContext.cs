@@ -33,7 +33,11 @@ public partial class GoatyContext : DbContext
 
     public virtual DbSet<Localisation> Localisations { get; set; }
 
+    public virtual DbSet<Produire> Produires { get; set; }
+
     public virtual DbSet<Ressource> Ressources { get; set; }
+
+    public virtual DbSet<Role> Roles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -57,31 +61,6 @@ public partial class GoatyContext : DbContext
             entity.Property(e => e.NomAuteur)
                 .HasMaxLength(200)
                 .HasColumnName("nomAuteur");
-
-            entity.HasMany(d => d.IdRessources).WithMany(p => p.IdAuteurs)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Produire",
-                    r => r.HasOne<Ressource>().WithMany()
-                        .HasForeignKey("IdRessource")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("produire_ibfk_2"),
-                    l => l.HasOne<Auteur>().WithMany()
-                        .HasForeignKey("IdAuteur")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("produire_ibfk_1"),
-                    j =>
-                    {
-                        j.HasKey("IdAuteur", "IdRessource")
-                            .HasName("PRIMARY")
-                            .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-                        j.ToTable("produire");
-                        j.IndexerProperty<int>("IdAuteur")
-                            .HasColumnType("int(11)")
-                            .HasColumnName("idAuteur");
-                        j.IndexerProperty<int>("IdRessource")
-                            .HasColumnType("int(11)")
-                            .HasColumnName("idRessource");
-                    });
         });
 
         modelBuilder.Entity<Categorie>(entity =>
@@ -89,6 +68,8 @@ public partial class GoatyContext : DbContext
             entity.HasKey(e => e.Idcategorie).HasName("PRIMARY");
 
             entity.ToTable("categorie");
+
+            entity.HasIndex(e => e.Libellecategorie, "libellecategorie").IsUnique();
 
             entity.Property(e => e.Idcategorie)
                 .HasColumnType("int(11)")
@@ -177,6 +158,11 @@ public partial class GoatyContext : DbContext
                 .HasForeignKey(d => d.Idemprunteur)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_emprunter_emprunteur");
+
+            entity.HasOne(d => d.Id).WithMany(p => p.Emprunters)
+                .HasForeignKey(d => new { d.Idressource, d.Idexemplaire })
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("emprunter_ibfk_3");
         });
 
         modelBuilder.Entity<Emprunteur>(entity =>
@@ -189,6 +175,8 @@ public partial class GoatyContext : DbContext
 
             entity.HasIndex(e => e.IdLocalisation, "idLocalisation");
 
+            entity.HasIndex(e => e.IdRole, "idRole");
+
             entity.Property(e => e.Idemprunteur)
                 .HasColumnType("int(11)")
                 .HasColumnName("idemprunteur");
@@ -198,6 +186,9 @@ public partial class GoatyContext : DbContext
             entity.Property(e => e.IdLocalisation)
                 .HasColumnType("int(11)")
                 .HasColumnName("idLocalisation");
+            entity.Property(e => e.IdRole)
+                .HasColumnType("int(11)")
+                .HasColumnName("idRole");
             entity.Property(e => e.Motpasseemprunteur)
                 .HasMaxLength(128)
                 .HasColumnName("motpasseemprunteur");
@@ -217,6 +208,11 @@ public partial class GoatyContext : DbContext
             entity.HasOne(d => d.IdLocalisationNavigation).WithMany(p => p.Emprunteurs)
                 .HasForeignKey(d => d.IdLocalisation)
                 .HasConstraintName("emprunteur_ibfk_1");
+
+            entity.HasOne(d => d.IdRoleNavigation).WithMany(p => p.Emprunteurs)
+                .HasForeignKey(d => d.IdRole)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("emprunteur_ibfk_2");
         });
 
         modelBuilder.Entity<Etat>(entity =>
@@ -309,6 +305,22 @@ public partial class GoatyContext : DbContext
                 .HasColumnName("villeLocalisation");
         });
 
+        modelBuilder.Entity<Produire>(entity =>
+        {
+            entity.HasKey(e => new { e.IdAuteur, e.IdRessource })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+            entity.ToTable("produire");
+
+            entity.Property(e => e.IdAuteur)
+                .HasColumnType("int(11)")
+                .HasColumnName("idAuteur");
+            entity.Property(e => e.IdRessource)
+                .HasColumnType("int(11)")
+                .HasColumnName("idRessource");
+        });
+
         modelBuilder.Entity<Ressource>(entity =>
         {
             entity.HasKey(e => e.Idressource).HasName("PRIMARY");
@@ -349,8 +361,21 @@ public partial class GoatyContext : DbContext
 
             entity.HasOne(d => d.IdcategorieNavigation).WithMany(p => p.Ressources)
                 .HasForeignKey(d => d.Idcategorie)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ressource_categorie");
+        });
+
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.HasKey(e => e.IdRole).HasName("PRIMARY");
+
+            entity.ToTable("role");
+
+            entity.Property(e => e.IdRole)
+                .HasColumnType("int(11)")
+                .HasColumnName("idRole");
+            entity.Property(e => e.Titre)
+                .HasMaxLength(100)
+                .HasColumnName("titre");
         });
 
         OnModelCreatingPartial(modelBuilder);
