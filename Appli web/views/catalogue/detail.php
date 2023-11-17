@@ -27,7 +27,7 @@
                 <?php } ?>
 
                 <!-- Bouton pour modifier un exemplaire -->
-                <?php if ($exemplaire) { ?>
+                <?php if ($exemplaire and $checkAvailable) { ?>
                     <form id="exemplaire" method="post" class="text-center pt-5 pb-3" action="/catalogue/emprunter">
                         <input type="hidden" name="idRessource" value="<?= $ressource->idressource ?>">
                         <input type="hidden" name="idExemplaire" value="<?= $exemplaire->idexemplaire ?>">

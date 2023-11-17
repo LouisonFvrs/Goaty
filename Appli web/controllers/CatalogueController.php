@@ -101,6 +101,11 @@ class CatalogueController extends WebController
         $ressource = $this->ressourceModel->getOne($id);
         $user = SessionHelpers::getConnected();
 
+        $checkAvailable = false;
+
+        if (SessionHelpers::isConnected()) {
+            $checkAvailable = $this->isAvailable($user, $ressource);
+        }
 
         if ($ressource == null) {
             $this->redirect("/");
@@ -123,7 +128,7 @@ class CatalogueController extends WebController
                 $this->commentaireModel->createCommentaire(htmlspecialchars($_POST['com']), htmlspecialchars($_POST['note']), $user->idemprunteur, $ressource->idressource);
             } else
             {
-                return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire, "commentaires" => $commentaires, "errorCom" => "Votre commentaire est déplacé !"));
+                return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire, "commentaires" => $commentaires, "errorCom" => "Votre commentaire est déplacé !", "checkAvailable" => $checkAvailable));
             }
         }
 
@@ -131,7 +136,7 @@ class CatalogueController extends WebController
         $commentaires = $this->commentaireModel->getComByRessources($id);
 
 
-        return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire, "commentaires" => $commentaires));
+        return Template::render("views/catalogue/detail.php", array("ressource" => $ressource, "exemplaire" => $exemplaire, "commentaires" => $commentaires, "checkAvailable" => $checkAvailable));
     }
 
     function estSurBlacklist($texte) {
@@ -142,6 +147,23 @@ class CatalogueController extends WebController
         foreach ($blacklist as $mot) {
             $motEnMinuscules = strtolower($mot);
             if (str_contains($texteEnMinuscules, $motEnMinuscules)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Vérifier si la la ressource peut etre emprunter par l'utilisateur
+    function isAvailable($user, $ressource)
+    {
+        $townOfUser = $user->idLocalisation;
+        $exemplaire = $this->exemplaireModel->getExemplaire($townOfUser, $ressource);
+
+        if ($exemplaire) {
+
+            $id = $exemplaire->idexemplaire;
+            $checkExemplaire = $this->exemplaireModel->isPresent($townOfUser, $id);
+            if($checkExemplaire) {
                 return true;
             }
         }

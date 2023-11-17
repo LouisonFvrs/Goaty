@@ -185,7 +185,7 @@ class UserController extends WebController
 
         if (!$user || !$idRessource || !$idExemplaire) {
             // Gestion d'erreur à améliorer
-            die ("Erreur: utilisateur non connecté ou ids non renseignés");
+            $this->redirect('/me');
         }
 
         $userEmprunt = $this->emprunter->getAllEmprunts($user->idemprunteur);
@@ -298,7 +298,7 @@ class UserController extends WebController
                 $this->emprunteur->resetPassword(htmlspecialchars($_POST['password']) ,htmlspecialchars($uuid));
                 return Template::render('views/user/login.php');
             } else {
-                $error = "Mot de passe incorrect";
+                $error = "Le mot de passe doit contenir minimum 8 caractères, majuscule, chiffre, caractère spécial !";
                 return Template::render('views/user/resetPassword.php', ["uuid" => $uuid ,"error" => $error]);
             }
         }
