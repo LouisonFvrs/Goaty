@@ -18,7 +18,7 @@ namespace AP3_MEDIA
         {
             InitializeComponent();
         }
-        
+
         //fermer la page
         private void btnFermer_Click(object sender, EventArgs e)
         {

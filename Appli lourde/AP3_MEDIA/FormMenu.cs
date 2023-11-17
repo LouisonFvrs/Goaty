@@ -69,5 +69,15 @@ namespace AP3_MEDIA
         {
             openChildForm(new FormEmprunteurs());
         }
+
+        private void aUTEURSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openChildForm(new FormAuteurs());
+        }
+
+        private void eMPRUNTSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openChildForm(new FormEmprunts());
+        }
     }
 }

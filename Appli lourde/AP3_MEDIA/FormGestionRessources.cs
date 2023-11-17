@@ -30,16 +30,6 @@ namespace AP3_MEDIA
             this.Close();
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void tbAnnee_TextChanged(object sender, EventArgs e)
-        {
-
-        }
         private void remplirListeRessources()
         {
             // remplir la comboBox des ressources (si modification)
@@ -200,6 +190,11 @@ namespace AP3_MEDIA
         private void cbRessources_SelectedIndexChanged(object sender, EventArgs e)
         {
             bsRessources_CurrentChanged(sender, e);
+        }
+
+        private void btnPlus_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

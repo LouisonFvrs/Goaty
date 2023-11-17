@@ -18,7 +18,6 @@ namespace AP3_MEDIA
         public FormCategories()
         {
             InitializeComponent();
-
         }
 
         public void remplirListeCategories()

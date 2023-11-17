@@ -31,6 +31,9 @@
             components = new System.ComponentModel.Container();
             label1 = new Label();
             gbInfo = new GroupBox();
+            lbAuteurs = new ListBox();
+            cbAuteur = new ComboBox();
+            label9 = new Label();
             cbCategories = new ComboBox();
             label8 = new Label();
             tbLangue = new TextBox();
@@ -50,6 +53,8 @@
             bsCategories = new BindingSource(components);
             cbRessources = new ComboBox();
             bsRessources = new BindingSource(components);
+            tbAuteur = new TextBox();
+            btnPlus = new Button();
             gbInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bsCategories).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsRessources).BeginInit();
@@ -67,6 +72,11 @@
             // 
             // gbInfo
             // 
+            gbInfo.Controls.Add(tbAuteur);
+            gbInfo.Controls.Add(lbAuteurs);
+            gbInfo.Controls.Add(btnPlus);
+            gbInfo.Controls.Add(cbAuteur);
+            gbInfo.Controls.Add(label9);
             gbInfo.Controls.Add(cbCategories);
             gbInfo.Controls.Add(label8);
             gbInfo.Controls.Add(tbLangue);
@@ -87,7 +97,33 @@
             gbInfo.Size = new Size(683, 227);
             gbInfo.TabIndex = 3;
             gbInfo.TabStop = false;
-            gbInfo.Text = "Informations de la ressource";
+            // 
+            // lbAuteurs
+            // 
+            lbAuteurs.FormattingEnabled = true;
+            lbAuteurs.ItemHeight = 17;
+            lbAuteurs.Location = new Point(225, 166);
+            lbAuteurs.Name = "lbAuteurs";
+            lbAuteurs.Size = new Size(165, 55);
+            lbAuteurs.TabIndex = 15;
+            // 
+            // cbAuteur
+            // 
+            cbAuteur.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbAuteur.FormattingEnabled = true;
+            cbAuteur.Location = new Point(225, 107);
+            cbAuteur.Name = "cbAuteur";
+            cbAuteur.Size = new Size(165, 25);
+            cbAuteur.TabIndex = 13;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(225, 88);
+            label9.Name = "label9";
+            label9.Size = new Size(46, 17);
+            label9.TabIndex = 12;
+            label9.Text = "Auteur";
             // 
             // cbCategories
             // 
@@ -146,21 +182,19 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(225, 136);
+            label5.Location = new Point(22, 176);
             label5.Name = "label5";
             label5.Size = new Size(100, 17);
             label5.TabIndex = 7;
             label5.Text = "Année de sortie";
-            label5.Click += label5_Click;
             // 
             // tbAnnee
             // 
-            tbAnnee.Location = new Point(225, 159);
+            tbAnnee.Location = new Point(22, 196);
             tbAnnee.MaxLength = 4;
             tbAnnee.Name = "tbAnnee";
             tbAnnee.Size = new Size(100, 25);
             tbAnnee.TabIndex = 3;
-            tbAnnee.TextChanged += tbAnnee_TextChanged;
             tbAnnee.KeyPress += tbAnnee_KeyPress;
             // 
             // tbImage
@@ -169,7 +203,7 @@
             tbImage.Location = new Point(225, 38);
             tbImage.Multiline = true;
             tbImage.Name = "tbImage";
-            tbImage.Size = new Size(186, 57);
+            tbImage.Size = new Size(186, 47);
             tbImage.TabIndex = 2;
             // 
             // label4
@@ -205,7 +239,7 @@
             tbDescription.Location = new Point(22, 86);
             tbDescription.Multiline = true;
             tbDescription.Name = "tbDescription";
-            tbDescription.Size = new Size(186, 98);
+            tbDescription.Size = new Size(186, 89);
             tbDescription.TabIndex = 1;
             // 
             // tbTitre
@@ -258,6 +292,27 @@
             // 
             bsRessources.CurrentChanged += bsRessources_CurrentChanged;
             // 
+            // tbAuteur
+            // 
+            tbAuteur.ForeColor = SystemColors.WindowText;
+            tbAuteur.Location = new Point(225, 138);
+            tbAuteur.Name = "tbAuteur";
+            tbAuteur.Size = new Size(165, 25);
+            tbAuteur.TabIndex = 16;
+            // 
+            // btnPlus
+            // 
+            btnPlus.BackColor = Color.Transparent;
+            btnPlus.Location = new Point(393, 107);
+            btnPlus.Margin = new Padding(2);
+            btnPlus.Name = "btnPlus";
+            btnPlus.Size = new Size(26, 22);
+            btnPlus.TabIndex = 14;
+            btnPlus.Text = "+";
+            btnPlus.TextAlign = ContentAlignment.TopRight;
+            btnPlus.UseVisualStyleBackColor = false;
+            btnPlus.Click += btnPlus_Click;
+            // 
             // FormGestionRessources
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -271,7 +326,6 @@
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormGestionRessources";
-            Text = "Gestion des Ressources";
             Load += FormGestionRessources_Load;
             gbInfo.ResumeLayout(false);
             gbInfo.PerformLayout();
@@ -304,5 +358,10 @@
         private Button btnAjouter;
         private ComboBox cbRessources;
         private BindingSource bsRessources;
+        private ComboBox cbAuteur;
+        private Label label9;
+        private ListBox lbAuteurs;
+        private TextBox tbAuteur;
+        private Button btnPlus;
     }
 }

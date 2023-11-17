@@ -15,6 +15,8 @@ public partial class GoatyContext : DbContext
     {
     }
 
+    public virtual DbSet<Auteur> Auteurs { get; set; }
+
     public virtual DbSet<Categorie> Categories { get; set; }
 
     public virtual DbSet<Commentaire> Commentaires { get; set; }
@@ -24,6 +26,8 @@ public partial class GoatyContext : DbContext
     public virtual DbSet<Emprunteur> Emprunteurs { get; set; }
 
     public virtual DbSet<Etat> Etats { get; set; }
+
+    public virtual DbSet<EtatEmprunt> EtatEmprunts { get; set; }
 
     public virtual DbSet<Exemplaire> Exemplaires { get; set; }
 
@@ -40,6 +44,45 @@ public partial class GoatyContext : DbContext
         modelBuilder
             .UseCollation("utf8mb3_unicode_ci")
             .HasCharSet("utf8mb3");
+
+        modelBuilder.Entity<Auteur>(entity =>
+        {
+            entity.HasKey(e => e.IdAuteur).HasName("PRIMARY");
+
+            entity.ToTable("auteur");
+
+            entity.Property(e => e.IdAuteur)
+                .HasColumnType("int(11)")
+                .HasColumnName("idAuteur");
+            entity.Property(e => e.NomAuteur)
+                .HasMaxLength(200)
+                .HasColumnName("nomAuteur");
+
+            entity.HasMany(d => d.IdRessources).WithMany(p => p.IdAuteurs)
+                .UsingEntity<Dictionary<string, object>>(
+                    "Produire",
+                    r => r.HasOne<Ressource>().WithMany()
+                        .HasForeignKey("IdRessource")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("produire_ibfk_2"),
+                    l => l.HasOne<Auteur>().WithMany()
+                        .HasForeignKey("IdAuteur")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("produire_ibfk_1"),
+                    j =>
+                    {
+                        j.HasKey("IdAuteur", "IdRessource")
+                            .HasName("PRIMARY")
+                            .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+                        j.ToTable("produire");
+                        j.IndexerProperty<int>("IdAuteur")
+                            .HasColumnType("int(11)")
+                            .HasColumnName("idAuteur");
+                        j.IndexerProperty<int>("IdRessource")
+                            .HasColumnType("int(11)")
+                            .HasColumnName("idRessource");
+                    });
+        });
 
         modelBuilder.Entity<Categorie>(entity =>
         {
@@ -92,6 +135,8 @@ public partial class GoatyContext : DbContext
 
             entity.HasIndex(e => e.IdCom, "idCom");
 
+            entity.HasIndex(e => e.IdEtatEmprunt, "idEtatEmprunt");
+
             entity.Property(e => e.Idemprunteur)
                 .HasColumnType("int(11)")
                 .HasColumnName("idemprunteur");
@@ -114,11 +159,19 @@ public partial class GoatyContext : DbContext
             entity.Property(e => e.IdCom)
                 .HasColumnType("int(11)")
                 .HasColumnName("idCom");
+            entity.Property(e => e.IdEtatEmprunt)
+                .HasColumnType("int(11)")
+                .HasColumnName("idEtatEmprunt");
 
             entity.HasOne(d => d.IdComNavigation).WithMany(p => p.Emprunters)
                 .HasForeignKey(d => d.IdCom)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("emprunter_ibfk_1");
+
+            entity.HasOne(d => d.IdEtatEmpruntNavigation).WithMany(p => p.Emprunters)
+                .HasForeignKey(d => d.IdEtatEmprunt)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("emprunter_ibfk_2");
 
             entity.HasOne(d => d.IdemprunteurNavigation).WithMany(p => p.Emprunters)
                 .HasForeignKey(d => d.Idemprunteur)
@@ -178,6 +231,20 @@ public partial class GoatyContext : DbContext
             entity.Property(e => e.Libelleetat)
                 .HasMaxLength(128)
                 .HasColumnName("libelleetat");
+        });
+
+        modelBuilder.Entity<EtatEmprunt>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("etatEmprunt");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.LibEtat)
+                .HasColumnType("text")
+                .HasColumnName("libEtat");
         });
 
         modelBuilder.Entity<Exemplaire>(entity =>
@@ -273,6 +340,9 @@ public partial class GoatyContext : DbContext
                 .HasMaxLength(2)
                 .IsFixedLength()
                 .HasColumnName("langue");
+            entity.Property(e => e.Numerique)
+                .HasMaxLength(1000)
+                .HasColumnName("numerique");
             entity.Property(e => e.Titre)
                 .HasMaxLength(128)
                 .HasColumnName("titre");
