@@ -12,7 +12,7 @@ namespace AP3_MEDIA
     {
         public static List<Emprunter> getListEmprunts()
         {
-             return Modele.MonModele.Emprunters.Include(a => a.Id).ThenInclude(a => a.IdressourceNavigation).ToList();
+             return Modele.MonModele.Emprunters.Include(p => p.IdEtatEmpruntNavigation).Where(p => p.IdEtatEmpruntNavigation.LibEtat != "Rendu").ToList();
         }
     }
 }

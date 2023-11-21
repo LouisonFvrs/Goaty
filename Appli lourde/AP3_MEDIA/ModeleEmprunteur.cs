@@ -14,7 +14,7 @@ namespace AP3_MEDIA
             return Modele.MonModele.Emprunteurs.ToList();
         }
 
-        public static Emprunteur RecupererEmprunteur(string login)
+        public static Emprunteur RecupererEmprunteurLogin(string login)
         {
             Emprunteur unEmprunteur = new Emprunteur();
             try
@@ -24,6 +24,20 @@ namespace AP3_MEDIA
             catch (Exception ex)
             {
                 MessageBox.Show("Erreur login ou mot de passe");
+            }
+            return unEmprunteur;
+        }
+
+        public static Emprunteur RecupererEmprunteurId(int id)
+        {
+            Emprunteur unEmprunteur = new Emprunteur();
+            try
+            {
+                unEmprunteur = Modele.MonModele.Emprunteurs.First(x => x.Idemprunteur == id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur");
             }
             return unEmprunteur;
         }

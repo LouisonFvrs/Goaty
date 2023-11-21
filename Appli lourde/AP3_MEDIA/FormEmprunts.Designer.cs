@@ -33,8 +33,12 @@
             dgvEmprunteurs = new DataGridView();
             label1 = new Label();
             bsEmprunts = new BindingSource(components);
+            cbEmprunts = new ComboBox();
+            label2 = new Label();
+            bsEmprunteurs = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)dgvEmprunteurs).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsEmprunts).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsEmprunteurs).BeginInit();
             SuspendLayout();
             // 
             // btnFermer
@@ -43,9 +47,9 @@
             btnFermer.FlatStyle = FlatStyle.Popup;
             btnFermer.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnFermer.ForeColor = Color.White;
-            btnFermer.Location = new Point(667, 231);
+            btnFermer.Location = new Point(710, 281);
             btnFermer.Name = "btnFermer";
-            btnFermer.Size = new Size(105, 55);
+            btnFermer.Size = new Size(78, 44);
             btnFermer.TabIndex = 4;
             btnFermer.Text = "FERMER";
             btnFermer.UseVisualStyleBackColor = false;
@@ -54,7 +58,7 @@
             // dgvEmprunteurs
             // 
             dgvEmprunteurs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvEmprunteurs.Location = new Point(101, 48);
+            dgvEmprunteurs.Location = new Point(124, 75);
             dgvEmprunteurs.Name = "dgvEmprunteurs";
             dgvEmprunteurs.RowTemplate.Height = 25;
             dgvEmprunteurs.Size = new Size(552, 187);
@@ -70,12 +74,31 @@
             label1.TabIndex = 6;
             label1.Text = "Liste des emprunts";
             // 
+            // cbEmprunts
+            // 
+            cbEmprunts.FormattingEnabled = true;
+            cbEmprunts.Location = new Point(621, 23);
+            cbEmprunts.Name = "cbEmprunts";
+            cbEmprunts.Size = new Size(121, 23);
+            cbEmprunts.TabIndex = 8;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(539, 26);
+            label2.Name = "label2";
+            label2.Size = new Size(76, 15);
+            label2.TabIndex = 9;
+            label2.Text = "Emprunteur :";
+            // 
             // FormEmprunts
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
-            ClientSize = new Size(784, 298);
+            ClientSize = new Size(800, 337);
+            Controls.Add(label2);
+            Controls.Add(cbEmprunts);
             Controls.Add(dgvEmprunteurs);
             Controls.Add(label1);
             Controls.Add(btnFermer);
@@ -86,6 +109,7 @@
             Load += FormEmprunts_Load;
             ((System.ComponentModel.ISupportInitialize)dgvEmprunteurs).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsEmprunts).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsEmprunteurs).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -96,5 +120,8 @@
         private DataGridView dgvEmprunteurs;
         private Label label1;
         private BindingSource bsEmprunts;
+        private ComboBox cbEmprunts;
+        private Label label2;
+        private BindingSource bsEmprunteurs;
     }
 }

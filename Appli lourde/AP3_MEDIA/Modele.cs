@@ -94,7 +94,6 @@ namespace AP3_MEDIA
                 uneRessource.Langue= langue;
                 uneRessource.Isbn = isbn;
                 uneRessource.Idcategorie= idCategorie;
-                uneRessource.IdAuteurs= ListAuteur;
 
                 monModele.Ressources.Add(uneRessource);
                 monModele.SaveChanges();

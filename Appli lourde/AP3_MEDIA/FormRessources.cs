@@ -34,8 +34,8 @@ namespace AP3_MEDIA
                 x.Titre,
                 x.Description,
                 x.Langue,
-                x.Anneesortie,
-                x.IdcategorieNavigation.Libellecategorie
+                Annee_sortie = x.Anneesortie,
+                Libelle = x.IdcategorieNavigation.Libellecategorie
             }).OrderBy(x => x.Titre).ToList();
 
             dgvRessources.DataSource = bsRessources;
@@ -53,8 +53,8 @@ namespace AP3_MEDIA
                 bsExemplaires.DataSource = (lesExemplaires).Select(x => new
                 {
                     x.Idexemplaire,
-                    x.Dateentree,
-                    x.IdetatNavigation.Libelleetat
+                    Date_entree = x.Dateentree,
+                    Libelle = x.IdetatNavigation.Libelleetat
                 });
 
                 dgvExemplaires.DataSource = bsExemplaires;
@@ -95,8 +95,8 @@ namespace AP3_MEDIA
                     x.Titre,
                     x.Description,
                     x.Langue,
-                    x.Anneesortie,
-                    x.IdcategorieNavigation.Libellecategorie
+                    Annee_sortie = x.Anneesortie,
+                    Libelle = x.IdcategorieNavigation.Libellecategorie
                 }).OrderBy(x => x.Titre).ToList();
 
                 dgvRessources.DataSource = bsRessourcesArchivees;
@@ -119,8 +119,8 @@ namespace AP3_MEDIA
                 x.Titre,
                 x.Description,
                 x.Langue,
-                x.Anneesortie,
-                x.IdcategorieNavigation.Libellecategorie
+                Annee_sortie = x.Anneesortie,
+                Libelle = x.IdcategorieNavigation.Libellecategorie
             }).OrderBy(x => x.Titre).ToList();
 
             dgvRessources.DataSource = bsRessources;

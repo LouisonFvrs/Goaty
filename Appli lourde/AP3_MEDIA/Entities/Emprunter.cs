@@ -15,7 +15,7 @@ public partial class Emprunter
 
     public int Dureeemprunt { get; set; }
 
-    public DateTime? Dateretour { get; set; }
+    public DateTime Dateretour { get; set; }
 
     public bool ArchiverEmprunter { get; set; }
 

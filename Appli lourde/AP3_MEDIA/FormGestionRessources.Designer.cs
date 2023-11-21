@@ -34,6 +34,8 @@
             btnAuteurInsert = new Button();
             tbAuteur = new TextBox();
             lbAuteurs = new ListBox();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            supprimerToolStripMenuItem = new ToolStripMenuItem();
             btnAuteurList = new Button();
             cbAuteurs = new ComboBox();
             label9 = new Label();
@@ -57,13 +59,11 @@
             cbRessources = new ComboBox();
             bsRessources = new BindingSource(components);
             bsAuteurs = new BindingSource(components);
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            supprimerToolStripMenuItem = new ToolStripMenuItem();
             gbInfo.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bsCategories).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsRessources).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsAuteurs).BeginInit();
-            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -136,6 +136,19 @@
             lbAuteurs.Name = "lbAuteurs";
             lbAuteurs.Size = new Size(165, 55);
             lbAuteurs.TabIndex = 15;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { supprimerToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(129, 26);
+            // 
+            // supprimerToolStripMenuItem
+            // 
+            supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
+            supprimerToolStripMenuItem.Size = new Size(128, 22);
+            supprimerToolStripMenuItem.Text = "supprimer";
+            supprimerToolStripMenuItem.Click += supprimerToolStripMenuItem_Click;
             // 
             // btnAuteurList
             // 
@@ -300,9 +313,9 @@
             btnAjouter.FlatStyle = FlatStyle.Popup;
             btnAjouter.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnAjouter.ForeColor = Color.White;
-            btnAjouter.Location = new Point(614, 290);
+            btnAjouter.Location = new Point(604, 290);
             btnAjouter.Name = "btnAjouter";
-            btnAjouter.Size = new Size(84, 35);
+            btnAjouter.Size = new Size(94, 35);
             btnAjouter.TabIndex = 12;
             btnAjouter.Text = "AJOUTER";
             btnAjouter.UseVisualStyleBackColor = false;
@@ -336,19 +349,6 @@
             // 
             bsRessources.CurrentChanged += bsRessources_CurrentChanged;
             // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { supprimerToolStripMenuItem });
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(129, 26);
-            // 
-            // supprimerToolStripMenuItem
-            // 
-            supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
-            supprimerToolStripMenuItem.Size = new Size(180, 22);
-            supprimerToolStripMenuItem.Text = "supprimer";
-            supprimerToolStripMenuItem.Click += supprimerToolStripMenuItem_Click;
-            // 
             // FormGestionRessources
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -365,10 +365,10 @@
             Load += FormGestionRessources_Load;
             gbInfo.ResumeLayout(false);
             gbInfo.PerformLayout();
+            contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)bsCategories).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsRessources).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsAuteurs).EndInit();
-            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }

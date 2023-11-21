@@ -77,5 +77,19 @@ namespace AP3_MEDIA
         {
             return Modele.MonModele.Localisations.ToList();
         }
+
+        public static Exemplaire RecupererExemplaire(int id)
+        {
+            Exemplaire unExemplaire = new Exemplaire();
+            try
+            {
+                unExemplaire = Modele.MonModele.Exemplaires.First(x => x.Idexemplaire == id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur");
+            }
+            return unExemplaire;
+        }
     }
 }

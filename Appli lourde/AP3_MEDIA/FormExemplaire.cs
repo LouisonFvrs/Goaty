@@ -39,7 +39,7 @@ namespace AP3_MEDIA
                 x.Libelleetat
             });
             cbEtat.DataSource = bsEtat;
-            // remplir la comboBox des états
+            // remplir la comboBox des localisations
             cbLocalisation.ValueMember = "IdLocalisation";    //permet de stocker l'identifiant
             cbLocalisation.DisplayMember = "villeLocalisation";
             bsLocalisation.DataSource = ModeleExemplaire.getListLocalisation().Select(x => new

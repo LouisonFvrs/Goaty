@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AP3_MEDIA.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,15 +27,24 @@ namespace AP3_MEDIA
         {
             bsEmprunts.DataSource = ModeleEmprunts.getListEmprunts().Select(x => new
             {
-                x.IdemprunteurNavigation.Nomemprunteur,
-                x.Id.IdressourceNavigation.Titre,
-                x.Idexemplaire,
-                x.Datedebutemprunt,
-                x.Dureeemprunt,
-                x.Dateretour,
-            })
-            .OrderBy(x => x.IdemprunteurNavigation.Nomemprunteur);
+                Nom = ModeleEmprunteur.RecupererEmprunteurId(x.Idemprunteur).Nomemprunteur,
+                Prenom = ModeleEmprunteur.RecupererEmprunteurId(x.Idemprunteur).Prenomemprunteur,
+                ModeleRessource.RecupererRessource(ModeleExemplaire.RecupererExemplaire(x.Idexemplaire).Idressource).Titre,
+                Debut_emprunt = DateOnly.FromDateTime(x.Datedebutemprunt),
+                Duree_emprunt = x.Dureeemprunt,
+                Retour_emprunt = DateOnly.FromDateTime(x.Dateretour),
+            }); ;
             dgvEmprunteurs.DataSource = bsEmprunts;
+
+            // remplir la comboBox des emprunteurs
+            cbEmprunts.ValueMember = "Idemprunteur";    //permet de stocker l'identifiant
+            cbEmprunts.DisplayMember = "Emprunteur";
+            bsEmprunteurs.DataSource = ModeleEmprunteur.getListEmprunteurs().Select(x => new
+            {
+                x.Idemprunteur,
+                Emprunteur = x.Prenomemprunteur + " " + x.Nomemprunteur
+            });
+            cbEmprunts.DataSource = bsEmprunteurs;
         }
     }
 }

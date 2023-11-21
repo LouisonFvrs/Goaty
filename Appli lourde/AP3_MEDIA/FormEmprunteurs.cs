@@ -22,13 +22,13 @@ namespace AP3_MEDIA
         {
             bsEmprunteurs.DataSource = Modele.getListEmprunteurs().Select(x => new
             {
-                x.Prenomemprunteur,
-                x.Nomemprunteur,
-                x.Datenaissance,
-                x.Emailemprunteur,
-                x.Telportable,
+                Prenom = x.Prenomemprunteur,
+                Nom = x.Nomemprunteur,
+                Date_naissance = x.Datenaissance,
+                Email = x.Emailemprunteur,
+                Telephone = x.Telportable,
             })
-            .OrderBy(x => x.Prenomemprunteur);
+            .OrderBy(x => x.Prenom);
             dgvEmprunteurs.DataSource = bsEmprunteurs;
         }
 

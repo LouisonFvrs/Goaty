@@ -24,7 +24,7 @@ namespace AP3_MEDIA
             string email = tbEmail.Text;
             string mdp = tbMdp.Text;
 
-            Emprunteur emp = ModeleEmprunteur.RecupererEmprunteur(email);
+            Emprunteur emp = ModeleEmprunteur.RecupererEmprunteurLogin(email);
             if (emp.Emailemprunteur != null)
             {
                 if (BCrypt.Net.BCrypt.Verify(mdp, emp.Motpasseemprunteur))
