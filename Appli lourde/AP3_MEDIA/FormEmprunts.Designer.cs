@@ -33,12 +33,19 @@
             dgvEmprunteurs = new DataGridView();
             label1 = new Label();
             bsEmprunts = new BindingSource(components);
-            cbEmprunts = new ComboBox();
+            cbEmprunteurs = new ComboBox();
             label2 = new Label();
             bsEmprunteurs = new BindingSource(components);
+            label3 = new Label();
+            cbEtats = new ComboBox();
+            bsEtats = new BindingSource(components);
+            label4 = new Label();
+            btnDureePret = new Button();
+            dtpDateRetour = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)dgvEmprunteurs).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsEmprunts).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsEmprunteurs).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsEtats).BeginInit();
             SuspendLayout();
             // 
             // btnFermer
@@ -58,10 +65,10 @@
             // dgvEmprunteurs
             // 
             dgvEmprunteurs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvEmprunteurs.Location = new Point(124, 75);
+            dgvEmprunteurs.Location = new Point(103, 57);
             dgvEmprunteurs.Name = "dgvEmprunteurs";
             dgvEmprunteurs.RowTemplate.Height = 25;
-            dgvEmprunteurs.Size = new Size(552, 187);
+            dgvEmprunteurs.Size = new Size(594, 222);
             dgvEmprunteurs.TabIndex = 7;
             // 
             // label1
@@ -74,22 +81,67 @@
             label1.TabIndex = 6;
             label1.Text = "Liste des emprunts";
             // 
-            // cbEmprunts
+            // cbEmprunteurs
             // 
-            cbEmprunts.FormattingEnabled = true;
-            cbEmprunts.Location = new Point(621, 23);
-            cbEmprunts.Name = "cbEmprunts";
-            cbEmprunts.Size = new Size(121, 23);
-            cbEmprunts.TabIndex = 8;
+            cbEmprunteurs.FormattingEnabled = true;
+            cbEmprunteurs.Location = new Point(472, 23);
+            cbEmprunteurs.Name = "cbEmprunteurs";
+            cbEmprunteurs.Size = new Size(121, 23);
+            cbEmprunteurs.TabIndex = 8;
+            cbEmprunteurs.SelectedValueChanged += cbEmprunteurs_SelectedValueChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(539, 26);
+            label2.Location = new Point(390, 26);
             label2.Name = "label2";
             label2.Size = new Size(76, 15);
             label2.TabIndex = 9;
             label2.Text = "Emprunteur :";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(599, 26);
+            label3.Name = "label3";
+            label3.Size = new Size(33, 15);
+            label3.TabIndex = 10;
+            label3.Text = "Etat :";
+            // 
+            // cbEtats
+            // 
+            cbEtats.FormattingEnabled = true;
+            cbEtats.Location = new Point(638, 23);
+            cbEtats.Name = "cbEtats";
+            cbEtats.Size = new Size(99, 23);
+            cbEtats.TabIndex = 11;
+            cbEtats.SelectedValueChanged += cbEtats_SelectedValueChanged;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(103, 298);
+            label4.Name = "label4";
+            label4.Size = new Size(301, 15);
+            label4.TabIndex = 12;
+            label4.Text = "Sélectionner une ligne et prolonger l'emprunt jusqu'au :";
+            // 
+            // btnDureePret
+            // 
+            btnDureePret.Location = new Point(622, 294);
+            btnDureePret.Name = "btnDureePret";
+            btnDureePret.Size = new Size(75, 23);
+            btnDureePret.TabIndex = 14;
+            btnDureePret.Text = "Valider";
+            btnDureePret.UseVisualStyleBackColor = true;
+            btnDureePret.Click += btnDureePret_Click;
+            // 
+            // dtpDateRetour
+            // 
+            dtpDateRetour.Location = new Point(410, 294);
+            dtpDateRetour.Name = "dtpDateRetour";
+            dtpDateRetour.Size = new Size(200, 23);
+            dtpDateRetour.TabIndex = 15;
             // 
             // FormEmprunts
             // 
@@ -97,8 +149,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
             ClientSize = new Size(800, 337);
+            Controls.Add(dtpDateRetour);
+            Controls.Add(btnDureePret);
+            Controls.Add(label4);
+            Controls.Add(cbEtats);
+            Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(cbEmprunts);
+            Controls.Add(cbEmprunteurs);
             Controls.Add(dgvEmprunteurs);
             Controls.Add(label1);
             Controls.Add(btnFermer);
@@ -110,6 +167,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvEmprunteurs).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsEmprunts).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsEmprunteurs).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsEtats).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -120,8 +178,14 @@
         private DataGridView dgvEmprunteurs;
         private Label label1;
         private BindingSource bsEmprunts;
-        private ComboBox cbEmprunts;
+        private ComboBox cbEmprunteurs;
         private Label label2;
         private BindingSource bsEmprunteurs;
+        private Label label3;
+        private ComboBox cbEtats;
+        private BindingSource bsEtats;
+        private Label label4;
+        private Button btnDureePret;
+        private DateTimePicker dtpDateRetour;
     }
 }
