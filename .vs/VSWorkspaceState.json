@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Appli lourde",
+    "\\Appli lourde\\AP3_MEDIA"
   ],
-  "SelectedNode": "\\AP3_MEDIA.sln",
+  "SelectedNode": "\\Appli lourde\\AP3_MEDIA.sln",
   "PreviewInSolutionExplorer": false
 }

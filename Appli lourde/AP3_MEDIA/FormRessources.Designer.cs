@@ -74,12 +74,12 @@
             // 
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { voirLesExemplaireToolStripMenuItem, supprimerToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(181, 70);
+            contextMenuStrip1.Size = new Size(178, 48);
             // 
             // voirLesExemplaireToolStripMenuItem
             // 
             voirLesExemplaireToolStripMenuItem.Name = "voirLesExemplaireToolStripMenuItem";
-            voirLesExemplaireToolStripMenuItem.Size = new Size(180, 22);
+            voirLesExemplaireToolStripMenuItem.Size = new Size(177, 22);
             voirLesExemplaireToolStripMenuItem.Text = "voir les exemplaires";
             voirLesExemplaireToolStripMenuItem.Click += voirLesExemplaireToolStripMenuItem_Click;
             // 
@@ -87,7 +87,7 @@
             // 
             supprimerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { supprimerToolStripMenuItem1 });
             supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
-            supprimerToolStripMenuItem.Size = new Size(180, 22);
+            supprimerToolStripMenuItem.Size = new Size(177, 22);
             supprimerToolStripMenuItem.Text = "archiver";
             supprimerToolStripMenuItem.Click += archiveToolStripMenuItem;
             // 
@@ -137,11 +137,11 @@
             dgvExemplaires.AllowUserToAddRows = false;
             dgvExemplaires.AllowUserToDeleteRows = false;
             dgvExemplaires.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvExemplaires.Location = new Point(524, 51);
+            dgvExemplaires.Location = new Point(307, 51);
             dgvExemplaires.Name = "dgvExemplaires";
             dgvExemplaires.ReadOnly = true;
             dgvExemplaires.RowTemplate.Height = 25;
-            dgvExemplaires.Size = new Size(240, 183);
+            dgvExemplaires.Size = new Size(457, 159);
             dgvExemplaires.TabIndex = 5;
             dgvExemplaires.Visible = false;
             // 

@@ -33,8 +33,6 @@ public partial class GoatyContext : DbContext
 
     public virtual DbSet<Localisation> Localisations { get; set; }
 
-    public virtual DbSet<Produire> Produires { get; set; }
-
     public virtual DbSet<Ressource> Ressources { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
@@ -61,6 +59,32 @@ public partial class GoatyContext : DbContext
             entity.Property(e => e.NomAuteur)
                 .HasMaxLength(200)
                 .HasColumnName("nomAuteur");
+
+            entity.HasMany(d => d.IdRessources).WithMany(p => p.IdAuteurs)
+                .UsingEntity<Dictionary<string, object>>(
+                    "Produire",
+                    r => r.HasOne<Ressource>().WithMany()
+                        .HasForeignKey("IdRessource")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("produire_ibfk_1"),
+                    l => l.HasOne<Auteur>().WithMany()
+                        .HasForeignKey("IdAuteur")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("produire_ibfk_2"),
+                    j =>
+                    {
+                        j.HasKey("IdAuteur", "IdRessource")
+                            .HasName("PRIMARY")
+                            .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+                        j.ToTable("produire");
+                        j.HasIndex(new[] { "IdRessource" }, "idRessource");
+                        j.IndexerProperty<int>("IdAuteur")
+                            .HasColumnType("int(11)")
+                            .HasColumnName("idAuteur");
+                        j.IndexerProperty<int>("IdRessource")
+                            .HasColumnType("int(11)")
+                            .HasColumnName("idRessource");
+                    });
         });
 
         modelBuilder.Entity<Categorie>(entity =>
@@ -303,22 +327,6 @@ public partial class GoatyContext : DbContext
             entity.Property(e => e.VilleLocalisation)
                 .HasMaxLength(100)
                 .HasColumnName("villeLocalisation");
-        });
-
-        modelBuilder.Entity<Produire>(entity =>
-        {
-            entity.HasKey(e => new { e.IdAuteur, e.IdRessource })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-
-            entity.ToTable("produire");
-
-            entity.Property(e => e.IdAuteur)
-                .HasColumnType("int(11)")
-                .HasColumnName("idAuteur");
-            entity.Property(e => e.IdRessource)
-                .HasColumnType("int(11)")
-                .HasColumnName("idRessource");
         });
 
         modelBuilder.Entity<Ressource>(entity =>

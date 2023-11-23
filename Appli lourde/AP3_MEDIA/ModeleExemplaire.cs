@@ -26,13 +26,8 @@ namespace AP3_MEDIA
         // retourne la liste des exemplaires selon la ressource sélectionnée 
         public static List<Exemplaire> listeExemplairesParRessource(int idR)
         {
-            List<Exemplaire> lesEx = Modele.MonModele.Exemplaires.Where(p => p.Idressource == idR).Include(p => p.IdetatNavigation).ToList();
+            List<Exemplaire> lesEx = Modele.MonModele.Exemplaires.Where(p => p.Idressource == idR).Include(p => p.IdetatNavigation).Include(p => p.IdLocalisationNavigation).ToList();
             return lesEx;
-        }
-
-        public static List<Localisation> getListLocalisationsSelonExemplaire(int idL)
-        {
-            return Modele.MonModele.Localisations.Where(p => p.IdLocalisation == idL).ToList();
         }
 
 

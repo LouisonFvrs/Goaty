@@ -1,6 +1,6 @@
 ﻿namespace AP3_MEDIA
 {
-    partial class FormAuteurs
+    partial class FormLocalisations
     {
         /// <summary>
         /// Required designer variable.
@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            btnFermer = new Button();
-            btnDeselectionner = new Button();
-            lbAuteurs = new ListBox();
-            label3 = new Label();
-            label4 = new Label();
             gbCategorie = new GroupBox();
             btnSupprimer = new Button();
             btnModifier = new Button();
@@ -41,71 +36,15 @@
             label2 = new Label();
             tbLibelle = new TextBox();
             label1 = new Label();
-            bsAuteurs = new BindingSource(components);
+            label4 = new Label();
+            label3 = new Label();
+            lbLocalisations = new ListBox();
+            btnDeselectionner = new Button();
+            btnFermer = new Button();
+            bindingSource1 = new BindingSource(components);
             gbCategorie.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)bsAuteurs).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             SuspendLayout();
-            // 
-            // btnFermer
-            // 
-            btnFermer.BackColor = Color.Black;
-            btnFermer.FlatStyle = FlatStyle.Popup;
-            btnFermer.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnFermer.ForeColor = Color.White;
-            btnFermer.Location = new Point(683, 270);
-            btnFermer.Name = "btnFermer";
-            btnFermer.Size = new Size(105, 55);
-            btnFermer.TabIndex = 3;
-            btnFermer.Text = "FERMER";
-            btnFermer.UseVisualStyleBackColor = false;
-            btnFermer.Click += btnFermer_Click;
-            // 
-            // btnDeselectionner
-            // 
-            btnDeselectionner.BackColor = Color.Black;
-            btnDeselectionner.FlatStyle = FlatStyle.Popup;
-            btnDeselectionner.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnDeselectionner.ForeColor = Color.White;
-            btnDeselectionner.Location = new Point(549, 46);
-            btnDeselectionner.Name = "btnDeselectionner";
-            btnDeselectionner.Size = new Size(106, 42);
-            btnDeselectionner.TabIndex = 14;
-            btnDeselectionner.Text = "Désélectionner";
-            btnDeselectionner.UseVisualStyleBackColor = false;
-            btnDeselectionner.Click += btnDeselectionner_Click_1;
-            // 
-            // lbAuteurs
-            // 
-            lbAuteurs.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbAuteurs.FormattingEnabled = true;
-            lbAuteurs.ItemHeight = 17;
-            lbAuteurs.Location = new Point(401, 46);
-            lbAuteurs.Name = "lbAuteurs";
-            lbAuteurs.Size = new Size(142, 242);
-            lbAuteurs.TabIndex = 15;
-            lbAuteurs.SelectedIndexChanged += lbAuteurs_SelectedIndexChanged;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(401, 26);
-            label3.Name = "label3";
-            label3.Size = new Size(89, 17);
-            label3.TabIndex = 16;
-            label3.Text = "Liste existante";
-            label3.Click += label3_Click;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(139, 305);
-            label4.Name = "label4";
-            label4.Size = new Size(375, 20);
-            label4.TabIndex = 17;
-            label4.Text = "sélectionner un auteur pour le modifier ou le supprimer";
-            label4.Click += label4_Click;
             // 
             // gbCategorie
             // 
@@ -114,13 +53,12 @@
             gbCategorie.Controls.Add(btnValider);
             gbCategorie.Controls.Add(label2);
             gbCategorie.Controls.Add(tbLibelle);
-            gbCategorie.Location = new Point(48, 106);
+            gbCategorie.Location = new Point(30, 99);
             gbCategorie.Name = "gbCategorie";
             gbCategorie.Size = new Size(278, 129);
-            gbCategorie.TabIndex = 19;
+            gbCategorie.TabIndex = 26;
             gbCategorie.TabStop = false;
             gbCategorie.Text = "A ajouter";
-            gbCategorie.Enter += gbCategorie_Enter;
             // 
             // btnSupprimer
             // 
@@ -130,7 +68,6 @@
             btnSupprimer.TabIndex = 10;
             btnSupprimer.Text = "Supprimer";
             btnSupprimer.UseVisualStyleBackColor = true;
-            btnSupprimer.Click += btnSupprimer_Click_1;
             // 
             // btnModifier
             // 
@@ -140,7 +77,6 @@
             btnModifier.TabIndex = 9;
             btnModifier.Text = "Modifier";
             btnModifier.UseVisualStyleBackColor = true;
-            btnModifier.Click += btnModifier_Click_1;
             // 
             // btnValider
             // 
@@ -150,7 +86,6 @@
             btnValider.TabIndex = 8;
             btnValider.Text = "Ajouter";
             btnValider.UseVisualStyleBackColor = true;
-            btnValider.Click += btnValider_Click_1;
             // 
             // label2
             // 
@@ -158,9 +93,9 @@
             label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(20, 29);
             label2.Name = "label2";
-            label2.Size = new Size(37, 17);
+            label2.Size = new Size(32, 17);
             label2.TabIndex = 7;
-            label2.Text = "Nom";
+            label2.Text = "Ville";
             // 
             // tbLibelle
             // 
@@ -173,18 +108,70 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(48, 26);
+            label1.Location = new Point(30, 19);
             label1.Name = "label1";
-            label1.Size = new Size(187, 25);
-            label1.TabIndex = 18;
-            label1.Text = "Gestion des auteurs";
-            label1.Click += label1_Click;
+            label1.Size = new Size(163, 25);
+            label1.TabIndex = 25;
+            label1.Text = "Gestion des villes";
             // 
-            // bsAuteurs
+            // label4
             // 
-            bsAuteurs.CurrentChanged += bsAuteurs_CurrentChanged_1;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(121, 298);
+            label4.Name = "label4";
+            label4.Size = new Size(368, 20);
+            label4.TabIndex = 24;
+            label4.Text = "sélectionner une ville pour le modifier ou le supprimer";
             // 
-            // FormAuteurs
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(383, 19);
+            label3.Name = "label3";
+            label3.Size = new Size(89, 17);
+            label3.TabIndex = 23;
+            label3.Text = "Liste existante";
+            // 
+            // lbLocalisations
+            // 
+            lbLocalisations.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbLocalisations.FormattingEnabled = true;
+            lbLocalisations.ItemHeight = 17;
+            lbLocalisations.Location = new Point(383, 39);
+            lbLocalisations.Name = "lbLocalisations";
+            lbLocalisations.Size = new Size(142, 242);
+            lbLocalisations.TabIndex = 22;
+            // 
+            // btnDeselectionner
+            // 
+            btnDeselectionner.BackColor = Color.Black;
+            btnDeselectionner.FlatStyle = FlatStyle.Popup;
+            btnDeselectionner.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDeselectionner.ForeColor = Color.White;
+            btnDeselectionner.Location = new Point(531, 39);
+            btnDeselectionner.Name = "btnDeselectionner";
+            btnDeselectionner.Size = new Size(106, 42);
+            btnDeselectionner.TabIndex = 21;
+            btnDeselectionner.Text = "Désélectionner";
+            btnDeselectionner.UseVisualStyleBackColor = false;
+            // 
+            // btnFermer
+            // 
+            btnFermer.BackColor = Color.Black;
+            btnFermer.FlatStyle = FlatStyle.Popup;
+            btnFermer.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnFermer.ForeColor = Color.White;
+            btnFermer.Location = new Point(665, 263);
+            btnFermer.Name = "btnFermer";
+            btnFermer.Size = new Size(105, 55);
+            btnFermer.TabIndex = 20;
+            btnFermer.Text = "FERMER";
+            btnFermer.UseVisualStyleBackColor = false;
+            btnFermer.Click += btnFermer_Click;
+            // 
+            // FormLocalisations
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -194,27 +181,22 @@
             Controls.Add(label1);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(lbAuteurs);
+            Controls.Add(lbLocalisations);
             Controls.Add(btnDeselectionner);
             Controls.Add(btnFermer);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "FormAuteurs";
-            Text = "FormAuteurs";
-            Load += FormAuteurs_Load_1;
+            Name = "FormLocalisations";
+            Text = "FormLocalisations";
+            Load += FormLocalisations_Load;
             gbCategorie.ResumeLayout(false);
             gbCategorie.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)bsAuteurs).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Button btnFermer;
-        private Button btnDeselectionner;
-        private ListBox lbAuteurs;
-        private Label label3;
-        private Label label4;
         private GroupBox gbCategorie;
         private Button btnSupprimer;
         private Button btnModifier;
@@ -222,6 +204,11 @@
         private Label label2;
         private TextBox tbLibelle;
         private Label label1;
-        private BindingSource bsAuteurs;
+        private Label label4;
+        private Label label3;
+        private ListBox lbLocalisations;
+        private Button btnDeselectionner;
+        private Button btnFermer;
+        private BindingSource bindingSource1;
     }
 }

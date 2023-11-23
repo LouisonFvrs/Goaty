@@ -86,5 +86,10 @@ namespace AP3_MEDIA
             this.Hide();
             formConnexion.Show();
         }
+
+        private void lOCALISATIONToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openChildForm(new FormLocalisations());
+        }
     }
 }

@@ -190,6 +190,12 @@ namespace AP3_MEDIA
 
                 gbInfo.Visible = true;
                 btnAjouter.Visible = true;
+                lbAuteurs.Items.Clear();
+                ICollection<Auteur> A = ModeleAuteur.RecupererAuteurParRessource(R.Idressource);
+                foreach (Auteur B in A)
+                {
+                    lbAuteurs.Items.Add(B.NomAuteur);
+                }
             }
             else
                 gbInfo.Visible = false;

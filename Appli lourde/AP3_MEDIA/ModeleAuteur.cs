@@ -127,5 +127,20 @@ namespace AP3_MEDIA
             int IdAuteur =  Modele.MonModele.Auteurs.Max(x => x.IdAuteur);
             return RecupererAuteur(IdAuteur);
         }
+
+        public static ICollection<Auteur> RecupererAuteurParRessource(int idR)
+        {
+            ICollection<Auteur> ListAuteur = new List<Auteur>();
+            try
+            {
+                Ressource R = Modele.MonModele.Ressources.Where(p => p.Idressource == idR).Include(x => x.IdAuteurs).First();
+                ListAuteur  = R.IdAuteurs;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+            return ListAuteur;
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace AP3_MEDIA
                 x.Description,
                 x.Langue,
                 Annee_sortie = x.Anneesortie,
-                Libelle = x.IdcategorieNavigation.Libellecategorie
+                Libelle = x.IdcategorieNavigation.Libellecategorie,
             }).OrderBy(x => x.Titre).ToList();
 
             dgvRessources.DataSource = bsRessources;
@@ -55,7 +55,7 @@ namespace AP3_MEDIA
                     x.Idexemplaire,
                     Date_entree = x.Dateentree,
                     Libelle = x.IdetatNavigation.Libelleetat,
-                    ModeleExemplaire.getListLocalisationsSelonExemplaire(ModeleExemplaire.listeExemplairesParRessource(idR).IdLocalisationNaviation).VilleLocalisation,
+                    Localisation = x.IdLocalisationNavigation.VilleLocalisation
                 });
 
                 dgvExemplaires.DataSource = bsExemplaires;

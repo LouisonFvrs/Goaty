@@ -11,28 +11,23 @@ using System.Windows.Forms;
 
 namespace AP3_MEDIA
 {
-    public partial class FormAuteurs : Form
+    public partial class FormLocalisations : Form
     {
 
-        private Auteur A = new Auteur();
-        public FormAuteurs()
+        private Localisation L = new Localisation();
+        public FormLocalisations()
         {
             InitializeComponent();
-        }
-
-        private void btnFermer_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         public void remplirListeAuteurs()
         {
             // remplir la comboBox des auteurs
-            lbAuteurs.ValueMember = "IdAuteur";    //permet de stocker l'identifiant
-            lbAuteurs.DisplayMember = "NomAuteur";
-            bsAuteurs.DataSource = ModeleAuteur.getListAuteurs();
-            lbAuteurs.DataSource = bsAuteurs;
-            lbAuteurs.SelectedIndex = -1;
+            lbLocalisations.ValueMember = "IdLocalisation";    //permet de stocker l'identifiant
+            lbLocalisations.DisplayMember = "NomAuteur";
+            lbLocalisations.DataSource = ModeleAuteur.getListAuteurs();
+            lbLocalisations.DataSource = bsAuteurs;
+            lbLocalisations.SelectedIndex = -1;
         }
         private void FormAuteurs_Load(object sender, EventArgs e)
         {
@@ -94,9 +89,9 @@ namespace AP3_MEDIA
             {
                 if (ModeleAuteur.ModifierAuteur(A.IdAuteur, libelle))
                 {
-                    MessageBox.Show("Auteur modifié ");
+                    MessageBox.Show("Localisation modifiée ");
                     remplirListeAuteurs();
-                    lbAuteurs.SelectedIndex = -1;
+                    lbLocalisations.SelectedIndex = -1;
                     tbLibelle.Clear();
                 }
                 else
@@ -128,37 +123,22 @@ namespace AP3_MEDIA
             }
             else
             {
-                MessageBox.Show("ERREUR : le nom ne doit pas être vide", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ERREUR : le ville ne doit pas être vide", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void FormAuteurs_Load_1(object sender, EventArgs e)
+        private void btnFermer_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void FormLocalisations_Load(object sender, EventArgs e)
         {
             remplirListeAuteurs();
 
             btnModifier.Hide();
             btnSupprimer.Hide();
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void lbAuteurs_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void gbCategorie_Enter(object sender, EventArgs e)
-        {
-        }
     }
 }
+

@@ -37,10 +37,11 @@
             cATEGORIESToolStripMenuItem = new ToolStripMenuItem();
             aUTEURSToolStripMenuItem = new ToolStripMenuItem();
             eMPRUNTSToolStripMenuItem = new ToolStripMenuItem();
+            dECONNEXIONToolStripMenuItem = new ToolStripMenuItem();
             qUITTERToolStripMenuItem = new ToolStripMenuItem();
             panelPrincipal = new Panel();
             label1 = new Label();
-            dECONNEXIONToolStripMenuItem = new ToolStripMenuItem();
+            lOCALISATIONToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             panelPrincipal.SuspendLayout();
             SuspendLayout();
@@ -48,7 +49,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(24, 24);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { rESSOURCESToolStripMenuItem, eMPRUNTEURToolStripMenuItem, cATEGORIESToolStripMenuItem, aUTEURSToolStripMenuItem, eMPRUNTSToolStripMenuItem, dECONNEXIONToolStripMenuItem, qUITTERToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { rESSOURCESToolStripMenuItem, eMPRUNTEURToolStripMenuItem, cATEGORIESToolStripMenuItem, aUTEURSToolStripMenuItem, eMPRUNTSToolStripMenuItem, lOCALISATIONToolStripMenuItem, dECONNEXIONToolStripMenuItem, qUITTERToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 24);
@@ -111,6 +112,13 @@
             eMPRUNTSToolStripMenuItem.Text = "EMPRUNTS";
             eMPRUNTSToolStripMenuItem.Click += eMPRUNTSToolStripMenuItem_Click;
             // 
+            // dECONNEXIONToolStripMenuItem
+            // 
+            dECONNEXIONToolStripMenuItem.Name = "dECONNEXIONToolStripMenuItem";
+            dECONNEXIONToolStripMenuItem.Size = new Size(102, 20);
+            dECONNEXIONToolStripMenuItem.Text = "DECONNEXION";
+            dECONNEXIONToolStripMenuItem.Click += dECONNEXIONToolStripMenuItem_Click;
+            // 
             // qUITTERToolStripMenuItem
             // 
             qUITTERToolStripMenuItem.Name = "qUITTERToolStripMenuItem";
@@ -140,12 +148,12 @@
             label1.TabIndex = 0;
             label1.Text = "Bienvenue à la Médiathèque";
             // 
-            // dECONNEXIONToolStripMenuItem
+            // lOCALISATIONToolStripMenuItem
             // 
-            dECONNEXIONToolStripMenuItem.Name = "dECONNEXIONToolStripMenuItem";
-            dECONNEXIONToolStripMenuItem.Size = new Size(102, 20);
-            dECONNEXIONToolStripMenuItem.Text = "DECONNEXION";
-            dECONNEXIONToolStripMenuItem.Click += dECONNEXIONToolStripMenuItem_Click;
+            lOCALISATIONToolStripMenuItem.Name = "lOCALISATIONToolStripMenuItem";
+            lOCALISATIONToolStripMenuItem.Size = new Size(99, 20);
+            lOCALISATIONToolStripMenuItem.Text = "LOCALISATION";
+            lOCALISATIONToolStripMenuItem.Click += lOCALISATIONToolStripMenuItem_Click;
             // 
             // FormMenu
             // 
@@ -182,5 +190,6 @@
         private ToolStripMenuItem aUTEURSToolStripMenuItem;
         private ToolStripMenuItem eMPRUNTSToolStripMenuItem;
         private ToolStripMenuItem dECONNEXIONToolStripMenuItem;
+        private ToolStripMenuItem lOCALISATIONToolStripMenuItem;
     }
 }
