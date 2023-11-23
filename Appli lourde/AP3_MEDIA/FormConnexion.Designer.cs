@@ -40,50 +40,56 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(176, 66);
+            label1.Location = new Point(251, 110);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(105, 28);
+            label1.Size = new Size(161, 41);
             label1.TabIndex = 0;
             label1.Text = "Connexion";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(210, 118);
+            label2.Location = new Point(300, 197);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(36, 15);
+            label2.Size = new Size(54, 25);
             label2.TabIndex = 1;
             label2.Text = "Email";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(190, 185);
+            label3.Location = new Point(271, 308);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(77, 15);
+            label3.Size = new Size(120, 25);
             label3.TabIndex = 2;
             label3.Text = "Mot de passe";
             // 
             // tbEmail
             // 
-            tbEmail.Location = new Point(178, 136);
+            tbEmail.Location = new Point(254, 227);
+            tbEmail.Margin = new Padding(4, 5, 4, 5);
             tbEmail.Name = "tbEmail";
-            tbEmail.Size = new Size(100, 23);
+            tbEmail.Size = new Size(141, 31);
             tbEmail.TabIndex = 3;
             // 
             // tbMdp
             // 
-            tbMdp.Location = new Point(178, 203);
+            tbMdp.Location = new Point(254, 338);
+            tbMdp.Margin = new Padding(4, 5, 4, 5);
             tbMdp.Name = "tbMdp";
             tbMdp.PasswordChar = '*';
-            tbMdp.Size = new Size(100, 23);
+            tbMdp.Size = new Size(141, 31);
             tbMdp.TabIndex = 4;
             // 
             // btnConnexion
             // 
-            btnConnexion.Location = new Point(191, 247);
+            btnConnexion.Location = new Point(273, 412);
+            btnConnexion.Margin = new Padding(4, 5, 4, 5);
             btnConnexion.Name = "btnConnexion";
-            btnConnexion.Size = new Size(75, 23);
+            btnConnexion.Size = new Size(107, 38);
             btnConnexion.TabIndex = 5;
             btnConnexion.Text = "connexion";
             btnConnexion.UseVisualStyleBackColor = true;
@@ -91,16 +97,17 @@
             // 
             // FormConnexion
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ActiveCaption;
-            ClientSize = new Size(457, 356);
+            BackColor = Color.SlateGray;
+            ClientSize = new Size(653, 593);
             Controls.Add(btnConnexion);
             Controls.Add(tbMdp);
             Controls.Add(tbEmail);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "FormConnexion";
             Text = "FormConnexion";
             ResumeLayout(false);

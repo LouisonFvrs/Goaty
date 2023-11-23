@@ -37,11 +37,11 @@
             cATEGORIESToolStripMenuItem = new ToolStripMenuItem();
             aUTEURSToolStripMenuItem = new ToolStripMenuItem();
             eMPRUNTSToolStripMenuItem = new ToolStripMenuItem();
+            lOCALISATIONToolStripMenuItem = new ToolStripMenuItem();
             dECONNEXIONToolStripMenuItem = new ToolStripMenuItem();
             qUITTERToolStripMenuItem = new ToolStripMenuItem();
             panelPrincipal = new Panel();
             label1 = new Label();
-            lOCALISATIONToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             panelPrincipal.SuspendLayout();
             SuspendLayout();
@@ -52,7 +52,8 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { rESSOURCESToolStripMenuItem, eMPRUNTEURToolStripMenuItem, cATEGORIESToolStripMenuItem, aUTEURSToolStripMenuItem, eMPRUNTSToolStripMenuItem, lOCALISATIONToolStripMenuItem, dECONNEXIONToolStripMenuItem, qUITTERToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Padding = new Padding(9, 3, 0, 3);
+            menuStrip1.Size = new Size(1143, 35);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -60,80 +61,88 @@
             // 
             rESSOURCESToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { listeToolStripMenuItem, ajoutToolStripMenuItem, modificationToolStripMenuItem });
             rESSOURCESToolStripMenuItem.Name = "rESSOURCESToolStripMenuItem";
-            rESSOURCESToolStripMenuItem.Size = new Size(88, 20);
+            rESSOURCESToolStripMenuItem.Size = new Size(135, 29);
             rESSOURCESToolStripMenuItem.Text = "RESSOURCES";
             // 
             // listeToolStripMenuItem
             // 
             listeToolStripMenuItem.Name = "listeToolStripMenuItem";
-            listeToolStripMenuItem.Size = new Size(142, 22);
+            listeToolStripMenuItem.Size = new Size(214, 34);
             listeToolStripMenuItem.Text = "Liste";
             listeToolStripMenuItem.Click += listeToolStripMenuItem_Click;
             // 
             // ajoutToolStripMenuItem
             // 
             ajoutToolStripMenuItem.Name = "ajoutToolStripMenuItem";
-            ajoutToolStripMenuItem.Size = new Size(142, 22);
+            ajoutToolStripMenuItem.Size = new Size(214, 34);
             ajoutToolStripMenuItem.Text = "Ajout";
             ajoutToolStripMenuItem.Click += ajoutToolStripMenuItem_Click;
             // 
             // modificationToolStripMenuItem
             // 
             modificationToolStripMenuItem.Name = "modificationToolStripMenuItem";
-            modificationToolStripMenuItem.Size = new Size(142, 22);
+            modificationToolStripMenuItem.Size = new Size(214, 34);
             modificationToolStripMenuItem.Text = "Modification";
             modificationToolStripMenuItem.Click += modificationToolStripMenuItem_Click;
             // 
             // eMPRUNTEURToolStripMenuItem
             // 
             eMPRUNTEURToolStripMenuItem.Name = "eMPRUNTEURToolStripMenuItem";
-            eMPRUNTEURToolStripMenuItem.Size = new Size(100, 20);
+            eMPRUNTEURToolStripMenuItem.Size = new Size(150, 29);
             eMPRUNTEURToolStripMenuItem.Text = "EMPRUNTEURS";
             eMPRUNTEURToolStripMenuItem.Click += eMPRUNTEURToolStripMenuItem_Click;
             // 
             // cATEGORIESToolStripMenuItem
             // 
             cATEGORIESToolStripMenuItem.Name = "cATEGORIESToolStripMenuItem";
-            cATEGORIESToolStripMenuItem.Size = new Size(85, 20);
+            cATEGORIESToolStripMenuItem.Size = new Size(129, 29);
             cATEGORIESToolStripMenuItem.Text = "CATEGORIES";
             cATEGORIESToolStripMenuItem.Click += cATEGORIESToolStripMenuItem_Click;
             // 
             // aUTEURSToolStripMenuItem
             // 
             aUTEURSToolStripMenuItem.Name = "aUTEURSToolStripMenuItem";
-            aUTEURSToolStripMenuItem.Size = new Size(68, 20);
+            aUTEURSToolStripMenuItem.Size = new Size(103, 29);
             aUTEURSToolStripMenuItem.Text = "AUTEURS";
             aUTEURSToolStripMenuItem.Click += aUTEURSToolStripMenuItem_Click;
             // 
             // eMPRUNTSToolStripMenuItem
             // 
             eMPRUNTSToolStripMenuItem.Name = "eMPRUNTSToolStripMenuItem";
-            eMPRUNTSToolStripMenuItem.Size = new Size(79, 20);
+            eMPRUNTSToolStripMenuItem.Size = new Size(118, 29);
             eMPRUNTSToolStripMenuItem.Text = "EMPRUNTS";
             eMPRUNTSToolStripMenuItem.Click += eMPRUNTSToolStripMenuItem_Click;
+            // 
+            // lOCALISATIONToolStripMenuItem
+            // 
+            lOCALISATIONToolStripMenuItem.Name = "lOCALISATIONToolStripMenuItem";
+            lOCALISATIONToolStripMenuItem.Size = new Size(147, 29);
+            lOCALISATIONToolStripMenuItem.Text = "LOCALISATION";
+            lOCALISATIONToolStripMenuItem.Click += lOCALISATIONToolStripMenuItem_Click;
             // 
             // dECONNEXIONToolStripMenuItem
             // 
             dECONNEXIONToolStripMenuItem.Name = "dECONNEXIONToolStripMenuItem";
-            dECONNEXIONToolStripMenuItem.Size = new Size(102, 20);
+            dECONNEXIONToolStripMenuItem.Size = new Size(153, 29);
             dECONNEXIONToolStripMenuItem.Text = "DECONNEXION";
             dECONNEXIONToolStripMenuItem.Click += dECONNEXIONToolStripMenuItem_Click;
             // 
             // qUITTERToolStripMenuItem
             // 
             qUITTERToolStripMenuItem.Name = "qUITTERToolStripMenuItem";
-            qUITTERToolStripMenuItem.Size = new Size(64, 20);
+            qUITTERToolStripMenuItem.Size = new Size(97, 29);
             qUITTERToolStripMenuItem.Text = "QUITTER";
             qUITTERToolStripMenuItem.Click += qUITTERToolStripMenuItem_Click;
             // 
             // panelPrincipal
             // 
-            panelPrincipal.BackColor = Color.LightSteelBlue;
+            panelPrincipal.BackColor = Color.SlateGray;
             panelPrincipal.BackgroundImageLayout = ImageLayout.Center;
             panelPrincipal.Controls.Add(label1);
-            panelPrincipal.Location = new Point(0, 21);
+            panelPrincipal.Location = new Point(0, 35);
+            panelPrincipal.Margin = new Padding(4, 5, 4, 5);
             panelPrincipal.Name = "panelPrincipal";
-            panelPrincipal.Size = new Size(800, 337);
+            panelPrincipal.Size = new Size(1143, 562);
             panelPrincipal.TabIndex = 2;
             panelPrincipal.Paint += panelPrincipal_Paint;
             // 
@@ -142,28 +151,23 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(242, 130);
+            label1.Location = new Point(346, 217);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(337, 32);
+            label1.Size = new Size(496, 48);
             label1.TabIndex = 0;
             label1.Text = "Bienvenue à la Médiathèque";
             // 
-            // lOCALISATIONToolStripMenuItem
-            // 
-            lOCALISATIONToolStripMenuItem.Name = "lOCALISATIONToolStripMenuItem";
-            lOCALISATIONToolStripMenuItem.Size = new Size(99, 20);
-            lOCALISATIONToolStripMenuItem.Text = "LOCALISATION";
-            lOCALISATIONToolStripMenuItem.Click += lOCALISATIONToolStripMenuItem_Click;
-            // 
             // FormMenu
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 358);
+            ClientSize = new Size(1143, 597);
             ControlBox = false;
             Controls.Add(panelPrincipal);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
+            Margin = new Padding(4, 5, 4, 5);
             Name = "FormMenu";
             Text = "Application MEDIA'TOUT";
             Load += Form1_Load;

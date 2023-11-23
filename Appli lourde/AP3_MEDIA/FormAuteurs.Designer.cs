@@ -52,9 +52,10 @@
             btnFermer.FlatStyle = FlatStyle.Popup;
             btnFermer.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnFermer.ForeColor = Color.White;
-            btnFermer.Location = new Point(683, 270);
+            btnFermer.Location = new Point(985, 480);
+            btnFermer.Margin = new Padding(4, 5, 4, 5);
             btnFermer.Name = "btnFermer";
-            btnFermer.Size = new Size(105, 55);
+            btnFermer.Size = new Size(129, 59);
             btnFermer.TabIndex = 3;
             btnFermer.Text = "FERMER";
             btnFermer.UseVisualStyleBackColor = false;
@@ -64,11 +65,12 @@
             // 
             btnDeselectionner.BackColor = Color.Black;
             btnDeselectionner.FlatStyle = FlatStyle.Popup;
-            btnDeselectionner.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDeselectionner.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             btnDeselectionner.ForeColor = Color.White;
-            btnDeselectionner.Location = new Point(549, 46);
+            btnDeselectionner.Location = new Point(782, 77);
+            btnDeselectionner.Margin = new Padding(4, 5, 4, 5);
             btnDeselectionner.Name = "btnDeselectionner";
-            btnDeselectionner.Size = new Size(106, 42);
+            btnDeselectionner.Size = new Size(151, 57);
             btnDeselectionner.TabIndex = 14;
             btnDeselectionner.Text = "Désélectionner";
             btnDeselectionner.UseVisualStyleBackColor = false;
@@ -78,19 +80,21 @@
             // 
             lbAuteurs.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             lbAuteurs.FormattingEnabled = true;
-            lbAuteurs.ItemHeight = 17;
-            lbAuteurs.Location = new Point(401, 46);
+            lbAuteurs.ItemHeight = 28;
+            lbAuteurs.Location = new Point(573, 77);
+            lbAuteurs.Margin = new Padding(4, 5, 4, 5);
             lbAuteurs.Name = "lbAuteurs";
-            lbAuteurs.Size = new Size(142, 242);
+            lbAuteurs.Size = new Size(201, 396);
             lbAuteurs.TabIndex = 15;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(401, 26);
+            label3.Location = new Point(573, 43);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(89, 17);
+            label3.Size = new Size(133, 28);
             label3.TabIndex = 16;
             label3.Text = "Liste existante";
             // 
@@ -98,9 +102,10 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(139, 305);
+            label4.Location = new Point(199, 508);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(375, 20);
+            label4.Size = new Size(579, 31);
             label4.TabIndex = 17;
             label4.Text = "sélectionner un auteur pour le modifier ou le supprimer";
             // 
@@ -111,18 +116,21 @@
             gbCategorie.Controls.Add(btnValider);
             gbCategorie.Controls.Add(label2);
             gbCategorie.Controls.Add(tbLibelle);
-            gbCategorie.Location = new Point(48, 106);
+            gbCategorie.Location = new Point(69, 177);
+            gbCategorie.Margin = new Padding(4, 5, 4, 5);
             gbCategorie.Name = "gbCategorie";
-            gbCategorie.Size = new Size(278, 129);
+            gbCategorie.Padding = new Padding(4, 5, 4, 5);
+            gbCategorie.Size = new Size(397, 215);
             gbCategorie.TabIndex = 19;
             gbCategorie.TabStop = false;
             gbCategorie.Text = "A ajouter";
             // 
             // btnSupprimer
             // 
-            btnSupprimer.Location = new Point(181, 90);
+            btnSupprimer.Location = new Point(259, 150);
+            btnSupprimer.Margin = new Padding(4, 5, 4, 5);
             btnSupprimer.Name = "btnSupprimer";
-            btnSupprimer.Size = new Size(75, 23);
+            btnSupprimer.Size = new Size(107, 38);
             btnSupprimer.TabIndex = 10;
             btnSupprimer.Text = "Supprimer";
             btnSupprimer.UseVisualStyleBackColor = true;
@@ -130,9 +138,10 @@
             // 
             // btnModifier
             // 
-            btnModifier.Location = new Point(101, 90);
+            btnModifier.Location = new Point(144, 150);
+            btnModifier.Margin = new Padding(4, 5, 4, 5);
             btnModifier.Name = "btnModifier";
-            btnModifier.Size = new Size(75, 23);
+            btnModifier.Size = new Size(107, 38);
             btnModifier.TabIndex = 9;
             btnModifier.Text = "Modifier";
             btnModifier.UseVisualStyleBackColor = true;
@@ -140,9 +149,10 @@
             // 
             // btnValider
             // 
-            btnValider.Location = new Point(20, 90);
+            btnValider.Location = new Point(29, 150);
+            btnValider.Margin = new Padding(4, 5, 4, 5);
             btnValider.Name = "btnValider";
-            btnValider.Size = new Size(75, 23);
+            btnValider.Size = new Size(107, 38);
             btnValider.TabIndex = 8;
             btnValider.Text = "Ajouter";
             btnValider.UseVisualStyleBackColor = true;
@@ -152,26 +162,29 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(20, 29);
+            label2.Location = new Point(29, 48);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(37, 17);
+            label2.Size = new Size(56, 28);
             label2.TabIndex = 7;
             label2.Text = "Nom";
             // 
             // tbLibelle
             // 
-            tbLibelle.Location = new Point(20, 49);
+            tbLibelle.Location = new Point(29, 82);
+            tbLibelle.Margin = new Padding(4, 5, 4, 5);
             tbLibelle.Name = "tbLibelle";
-            tbLibelle.Size = new Size(236, 23);
+            tbLibelle.Size = new Size(335, 31);
             tbLibelle.TabIndex = 6;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(48, 26);
+            label1.Location = new Point(69, 43);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(187, 25);
+            label1.Size = new Size(289, 40);
             label1.TabIndex = 18;
             label1.Text = "Gestion des auteurs";
             // 
@@ -181,10 +194,10 @@
             // 
             // FormAuteurs
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.LightSteelBlue;
-            ClientSize = new Size(800, 337);
+            BackColor = Color.SlateGray;
+            ClientSize = new Size(1143, 562);
             Controls.Add(gbCategorie);
             Controls.Add(label1);
             Controls.Add(label4);
@@ -193,6 +206,7 @@
             Controls.Add(btnDeselectionner);
             Controls.Add(btnFermer);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(4, 5, 4, 5);
             Name = "FormAuteurs";
             Text = "FormAuteurs";
             Load += FormAuteurs_Load_1;

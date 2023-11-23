@@ -41,5 +41,26 @@ namespace AP3_MEDIA
             }
             return unEmprunteur;
         }
+
+        public static bool ArchiverEmprunteur(int id)
+        {
+            Emprunteur unEmprunteur;
+            bool vretour = true;
+            try
+            {
+                unEmprunteur = RecupererEmprunteurId(id);
+
+                // mise à jour des champs
+                unEmprunteur.ArchiverEmprunteur = true;
+                Modele.MonModele.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+                MessageBox.Show(ex.Message.ToString());
+            }
+            return vretour;
+        }
     }
 }

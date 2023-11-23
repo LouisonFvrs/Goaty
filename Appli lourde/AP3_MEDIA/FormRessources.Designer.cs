@@ -40,6 +40,9 @@
             label2 = new Label();
             bsExemplaires = new BindingSource(components);
             dgvExemplaires = new DataGridView();
+            contextMenuStrip2 = new ContextMenuStrip(components);
+            toolStripMenuItem2 = new ToolStripMenuItem();
+            toolStripMenuItem3 = new ToolStripMenuItem();
             btnListeArchive = new Button();
             bsRessourcesArchivees = new BindingSource(components);
             btnRessources = new Button();
@@ -49,6 +52,7 @@
             ((System.ComponentModel.ISupportInitialize)bsRessources).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsExemplaires).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvExemplaires).BeginInit();
+            contextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bsRessourcesArchivees).BeginInit();
             SuspendLayout();
             // 
@@ -60,11 +64,13 @@
             dgvRessources.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvRessources.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRessources.ContextMenuStrip = contextMenuStrip1;
-            dgvRessources.Location = new Point(58, 41);
+            dgvRessources.Location = new Point(83, 68);
+            dgvRessources.Margin = new Padding(4, 5, 4, 5);
             dgvRessources.Name = "dgvRessources";
             dgvRessources.ReadOnly = true;
+            dgvRessources.RowHeadersWidth = 62;
             dgvRessources.RowTemplate.Height = 25;
-            dgvRessources.Size = new Size(670, 215);
+            dgvRessources.Size = new Size(957, 358);
             dgvRessources.TabIndex = 0;
             dgvRessources.CellContentClick += dgvRessources_CellContentClick;
             dgvRessources.CellMouseClick += dgvRessources_CellMouseClick;
@@ -72,14 +78,15 @@
             // 
             // contextMenuStrip1
             // 
+            contextMenuStrip1.ImageScalingSize = new Size(24, 24);
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { voirLesExemplaireToolStripMenuItem, supprimerToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(178, 48);
+            contextMenuStrip1.Size = new Size(239, 68);
             // 
             // voirLesExemplaireToolStripMenuItem
             // 
             voirLesExemplaireToolStripMenuItem.Name = "voirLesExemplaireToolStripMenuItem";
-            voirLesExemplaireToolStripMenuItem.Size = new Size(177, 22);
+            voirLesExemplaireToolStripMenuItem.Size = new Size(238, 32);
             voirLesExemplaireToolStripMenuItem.Text = "voir les exemplaires";
             voirLesExemplaireToolStripMenuItem.Click += voirLesExemplaireToolStripMenuItem_Click;
             // 
@@ -87,14 +94,13 @@
             // 
             supprimerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { supprimerToolStripMenuItem1 });
             supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
-            supprimerToolStripMenuItem.Size = new Size(177, 22);
+            supprimerToolStripMenuItem.Size = new Size(238, 32);
             supprimerToolStripMenuItem.Text = "archiver";
-            supprimerToolStripMenuItem.Click += archiveToolStripMenuItem;
             // 
             // supprimerToolStripMenuItem1
             // 
             supprimerToolStripMenuItem1.Name = "supprimerToolStripMenuItem1";
-            supprimerToolStripMenuItem1.Size = new Size(128, 22);
+            supprimerToolStripMenuItem1.Size = new Size(195, 34);
             supprimerToolStripMenuItem1.Text = "supprimer";
             supprimerToolStripMenuItem1.Click += supprimerToolStripMenuItem1_Click;
             // 
@@ -102,9 +108,10 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(58, 13);
+            label1.Location = new Point(83, 22);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(189, 25);
+            label1.Size = new Size(294, 40);
             label1.TabIndex = 1;
             label1.Text = "Liste des Ressources";
             // 
@@ -114,9 +121,10 @@
             btnFermer.FlatStyle = FlatStyle.Popup;
             btnFermer.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnFermer.ForeColor = Color.White;
-            btnFermer.Location = new Point(623, 270);
+            btnFermer.Location = new Point(992, 486);
+            btnFermer.Margin = new Padding(4, 5, 4, 5);
             btnFermer.Name = "btnFermer";
-            btnFermer.Size = new Size(105, 55);
+            btnFermer.Size = new Size(119, 56);
             btnFermer.TabIndex = 2;
             btnFermer.Text = "FERMER";
             btnFermer.UseVisualStyleBackColor = false;
@@ -126,9 +134,10 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(58, 270);
+            label2.Location = new Point(83, 450);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(438, 20);
+            label2.Size = new Size(677, 31);
             label2.TabIndex = 4;
             label2.Text = "click droit sur la ressource sélectionnée pour voir ses exemplaires";
             // 
@@ -137,19 +146,45 @@
             dgvExemplaires.AllowUserToAddRows = false;
             dgvExemplaires.AllowUserToDeleteRows = false;
             dgvExemplaires.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvExemplaires.Location = new Point(307, 51);
+            dgvExemplaires.ContextMenuStrip = contextMenuStrip2;
+            dgvExemplaires.Location = new Point(439, 85);
+            dgvExemplaires.Margin = new Padding(4, 5, 4, 5);
             dgvExemplaires.Name = "dgvExemplaires";
             dgvExemplaires.ReadOnly = true;
+            dgvExemplaires.RowHeadersWidth = 62;
             dgvExemplaires.RowTemplate.Height = 25;
-            dgvExemplaires.Size = new Size(457, 159);
+            dgvExemplaires.Size = new Size(653, 265);
             dgvExemplaires.TabIndex = 5;
             dgvExemplaires.Visible = false;
             // 
+            // contextMenuStrip2
+            // 
+            contextMenuStrip2.ImageScalingSize = new Size(24, 24);
+            contextMenuStrip2.Items.AddRange(new ToolStripItem[] { toolStripMenuItem2 });
+            contextMenuStrip2.Name = "contextMenuStrip1";
+            contextMenuStrip2.Size = new Size(146, 36);
+            // 
+            // toolStripMenuItem2
+            // 
+            toolStripMenuItem2.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem3 });
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
+            toolStripMenuItem2.Size = new Size(145, 32);
+            toolStripMenuItem2.Text = "archiver";
+            toolStripMenuItem2.Click += toolStripMenuItem2_Click;
+            // 
+            // toolStripMenuItem3
+            // 
+            toolStripMenuItem3.Name = "toolStripMenuItem3";
+            toolStripMenuItem3.Size = new Size(195, 34);
+            toolStripMenuItem3.Text = "supprimer";
+            toolStripMenuItem3.Click += toolStripMenuItem3_Click;
+            // 
             // btnListeArchive
             // 
-            btnListeArchive.Location = new Point(58, 302);
+            btnListeArchive.Location = new Point(83, 503);
+            btnListeArchive.Margin = new Padding(4, 5, 4, 5);
             btnListeArchive.Name = "btnListeArchive";
-            btnListeArchive.Size = new Size(134, 23);
+            btnListeArchive.Size = new Size(191, 38);
             btnListeArchive.TabIndex = 6;
             btnListeArchive.Text = "Ressources archivées";
             btnListeArchive.UseVisualStyleBackColor = true;
@@ -157,9 +192,10 @@
             // 
             // btnRessources
             // 
-            btnRessources.Location = new Point(207, 302);
+            btnRessources.Location = new Point(296, 503);
+            btnRessources.Margin = new Padding(4, 5, 4, 5);
             btnRessources.Name = "btnRessources";
-            btnRessources.Size = new Size(134, 23);
+            btnRessources.Size = new Size(191, 38);
             btnRessources.TabIndex = 7;
             btnRessources.Text = "Ressources";
             btnRessources.UseVisualStyleBackColor = true;
@@ -167,9 +203,10 @@
             // 
             // btnAjoutExem
             // 
-            btnAjoutExem.Location = new Point(362, 302);
+            btnAjoutExem.Location = new Point(517, 503);
+            btnAjoutExem.Margin = new Padding(4, 5, 4, 5);
             btnAjoutExem.Name = "btnAjoutExem";
-            btnAjoutExem.Size = new Size(134, 23);
+            btnAjoutExem.Size = new Size(218, 38);
             btnAjoutExem.TabIndex = 9;
             btnAjoutExem.Text = "Ajouter un exemplaire";
             btnAjoutExem.UseVisualStyleBackColor = true;
@@ -177,10 +214,10 @@
             // 
             // FormRessources
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.LightSteelBlue;
-            ClientSize = new Size(800, 337);
+            BackColor = Color.SlateGray;
+            ClientSize = new Size(1143, 562);
             Controls.Add(btnAjoutExem);
             Controls.Add(btnRessources);
             Controls.Add(btnListeArchive);
@@ -190,6 +227,7 @@
             Controls.Add(label1);
             Controls.Add(dgvRessources);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(4, 5, 4, 5);
             Name = "FormRessources";
             Text = "Liste des Ressources";
             Load += FormRessources_Load;
@@ -198,6 +236,7 @@
             ((System.ComponentModel.ISupportInitialize)bsRessources).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsExemplaires).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvExemplaires).EndInit();
+            contextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)bsRessourcesArchivees).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -220,5 +259,8 @@
         private Button btnRessources;
         private ToolStripMenuItem supprimerToolStripMenuItem1;
         private Button btnAjoutExem;
+        private ContextMenuStrip contextMenuStrip2;
+        private ToolStripMenuItem toolStripMenuItem2;
+        private ToolStripMenuItem toolStripMenuItem3;
     }
 }

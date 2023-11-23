@@ -21,30 +21,43 @@ namespace AP3_MEDIA
 
         private void btnConnexion_Click(object sender, EventArgs e)
         {
-            string email = tbEmail.Text;
-            string mdp = tbMdp.Text;
-
-            Emprunteur emp = ModeleEmprunteur.RecupererEmprunteurLogin(email);
-            if (emp.Emailemprunteur != null)
+            try
             {
-                if (BCrypt.Net.BCrypt.Verify(mdp, emp.Motpasseemprunteur))
+                string email = tbEmail.Text;
+                string mdp = tbMdp.Text;
+
+                Emprunteur emp = ModeleEmprunteur.RecupererEmprunteurLogin(email);
+
+                if (emp != null && emp.Emailemprunteur != null)
                 {
-                    if (emp.IdRole == 1)
+                    if (BCrypt.Net.BCrypt.Verify(mdp, emp.Motpasseemprunteur))
                     {
-                        FormMenu formMenu = new FormMenu();
-                        this.Hide();
-                        formMenu.Show();
+                        if (emp.IdRole == 1)
+                        {
+                            FormMenu formMenu = new FormMenu();
+                            this.Hide();
+                            formMenu.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Vous n'avez pas les accès pour vous connecter", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Vous n'avez pas les accès pour vous connecter");
+                        MessageBox.Show("Login ou mot de passe erroné", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("login ou mot de passe erroné");
+                    MessageBox.Show("Login ou mot de passe erroné", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
 }
+

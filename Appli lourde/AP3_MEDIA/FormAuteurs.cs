@@ -67,70 +67,105 @@ namespace AP3_MEDIA
             btnSupprimer.Hide();
         }
 
+        // ... (votre code existant)
+
         private void btnSupprimer_Click_1(object sender, EventArgs e)
         {
-            string libelle = tbLibelle.Text;
-            if (libelle != "")
+            try
             {
-                if (ModeleAuteur.SupprimerAuteur(A.IdAuteur))
+                if (lbAuteurs.SelectedIndex != -1)
                 {
-                    MessageBox.Show("Auteur supprimé ");
-                    remplirListeAuteurs();
-                    lbAuteurs.SelectedIndex = -1;
-                    tbLibelle.Clear();
+                    if (ModeleAuteur.SupprimerAuteur(A.IdAuteur))
+                    {
+                        MessageBox.Show("Auteur supprimé ");
+                        remplirListeAuteurs();
+                        lbAuteurs.SelectedIndex = -1;
+                        tbLibelle.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("La suppression de l'auteur a échoué", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("ERREUR : Sélectionner l'auteur à supprimer", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("ERREUR : Sélectionner la catégorie à supprimer", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnModifier_Click_1(object sender, EventArgs e)
         {
-            string libelle = tbLibelle.Text;
-
-            if (libelle != "")
+            try
             {
-                if (ModeleAuteur.ModifierAuteur(A.IdAuteur, libelle))
+                if (lbAuteurs.SelectedIndex != -1)
                 {
-                    MessageBox.Show("Auteur modifié ");
-                    remplirListeAuteurs();
-                    lbAuteurs.SelectedIndex = -1;
-                    tbLibelle.Clear();
+                    string libelle = tbLibelle.Text;
+
+                    if (!string.IsNullOrEmpty(libelle))
+                    {
+                        if (ModeleAuteur.ModifierAuteur(A.IdAuteur, libelle))
+                        {
+                            MessageBox.Show("Auteur modifié ");
+                            remplirListeAuteurs();
+                            lbAuteurs.SelectedIndex = -1;
+                            tbLibelle.Clear();
+                        }
+                        else
+                        {
+                            MessageBox.Show("La modification de l'auteur a échoué", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERREUR : Le nom ne doit pas être vide", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Modification impossible", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("ERREUR : Sélectionner l'auteur à modifier", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("ERREUR : Sélectionner l'auteur à modifier", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnValider_Click_1(object sender, EventArgs e)
         {
-            string libelle = tbLibelle.Text;
-            if (libelle != "")
+            try
             {
-                if (ModeleAuteur.AjoutAuteur(libelle))
+                string libelle = tbLibelle.Text;
+
+                if (!string.IsNullOrEmpty(libelle))
                 {
-                    MessageBox.Show("Auteur ajouté ");
-                    tbLibelle.Clear();
-                    remplirListeAuteurs();
+                    if (ModeleAuteur.AjoutAuteur(libelle))
+                    {
+                        MessageBox.Show("Auteur ajouté ");
+                        tbLibelle.Clear();
+                        remplirListeAuteurs();
+                    }
+                    else
+                    {
+                        MessageBox.Show("L'ajout de l'auteur a échoué", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Ajout impossible", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("ERREUR : Le nom ne doit pas être vide", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("ERREUR : le nom ne doit pas être vide", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void FormAuteurs_Load_1(object sender, EventArgs e)
         {

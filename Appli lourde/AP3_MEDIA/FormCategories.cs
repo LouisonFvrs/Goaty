@@ -15,6 +15,7 @@ namespace AP3_MEDIA
     public partial class FormCategories : Form
     {
         private Categorie C = new Categorie();
+
         public FormCategories()
         {
             InitializeComponent();
@@ -22,115 +23,185 @@ namespace AP3_MEDIA
 
         public void remplirListeCategories()
         {
-            // remplir la comboBox des catégories
-            lbCategories.ValueMember = "idcategorie";    //permet de stocker l'identifiant
-            lbCategories.DisplayMember = "libellecategorie";
-            bsCategories.DataSource = ModeleCategorie.getListCategories();
-            lbCategories.DataSource = bsCategories;
-            lbCategories.SelectedIndex = -1;
+            try
+            {
+                lbCategories.ValueMember = "idcategorie";
+                lbCategories.DisplayMember = "libellecategorie";
+                bsCategories.DataSource = ModeleCategorie.getListCategories();
+                lbCategories.DataSource = bsCategories;
+                lbCategories.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
         private void FormCategories_Load(object sender, EventArgs e)
         {
-            remplirListeCategories();
-
-            btnModifier.Hide();
-            btnSupprimer.Hide();
+            try
+            {
+                remplirListeCategories();
+                btnModifier.Hide();
+                btnSupprimer.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnFermer_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnValider_Click(object sender, EventArgs e)
         {
-            string libelle = tbLibelle.Text;
-            if (libelle != "")
+            try
             {
-                if (ModeleCategorie.AjoutCategorie(libelle))
+                string libelle = tbLibelle.Text;
+
+                if (!string.IsNullOrEmpty(libelle))
                 {
-                    MessageBox.Show("Catégorie ajoutée ");
-                    tbLibelle.Clear();
-                    remplirListeCategories();
+                    if (ModeleCategorie.AjoutCategorie(libelle))
+                    {
+                        MessageBox.Show("Catégorie ajoutée ");
+                        tbLibelle.Clear();
+                        remplirListeCategories();
+                    }
+                    else
+                    {
+                        MessageBox.Show("L'ajout de la catégorie a échoué", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Ajout impossible", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("ERREUR : Le libellé ne doit pas être vide", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("ERREUR : Libellé ne doit pas être vide", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void bsCategories_CurrentChanged(object sender, EventArgs e)
         {
-            if (lbCategories.SelectedIndex != -1)
+            try
             {
-                // récupération de la catégorie sélectionnée
-                C = (Categorie)bsCategories.Current;
-
-                // mise à jour du libellé pour modifier ou supprimer
-                tbLibelle.Text = C.Libellecategorie;
-
-                btnValider.Hide();
-                btnModifier.Show();
-                btnSupprimer.Show();
+                if (lbCategories.SelectedIndex != -1)
+                {
+                    C = (Categorie)bsCategories.Current;
+                    tbLibelle.Text = C.Libellecategorie;
+                    btnValider.Hide();
+                    btnModifier.Show();
+                    btnSupprimer.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnModifier_Click(object sender, EventArgs e)
         {
-            string libelle = tbLibelle.Text;
-
-            if (libelle != "")
+            try
             {
-                if (ModeleCategorie.ModifierCategorie(C.Idcategorie, libelle))
+                if (lbCategories.SelectedIndex != -1)
                 {
-                    MessageBox.Show("Catégorie modifiée ");
-                    remplirListeCategories();
-                    lbCategories.SelectedIndex = -1;
-                    tbLibelle.Clear();
+                    string libelle = tbLibelle.Text;
+
+                    if (!string.IsNullOrEmpty(libelle))
+                    {
+                        if (ModeleCategorie.ModifierCategorie(C.Idcategorie, libelle))
+                        {
+                            MessageBox.Show("Catégorie modifiée ");
+                            remplirListeCategories();
+                            lbCategories.SelectedIndex = -1;
+                            tbLibelle.Clear();
+                        }
+                        else
+                        {
+                            MessageBox.Show("La modification de la catégorie a échoué", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERREUR : Le libellé ne doit pas être vide", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Modification impossible", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("ERREUR : Sélectionner la catégorie à modifier", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("ERREUR : Sélectionner la catégorie à modifier", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
-            string libelle = tbLibelle.Text;
-            if (libelle != "")
+            try
             {
-                if (ModeleCategorie.SupprimerCategorie(C.Idcategorie))
+                if (lbCategories.SelectedIndex != -1)
                 {
-                    MessageBox.Show("Catégorie supprimée ");
-                    remplirListeCategories();
-                    lbCategories.SelectedIndex = -1;
-                    tbLibelle.Clear();
+                    string libelle = tbLibelle.Text;
+
+                    if (!string.IsNullOrEmpty(libelle))
+                    {
+                        if (ModeleCategorie.SupprimerCategorie(C.Idcategorie))
+                        {
+                            MessageBox.Show("Catégorie supprimée ");
+                            remplirListeCategories();
+                            lbCategories.SelectedIndex = -1;
+                            tbLibelle.Clear();
+                        }
+                        else
+                        {
+                            MessageBox.Show("La suppression de la catégorie a échoué", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERREUR : Sélectionner la catégorie à supprimer", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("ERREUR : Sélectionner la catégorie à supprimer", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("ERREUR : Sélectionner la catégorie à supprimer", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnDeselectionner_Click(object sender, EventArgs e)
         {
-            lbCategories.SelectedIndex = -1;
-            tbLibelle.Clear();
-            btnValider.Show();
-            btnModifier.Hide();
-            btnSupprimer.Hide();
+            try
+            {
+                lbCategories.SelectedIndex = -1;
+                tbLibelle.Clear();
+                btnValider.Show();
+                btnModifier.Hide();
+                btnSupprimer.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

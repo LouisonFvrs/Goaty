@@ -91,5 +91,46 @@ namespace AP3_MEDIA
             }
             return unExemplaire;
         }
+
+        public static bool ArchiverExemplaire(int id)
+        {
+            Exemplaire unExemplaire;
+            bool vretour = true;
+            try
+            {
+                unExemplaire = RecupererExemplaire(id);
+
+                // mise à jour des champs
+                unExemplaire.ArchiverExem = true;
+                Modele.MonModele.SaveChanges();
+           
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+                MessageBox.Show(ex.Message.ToString());
+            }
+            return vretour;
+        }
+
+        public static bool SupprimerExemplaire(int id)
+        {
+            Exemplaire unExemplaire;
+            bool vretour = true;
+            try
+            {
+                // récupération de la ressource à supprimer
+                unExemplaire = RecupererExemplaire(id);
+                Modele.MonModele.Exemplaires.Remove(unExemplaire);
+                Modele.MonModele.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+                MessageBox.Show(ex.Message.ToString());
+            }
+            return vretour;
+        }
     }
 }
+

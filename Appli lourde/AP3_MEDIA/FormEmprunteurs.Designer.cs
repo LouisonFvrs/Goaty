@@ -31,9 +31,12 @@
             components = new System.ComponentModel.Container();
             label1 = new Label();
             dgvEmprunteurs = new DataGridView();
+            contextMenuStrip2 = new ContextMenuStrip(components);
+            toolStripMenuItem2 = new ToolStripMenuItem();
             bsEmprunteurs = new BindingSource(components);
             btnFermer = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvEmprunteurs).BeginInit();
+            contextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bsEmprunteurs).BeginInit();
             SuspendLayout();
             // 
@@ -41,20 +44,38 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(43, 26);
+            label1.Location = new Point(61, 43);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(208, 25);
+            label1.Size = new Size(322, 40);
             label1.TabIndex = 4;
             label1.Text = "Liste des emprunteurs";
             // 
             // dgvEmprunteurs
             // 
             dgvEmprunteurs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvEmprunteurs.Location = new Point(124, 75);
+            dgvEmprunteurs.ContextMenuStrip = contextMenuStrip2;
+            dgvEmprunteurs.Location = new Point(103, 99);
+            dgvEmprunteurs.Margin = new Padding(4, 5, 4, 5);
             dgvEmprunteurs.Name = "dgvEmprunteurs";
+            dgvEmprunteurs.RowHeadersWidth = 62;
             dgvEmprunteurs.RowTemplate.Height = 25;
-            dgvEmprunteurs.Size = new Size(552, 187);
+            dgvEmprunteurs.Size = new Size(937, 365);
             dgvEmprunteurs.TabIndex = 5;
+            // 
+            // contextMenuStrip2
+            // 
+            contextMenuStrip2.ImageScalingSize = new Size(24, 24);
+            contextMenuStrip2.Items.AddRange(new ToolStripItem[] { toolStripMenuItem2 });
+            contextMenuStrip2.Name = "contextMenuStrip1";
+            contextMenuStrip2.Size = new Size(146, 36);
+            // 
+            // toolStripMenuItem2
+            // 
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
+            toolStripMenuItem2.Size = new Size(145, 32);
+            toolStripMenuItem2.Text = "archiver";
+            toolStripMenuItem2.Click += toolStripMenuItem2_Click;
             // 
             // btnFermer
             // 
@@ -62,9 +83,10 @@
             btnFermer.FlatStyle = FlatStyle.Popup;
             btnFermer.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnFermer.ForeColor = Color.White;
-            btnFermer.Location = new Point(701, 279);
+            btnFermer.Location = new Point(998, 489);
+            btnFermer.Margin = new Padding(4, 5, 4, 5);
             btnFermer.Name = "btnFermer";
-            btnFermer.Size = new Size(87, 46);
+            btnFermer.Size = new Size(127, 53);
             btnFermer.TabIndex = 10;
             btnFermer.Text = "FERMER";
             btnFermer.UseVisualStyleBackColor = false;
@@ -72,18 +94,20 @@
             // 
             // FormEmprunteurs
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.LightSteelBlue;
-            ClientSize = new Size(800, 337);
+            BackColor = Color.SlateGray;
+            ClientSize = new Size(1143, 562);
             Controls.Add(btnFermer);
             Controls.Add(dgvEmprunteurs);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(4, 5, 4, 5);
             Name = "FormEmprunteurs";
             Text = "FormEmprunteurs";
             Load += FormEmprunteurs_Load;
             ((System.ComponentModel.ISupportInitialize)dgvEmprunteurs).EndInit();
+            contextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)bsEmprunteurs).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -95,5 +119,7 @@
         private DataGridView dgvEmprunteurs;
         private BindingSource bsEmprunteurs;
         private Button btnFermer;
+        private ContextMenuStrip contextMenuStrip2;
+        private ToolStripMenuItem toolStripMenuItem2;
     }
 }
