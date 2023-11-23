@@ -31,6 +31,8 @@
             components = new System.ComponentModel.Container();
             btnFermer = new Button();
             dgvEmprunteurs = new DataGridView();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            supprimerToolStripMenuItem = new ToolStripMenuItem();
             label1 = new Label();
             bsEmprunts = new BindingSource(components);
             cbEmprunteurs = new ComboBox();
@@ -42,7 +44,10 @@
             label4 = new Label();
             btnDureePret = new Button();
             dtpDateRetour = new DateTimePicker();
+            btnEmpruntsArchives = new Button();
+            btnEmprunts = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvEmprunteurs).BeginInit();
+            contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bsEmprunts).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsEmprunteurs).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsEtats).BeginInit();
@@ -65,11 +70,25 @@
             // dgvEmprunteurs
             // 
             dgvEmprunteurs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvEmprunteurs.ContextMenuStrip = contextMenuStrip1;
             dgvEmprunteurs.Location = new Point(103, 57);
             dgvEmprunteurs.Name = "dgvEmprunteurs";
             dgvEmprunteurs.RowTemplate.Height = 25;
             dgvEmprunteurs.Size = new Size(594, 222);
             dgvEmprunteurs.TabIndex = 7;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { supprimerToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(117, 26);
+            // 
+            // supprimerToolStripMenuItem
+            // 
+            supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
+            supprimerToolStripMenuItem.Size = new Size(116, 22);
+            supprimerToolStripMenuItem.Text = "archiver";
+            supprimerToolStripMenuItem.Click += supprimerToolStripMenuItem_Click;
             // 
             // label1
             // 
@@ -143,12 +162,34 @@
             dtpDateRetour.Size = new Size(200, 23);
             dtpDateRetour.TabIndex = 15;
             // 
+            // btnEmpruntsArchives
+            // 
+            btnEmpruntsArchives.Location = new Point(12, 128);
+            btnEmpruntsArchives.Name = "btnEmpruntsArchives";
+            btnEmpruntsArchives.Size = new Size(75, 43);
+            btnEmpruntsArchives.TabIndex = 16;
+            btnEmpruntsArchives.Text = "Emprunts archivés";
+            btnEmpruntsArchives.UseVisualStyleBackColor = true;
+            btnEmpruntsArchives.Click += btnEmpruntsArchives_Click;
+            // 
+            // btnEmprunts
+            // 
+            btnEmprunts.Location = new Point(12, 188);
+            btnEmprunts.Name = "btnEmprunts";
+            btnEmprunts.Size = new Size(75, 43);
+            btnEmprunts.TabIndex = 17;
+            btnEmprunts.Text = "Emprunts";
+            btnEmprunts.UseVisualStyleBackColor = true;
+            btnEmprunts.Click += btnEmprunts_Click;
+            // 
             // FormEmprunts
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
             ClientSize = new Size(800, 337);
+            Controls.Add(btnEmprunts);
+            Controls.Add(btnEmpruntsArchives);
             Controls.Add(dtpDateRetour);
             Controls.Add(btnDureePret);
             Controls.Add(label4);
@@ -165,6 +206,7 @@
             Text = "FormEmprunts";
             Load += FormEmprunts_Load;
             ((System.ComponentModel.ISupportInitialize)dgvEmprunteurs).EndInit();
+            contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)bsEmprunts).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsEmprunteurs).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsEtats).EndInit();
@@ -187,5 +229,9 @@
         private Label label4;
         private Button btnDureePret;
         private DateTimePicker dtpDateRetour;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem supprimerToolStripMenuItem;
+        private Button btnEmpruntsArchives;
+        private Button btnEmprunts;
     }
 }

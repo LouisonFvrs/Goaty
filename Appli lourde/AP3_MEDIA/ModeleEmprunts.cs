@@ -84,5 +84,27 @@ namespace AP3_MEDIA
             }
             return vretour;
         }
+
+        public static bool ArchiverEmprunt(int Idressource, int Idemprunteur, int Idexemplaire, DateTime Datedebutemprunt)
+        {
+            Emprunter unEmprunt;
+            bool vretour = true;
+            try
+            {
+                // récupération de la ressource à modifier
+                unEmprunt = RecupererEmprunts(Idressource, Idemprunteur, Idexemplaire, Datedebutemprunt);
+
+                // mise à jour des champs
+                unEmprunt.ArchiverEmprunter = true;
+                Modele.MonModele.SaveChanges();
+             
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+                MessageBox.Show(ex.Message.ToString());
+            }
+            return vretour;
+        }
     }
 }

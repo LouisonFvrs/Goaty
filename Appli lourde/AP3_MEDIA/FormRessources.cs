@@ -54,7 +54,8 @@ namespace AP3_MEDIA
                 {
                     x.Idexemplaire,
                     Date_entree = x.Dateentree,
-                    Libelle = x.IdetatNavigation.Libelleetat
+                    Libelle = x.IdetatNavigation.Libelleetat,
+                    ModeleExemplaire.getListLocalisationsSelonExemplaire(ModeleExemplaire.listeExemplairesParRessource(idR).IdLocalisationNaviation).VilleLocalisation,
                 });
 
                 dgvExemplaires.DataSource = bsExemplaires;

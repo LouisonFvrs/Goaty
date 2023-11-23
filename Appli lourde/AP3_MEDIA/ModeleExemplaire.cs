@@ -30,6 +30,11 @@ namespace AP3_MEDIA
             return lesEx;
         }
 
+        public static List<Localisation> getListLocalisationsSelonExemplaire(int idL)
+        {
+            return Modele.MonModele.Localisations.Where(p => p.IdLocalisation == idL).ToList();
+        }
+
 
         public static int ObtenirDernierIdExemplaire()
         {

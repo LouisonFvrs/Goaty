@@ -43,7 +43,6 @@
             btnListeArchive = new Button();
             bsRessourcesArchivees = new BindingSource(components);
             btnRessources = new Button();
-            contextMenuStrip2 = new ContextMenuStrip(components);
             btnAjoutExem = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvRessources).BeginInit();
             contextMenuStrip1.SuspendLayout();
@@ -75,12 +74,12 @@
             // 
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { voirLesExemplaireToolStripMenuItem, supprimerToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(178, 48);
+            contextMenuStrip1.Size = new Size(181, 70);
             // 
             // voirLesExemplaireToolStripMenuItem
             // 
             voirLesExemplaireToolStripMenuItem.Name = "voirLesExemplaireToolStripMenuItem";
-            voirLesExemplaireToolStripMenuItem.Size = new Size(177, 22);
+            voirLesExemplaireToolStripMenuItem.Size = new Size(180, 22);
             voirLesExemplaireToolStripMenuItem.Text = "voir les exemplaires";
             voirLesExemplaireToolStripMenuItem.Click += voirLesExemplaireToolStripMenuItem_Click;
             // 
@@ -88,7 +87,7 @@
             // 
             supprimerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { supprimerToolStripMenuItem1 });
             supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
-            supprimerToolStripMenuItem.Size = new Size(177, 22);
+            supprimerToolStripMenuItem.Size = new Size(180, 22);
             supprimerToolStripMenuItem.Text = "archiver";
             supprimerToolStripMenuItem.Click += archiveToolStripMenuItem;
             // 
@@ -166,11 +165,6 @@
             btnRessources.UseVisualStyleBackColor = true;
             btnRessources.Click += btnRessources_Click;
             // 
-            // contextMenuStrip2
-            // 
-            contextMenuStrip2.Name = "contextMenuStrip2";
-            contextMenuStrip2.Size = new Size(61, 4);
-            // 
             // btnAjoutExem
             // 
             btnAjoutExem.Location = new Point(362, 302);
@@ -225,7 +219,6 @@
         private BindingSource bsRessourcesArchivees;
         private Button btnRessources;
         private ToolStripMenuItem supprimerToolStripMenuItem1;
-        private ContextMenuStrip contextMenuStrip2;
         private Button btnAjoutExem;
     }
 }
