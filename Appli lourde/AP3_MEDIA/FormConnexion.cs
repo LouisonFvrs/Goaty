@@ -34,7 +34,9 @@ namespace AP3_MEDIA
                         FormMenu formMenu = new FormMenu();
                         this.Hide();
                         formMenu.Show();
-                    } else {
+                    }
+                    else
+                    {
                         MessageBox.Show("Vous n'avez pas les accès pour vous connecter");
                     }
                 }

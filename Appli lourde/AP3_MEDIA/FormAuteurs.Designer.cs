@@ -83,7 +83,6 @@
             lbAuteurs.Name = "lbAuteurs";
             lbAuteurs.Size = new Size(142, 242);
             lbAuteurs.TabIndex = 15;
-            lbAuteurs.SelectedIndexChanged += lbAuteurs_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -94,7 +93,6 @@
             label3.Size = new Size(89, 17);
             label3.TabIndex = 16;
             label3.Text = "Liste existante";
-            label3.Click += label3_Click;
             // 
             // label4
             // 
@@ -105,7 +103,6 @@
             label4.Size = new Size(375, 20);
             label4.TabIndex = 17;
             label4.Text = "sélectionner un auteur pour le modifier ou le supprimer";
-            label4.Click += label4_Click;
             // 
             // gbCategorie
             // 
@@ -120,7 +117,6 @@
             gbCategorie.TabIndex = 19;
             gbCategorie.TabStop = false;
             gbCategorie.Text = "A ajouter";
-            gbCategorie.Enter += gbCategorie_Enter;
             // 
             // btnSupprimer
             // 
@@ -178,7 +174,6 @@
             label1.Size = new Size(187, 25);
             label1.TabIndex = 18;
             label1.Text = "Gestion des auteurs";
-            label1.Click += label1_Click;
             // 
             // bsAuteurs
             // 

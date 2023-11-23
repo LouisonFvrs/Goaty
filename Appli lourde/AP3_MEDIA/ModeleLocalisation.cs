@@ -1,24 +1,21 @@
-﻿using System;
+﻿using AP3_MEDIA.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AP3_MEDIA.Entities;
-using Microsoft.EntityFrameworkCore;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AP3_MEDIA
 {
-    internal class ModeleAuteur
+    internal class ModeleLocalisation
     {
-
         /// <summary>
         /// Fonction qui retourne la liste de toutes les auteurs
         /// </summary>
         /// <returns>Liste</returns>
-        public static List<Auteur> getListAuteurs()
+        public static List<Localisation> getListLocalisations()
         {
-            return Modele.MonModele.Auteurs.ToList();
+            return Modele.MonModele.Localisations.ToList();
         }
 
 
@@ -27,18 +24,19 @@ namespace AP3_MEDIA
         /// </summary>
         /// <param name="libelle"></param>
         /// <returns>bool</returns>
-        public static bool AjoutAuteur(string libelle)
+        public static bool AjoutLocalisation(string ville, string adresse)
         {
-            Auteur unAuteur;
+            Localisation uneVille;
             bool vretour = true;
             try
             {
                 // ajout dans la table Auteur
 
-                unAuteur = new Auteur();
-                unAuteur.NomAuteur = libelle;
+                uneVille = new Localisation();
+                uneVille.VilleLocalisation = ville;
+                uneVille.AdresseLocalisation = adresse;
 
-                Modele.MonModele.Auteurs.Add(unAuteur);
+                Modele.MonModele.Localisations.Add(uneVille);
                 Modele.MonModele.SaveChanges();
 
             }
@@ -56,15 +54,16 @@ namespace AP3_MEDIA
         /// <param name="idC">identifiant de la catégorie à modifier</param>
         /// <param name="libelle"></param>
         /// <returns>bool</returns>
-        public static bool ModifierAuteur(int idA, string libelle)
+        public static bool ModifierLocalisation(int idL, string ville, string adresse)
         {
-            Auteur unAuteur;
+            Localisation uneVille;
             bool vretour = true;
             try
             {
                 // récupération de la categorie à modifier
-                unAuteur = RecupererAuteur(idA);
-                unAuteur.NomAuteur = libelle;
+                uneVille = RecupererLocalisation(idL);
+                uneVille.VilleLocalisation = ville;
+                uneVille.AdresseLocalisation = adresse;
 
                 Modele.MonModele.SaveChanges();
 
@@ -82,15 +81,15 @@ namespace AP3_MEDIA
         /// </summary>
         /// <param name="idC">identifiant de la catégorie à supprimer</param>
         /// <returns>bool</returns>
-        public static bool SupprimerAuteur(int idA)
+        public static bool SupprimerLocalisation(int idL)
         {
-            Auteur unAuteur;
+            Localisation uneVille;
             bool vretour = true;
             try
             {
                 // récupération de la categorie à supprimer
-                unAuteur = RecupererAuteur(idA);
-                Modele.MonModele.Auteurs.Remove(unAuteur);
+                uneVille = RecupererLocalisation(idL);
+                Modele.MonModele.Localisations.Remove(uneVille);
 
                 Modele.MonModele.SaveChanges();
 
@@ -98,7 +97,7 @@ namespace AP3_MEDIA
             catch (Exception ex)
             {
                 vretour = false;
-                MessageBox.Show("Suppression impossible, lien existant");
+                MessageBox.Show("Suppression impossible");
             }
             return vretour;
         }
@@ -108,39 +107,24 @@ namespace AP3_MEDIA
         /// </summary>
         /// <param name="idC"></param>
         /// <returns>Categorie</returns>
-        public static Auteur RecupererAuteur(int idA)
+        public static Localisation RecupererLocalisation(int idL)
         {
-            Auteur unAuteur = new Auteur();
+            Localisation uneVille = new Localisation();
             try
             {
-                unAuteur = Modele.MonModele.Auteurs.First(x => x.IdAuteur == idA);
+                uneVille = Modele.MonModele.Localisations.First(x => x.IdLocalisation == idL);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
             }
-            return unAuteur;
+            return uneVille;
         }
 
-        public static Auteur RecupererDernierAuteur()
+        public static Localisation RecupererDerniereLocalisation()
         {
-            int IdAuteur =  Modele.MonModele.Auteurs.Max(x => x.IdAuteur);
-            return RecupererAuteur(IdAuteur);
-        }
-
-        public static ICollection<Auteur> RecupererAuteurParRessource(int idR)
-        {
-            ICollection<Auteur> ListAuteur = new List<Auteur>();
-            try
-            {
-                Ressource R = Modele.MonModele.Ressources.Where(p => p.Idressource == idR).Include(x => x.IdAuteurs).First();
-                ListAuteur  = R.IdAuteurs;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-            }
-            return ListAuteur;
+            int idLocalisation = Modele.MonModele.Localisations.Max(x => x.IdLocalisation);
+            return RecupererLocalisation(idLocalisation);
         }
     }
 }

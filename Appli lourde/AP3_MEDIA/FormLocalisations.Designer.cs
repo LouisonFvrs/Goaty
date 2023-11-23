@@ -30,6 +30,8 @@
         {
             components = new System.ComponentModel.Container();
             gbCategorie = new GroupBox();
+            label5 = new Label();
+            tbAdresse = new TextBox();
             btnSupprimer = new Button();
             btnModifier = new Button();
             btnValider = new Button();
@@ -41,13 +43,15 @@
             lbLocalisations = new ListBox();
             btnDeselectionner = new Button();
             btnFermer = new Button();
-            bindingSource1 = new BindingSource(components);
+            bsLocalisations = new BindingSource(components);
             gbCategorie.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsLocalisations).BeginInit();
             SuspendLayout();
             // 
             // gbCategorie
             // 
+            gbCategorie.Controls.Add(label5);
+            gbCategorie.Controls.Add(tbAdresse);
             gbCategorie.Controls.Add(btnSupprimer);
             gbCategorie.Controls.Add(btnModifier);
             gbCategorie.Controls.Add(btnValider);
@@ -55,37 +59,57 @@
             gbCategorie.Controls.Add(tbLibelle);
             gbCategorie.Location = new Point(30, 99);
             gbCategorie.Name = "gbCategorie";
-            gbCategorie.Size = new Size(278, 129);
+            gbCategorie.Size = new Size(278, 182);
             gbCategorie.TabIndex = 26;
             gbCategorie.TabStop = false;
             gbCategorie.Text = "A ajouter";
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(20, 92);
+            label5.Name = "label5";
+            label5.Size = new Size(55, 17);
+            label5.TabIndex = 12;
+            label5.Text = "Adresse";
+            // 
+            // tbAdresse
+            // 
+            tbAdresse.Location = new Point(20, 112);
+            tbAdresse.Name = "tbAdresse";
+            tbAdresse.Size = new Size(236, 23);
+            tbAdresse.TabIndex = 11;
+            // 
             // btnSupprimer
             // 
-            btnSupprimer.Location = new Point(181, 90);
+            btnSupprimer.Location = new Point(181, 153);
             btnSupprimer.Name = "btnSupprimer";
             btnSupprimer.Size = new Size(75, 23);
             btnSupprimer.TabIndex = 10;
             btnSupprimer.Text = "Supprimer";
             btnSupprimer.UseVisualStyleBackColor = true;
+            btnSupprimer.Click += btnSupprimer_Click;
             // 
             // btnModifier
             // 
-            btnModifier.Location = new Point(101, 90);
+            btnModifier.Location = new Point(100, 153);
             btnModifier.Name = "btnModifier";
             btnModifier.Size = new Size(75, 23);
             btnModifier.TabIndex = 9;
             btnModifier.Text = "Modifier";
             btnModifier.UseVisualStyleBackColor = true;
+            btnModifier.Click += btnModifier_Click;
             // 
             // btnValider
             // 
-            btnValider.Location = new Point(20, 90);
+            btnValider.Location = new Point(19, 153);
             btnValider.Name = "btnValider";
             btnValider.Size = new Size(75, 23);
             btnValider.TabIndex = 8;
             btnValider.Text = "Ajouter";
             btnValider.UseVisualStyleBackColor = true;
+            btnValider.Click += btnValider_Click;
             // 
             // label2
             // 
@@ -128,7 +152,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(383, 19);
+            label3.Location = new Point(351, 19);
             label3.Name = "label3";
             label3.Size = new Size(89, 17);
             label3.TabIndex = 23;
@@ -139,9 +163,9 @@
             lbLocalisations.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             lbLocalisations.FormattingEnabled = true;
             lbLocalisations.ItemHeight = 17;
-            lbLocalisations.Location = new Point(383, 39);
+            lbLocalisations.Location = new Point(351, 39);
             lbLocalisations.Name = "lbLocalisations";
-            lbLocalisations.Size = new Size(142, 242);
+            lbLocalisations.Size = new Size(307, 242);
             lbLocalisations.TabIndex = 22;
             // 
             // btnDeselectionner
@@ -150,12 +174,13 @@
             btnDeselectionner.FlatStyle = FlatStyle.Popup;
             btnDeselectionner.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
             btnDeselectionner.ForeColor = Color.White;
-            btnDeselectionner.Location = new Point(531, 39);
+            btnDeselectionner.Location = new Point(664, 39);
             btnDeselectionner.Name = "btnDeselectionner";
             btnDeselectionner.Size = new Size(106, 42);
             btnDeselectionner.TabIndex = 21;
             btnDeselectionner.Text = "Désélectionner";
             btnDeselectionner.UseVisualStyleBackColor = false;
+            btnDeselectionner.Click += btnDeselectionner_Click;
             // 
             // btnFermer
             // 
@@ -171,11 +196,15 @@
             btnFermer.UseVisualStyleBackColor = false;
             btnFermer.Click += btnFermer_Click;
             // 
+            // bsLocalisations
+            // 
+            bsLocalisations.CurrentChanged += bsLocalisations_CurrentChanged;
+            // 
             // FormLocalisations
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.LightSteelBlue;
+            BackColor = Color.SlateGray;
             ClientSize = new Size(800, 337);
             Controls.Add(gbCategorie);
             Controls.Add(label1);
@@ -190,7 +219,7 @@
             Load += FormLocalisations_Load;
             gbCategorie.ResumeLayout(false);
             gbCategorie.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsLocalisations).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -209,6 +238,8 @@
         private ListBox lbLocalisations;
         private Button btnDeselectionner;
         private Button btnFermer;
-        private BindingSource bindingSource1;
+        private BindingSource bsLocalisations;
+        private Label label5;
+        private TextBox tbAdresse;
     }
 }
