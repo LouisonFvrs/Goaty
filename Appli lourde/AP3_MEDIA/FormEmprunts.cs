@@ -168,20 +168,6 @@ namespace AP3_MEDIA
             // Appliquez la couleur de fond à la ligne
             dgvEmprunteurs.Rows[rowIndex].DefaultCellStyle.BackColor = rowColor;
         }
-        private void dgvEmprunteurs_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // Vérifiez si le clic a été effectué sur la colonne "Action" et si c'est un clic gauche (ButtonState.Pressed)
-            if (e.ColumnIndex == dgvEmprunteurs.Columns["Action"].Index && e.RowIndex >= 0 &&
-                (Control.MouseButtons & MouseButtons.Left) == MouseButtons.Left)
-            {
-                // Obtenez les informations associées à la ligne cliquée
-                Idressource = (int)dgvEmprunteurs.Rows[e.RowIndex].Cells["Idressource"].Value; // Assurez-vous que le nom de la colonne est correct
-                Idemprunteur = (int)dgvEmprunteurs.Rows[e.RowIndex].Cells["Idemprunteur"].Value; // Assurez-vous que le nom de la colonne est correct
-                Idexemplaire = (int)dgvEmprunteurs.Rows[e.RowIndex].Cells["Idexemplaire"].Value; // Assurez-vous que le nom de la colonne est correct
-                Datedebutemprunt = (DateTime)dgvEmprunteurs.Rows[e.RowIndex].Cells["Datedebutemprunt"].Value; // Assurez-vous que le nom de la colonne est correct
-            }
-        }
-
 
         private void btnDureePret_Click(object sender, EventArgs e)
         {
@@ -192,10 +178,13 @@ namespace AP3_MEDIA
             else
             {
                 DateTime dureeProlongation = dtpDateRetour.Value;
-                if (ModeleEmprunts.ProlongationDureeEmprunts(Idressource, Idemprunteur, Idexemplaire, Datedebutemprunt, dureeProlongation)
-))
+                int Idressource = (int)((DataRowView)bsEmprunteurs.Current)["Idressource"];
+                int Idemprunteur = (int)((DataRowView)bsEmprunteurs.Current)["Idemprunteur"];
+                int Idexemplaire = (int)((DataRowView)bsEmprunteurs.Current)["Idexemplaire"];
+                DateTime Datedebutemprunt = (DateTime)((DataRowView)bsEmprunteurs.Current)["Datedebutemprunt"];
+
+                if (ModeleEmprunts.ProlongationDureeEmprunts(Idressource, Idemprunteur, Idexemplaire, Datedebutemprunt, dureeProlongation))
                 {
-                    MessageBox.Show("Durée du prêt prolongée");
                     Modele.MonModele.SaveChanges();
                 }
             }

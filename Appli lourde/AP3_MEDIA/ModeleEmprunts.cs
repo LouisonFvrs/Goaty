@@ -57,8 +57,14 @@ namespace AP3_MEDIA
                 // récupération de la ressource à modifier
                 unEmprunt = RecupererEmprunts(Idressource, Idemprunteur, Idexemplaire, Datedebutemprunt);
 
+                if (unEmprunt.Dateretour >= NouvelleDateRetour)
+                {
+                    MessageBox.Show("Il faut choisir une date supérieure à la date de retour initiale");
+                    return vretour;
+                }
+
                 // Calcul de la différence en jours
-                TimeSpan difference = NouvelleDateRetour - unEmprunt.Dateretour;
+                TimeSpan difference = NouvelleDateRetour - Datedebutemprunt;
 
                 // Obtention du nombre total de jours
                 int nouvelleDuree = difference.Days;
@@ -67,6 +73,7 @@ namespace AP3_MEDIA
                 unEmprunt.Dateretour = NouvelleDateRetour;
                 unEmprunt.Dureeemprunt = nouvelleDuree;
 
+                MessageBox.Show("Durée du prêt prolongée");
                 Modele.MonModele.SaveChanges();
 
             }
