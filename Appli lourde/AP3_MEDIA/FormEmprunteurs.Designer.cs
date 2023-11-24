@@ -44,10 +44,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(61, 43);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(43, 26);
             label1.Name = "label1";
-            label1.Size = new Size(322, 40);
+            label1.Size = new Size(208, 25);
             label1.TabIndex = 4;
             label1.Text = "Liste des emprunteurs";
             // 
@@ -55,12 +54,11 @@
             // 
             dgvEmprunteurs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvEmprunteurs.ContextMenuStrip = contextMenuStrip2;
-            dgvEmprunteurs.Location = new Point(103, 99);
-            dgvEmprunteurs.Margin = new Padding(4, 5, 4, 5);
+            dgvEmprunteurs.Location = new Point(122, 58);
             dgvEmprunteurs.Name = "dgvEmprunteurs";
             dgvEmprunteurs.RowHeadersWidth = 62;
             dgvEmprunteurs.RowTemplate.Height = 25;
-            dgvEmprunteurs.Size = new Size(937, 365);
+            dgvEmprunteurs.Size = new Size(556, 220);
             dgvEmprunteurs.TabIndex = 5;
             // 
             // contextMenuStrip2
@@ -68,12 +66,12 @@
             contextMenuStrip2.ImageScalingSize = new Size(24, 24);
             contextMenuStrip2.Items.AddRange(new ToolStripItem[] { toolStripMenuItem2 });
             contextMenuStrip2.Name = "contextMenuStrip1";
-            contextMenuStrip2.Size = new Size(146, 36);
+            contextMenuStrip2.Size = new Size(117, 26);
             // 
             // toolStripMenuItem2
             // 
             toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(145, 32);
+            toolStripMenuItem2.Size = new Size(116, 22);
             toolStripMenuItem2.Text = "archiver";
             toolStripMenuItem2.Click += toolStripMenuItem2_Click;
             // 
@@ -83,10 +81,9 @@
             btnFermer.FlatStyle = FlatStyle.Popup;
             btnFermer.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnFermer.ForeColor = Color.White;
-            btnFermer.Location = new Point(998, 489);
-            btnFermer.Margin = new Padding(4, 5, 4, 5);
+            btnFermer.Location = new Point(699, 293);
             btnFermer.Name = "btnFermer";
-            btnFermer.Size = new Size(127, 53);
+            btnFermer.Size = new Size(89, 32);
             btnFermer.TabIndex = 10;
             btnFermer.Text = "FERMER";
             btnFermer.UseVisualStyleBackColor = false;
@@ -94,15 +91,14 @@
             // 
             // FormEmprunteurs
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SlateGray;
-            ClientSize = new Size(1143, 562);
+            ClientSize = new Size(800, 337);
             Controls.Add(btnFermer);
             Controls.Add(dgvEmprunteurs);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(4, 5, 4, 5);
             Name = "FormEmprunteurs";
             Text = "FormEmprunteurs";
             Load += FormEmprunteurs_Load;

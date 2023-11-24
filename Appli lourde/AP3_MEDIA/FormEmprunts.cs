@@ -46,29 +46,14 @@ namespace AP3_MEDIA
                     Etat = ModeleEmprunts.RecupererEtatEmprunt(x.IdEtatEmprunt).LibEtat
                 }).Where(x => x.ArchiverEmprunter == param);
 
-                if (bsEmprunts != null && bsEmprunts.DataSource != null && ((IEnumerable)bsEmprunts.DataSource).Cast<object>().Any())
-                {
-                    dgvEmprunteurs.DataSource = bsEmprunts;
-                    dgvEmprunteurs.Columns[0].Visible = false;
-                    dgvEmprunteurs.Columns[1].Visible = false;
-                    dgvEmprunteurs.Columns[2].Visible = false;
-                    dgvEmprunteurs.Columns[3].Visible = false;
-                    dgvEmprunteurs.Columns[4].Visible = false;
-                    dgvEmprunteurs.Columns[5].Visible = false;
-                }
-                else
-                {
-                    dgvEmprunteurs.DataSource = null;
-                    dgvEmprunteurs.Columns.Clear();
-                    dgvEmprunteurs.Columns.Add("", "Nom");
-                    dgvEmprunteurs.Columns.Add("", "Prenom");
-                    dgvEmprunteurs.Columns.Add("", "Titre");
-                    dgvEmprunteurs.Columns.Add("", "Debut_emprunt");
-                    dgvEmprunteurs.Columns.Add("", "Duree_emprunt");
-                    dgvEmprunteurs.Columns.Add("", "Retour_emprunt");
-                    dgvEmprunteurs.Columns.Add("", "Etat");
-                    MessageBox.Show("ERREUR : Pas d'emprunts correspondant à la demande", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                dgvEmprunteurs.DataSource = bsEmprunts;
+                dgvEmprunteurs.Columns[0].Visible = false;
+                dgvEmprunteurs.Columns[1].Visible = false;
+                dgvEmprunteurs.Columns[2].Visible = false;
+                dgvEmprunteurs.Columns[3].Visible = false;
+                dgvEmprunteurs.Columns[4].Visible = false;
+                dgvEmprunteurs.Columns[5].Visible = false;
+                
             }
             catch (Exception ex)
             {
@@ -281,7 +266,16 @@ namespace AP3_MEDIA
 
         private void btnEmpruntsArchives_Click(object sender, EventArgs e)
         {
-            RemplirTab(true);
+            List<Emprunter> listEmprunts = ModeleEmprunts.getListEmpruntsArchives();
+            if (listEmprunts.Count != 0)
+            {
+                RemplirTab(true);
+            } 
+            else
+            {
+                dgvEmprunteurs.Visible = false;
+                MessageBox.Show("Pas d'emprunt archivé");
+            }
         }
 
         private void btnEmprunts_Click(object sender, EventArgs e)

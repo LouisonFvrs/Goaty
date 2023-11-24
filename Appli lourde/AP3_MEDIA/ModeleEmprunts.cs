@@ -15,6 +15,11 @@ namespace AP3_MEDIA
              return Modele.MonModele.Emprunters.Include(p => p.IdEtatEmpruntNavigation).ToList();
         }
 
+        public static List<Emprunter> getListEmpruntsArchives()
+        {
+            return Modele.MonModele.Emprunters.Include(p => p.IdEtatEmpruntNavigation).Where(x => x.ArchiverEmprunter == true).ToList();
+        }
+
         public static List<EtatEmprunt> getListEtatEmprunts()
         {
             return Modele.MonModele.EtatEmprunts.ToList();

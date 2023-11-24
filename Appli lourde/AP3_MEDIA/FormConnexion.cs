@@ -46,6 +46,7 @@ namespace AP3_MEDIA
                     else
                     {
                         MessageBox.Show("Login ou mot de passe erroné", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
                 }
                 else
