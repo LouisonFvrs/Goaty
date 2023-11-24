@@ -214,6 +214,8 @@ namespace AP3_MEDIA
                 System.Type type = bsExemplaires.Current.GetType();
                 int idE = (int)type.GetProperty("Idexemplaire").GetValue(bsExemplaires.Current, null);
                 ModeleExemplaire.ArchiverExemplaire(idE);
+                Modele.MonModele.SaveChanges();
+                MessageBox.Show("L'exemplaire a bien été archivé");
             }
             catch (Exception ex)
             {
@@ -228,6 +230,8 @@ namespace AP3_MEDIA
                 System.Type type = bsExemplaires.Current.GetType();
                 int idE = (int)type.GetProperty("Idexemplaire").GetValue(bsExemplaires.Current, null);
                 ModeleExemplaire.SupprimerExemplaire(idE);
+                Modele.MonModele.SaveChanges();
+                MessageBox.Show("L'exemplaire a bien été supprimé");
             }
             catch (Exception ex)
             {
